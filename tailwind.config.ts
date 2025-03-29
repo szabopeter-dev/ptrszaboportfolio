@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,25 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				navy: {
+					DEFAULT: '#0A192F',
+					light: '#112240',
+					lightest: '#233554'
+				},
+				slate: {
+					DEFAULT: '#8892B0',
+					light: '#A8B2D1',
+					lightest: '#CCD6F6'
+				},
+				accent: {
+					DEFAULT: '#64FFDA',
+					dark: '#5CDBC3'
 				}
+			},
+			fontFamily: {
+				sans: ['Calibre', 'San Francisco', 'SF Pro Text', 'system-ui', 'sans-serif'],
+				mono: ['SF Mono', 'Fira Code', 'monospace']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
