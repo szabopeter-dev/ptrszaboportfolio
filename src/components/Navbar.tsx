@@ -19,6 +19,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
+    { name: "Education", href: "#education" },
     { name: "Skills", href: "#skills" },
     { name: "Contact", href: "#contact" }
   ];
@@ -36,7 +37,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link, index) => (
             <a 
               key={link.name}

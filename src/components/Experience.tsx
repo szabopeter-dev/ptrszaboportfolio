@@ -14,42 +14,29 @@ const Experience = () => {
   
   const jobs: Job[] = [
     {
-      company: "StageZero",
-      title: "Senior Data Scientist",
-      period: "January 2023 - Present",
+      company: "ReComp Informatikai Zrt.",
+      title: "Junior Software Developer",
+      period: "September 2024 - Present",
       description: [
-        "Leading end-to-end machine learning projects from problem definition to model deployment",
-        "Developing advanced AI solutions for text classification, recommendation systems, and predictive analytics",
-        "Collaborating with cross-functional teams to integrate ML models into production systems",
-        "Mentoring junior data scientists and establishing best practices for the data science team"
+        "Contributing to the modernization of a legacy attorney management platform, originally built in Delphi, as part of a full-stack redevelopment effort",
+        "Rebuilding the system using React, Next.js, and Tailwind CSS, with testing implemented in Jest and CI/CD pipelines managed through GitLab",
+        "Actively developing and shipping production-ready features, gaining hands-on experience while delivering real business value in a professional software engineering environment"
       ]
     },
     {
-      company: "Docler",
-      title: "Senior Data Scientist",
-      period: "2017 - 2022",
+      company: "ReComp Informatikai Zrt.",
+      title: "Software Developer Intern",
+      period: "June 2024 - September 2024",
       description: [
-        "Developed and implemented machine learning models for user behavior prediction and personalization",
-        "Created and maintained ETL pipelines for large-scale data processing",
-        "Conducted A/B testing to evaluate model performance and business impact",
-        "Collaborated with product teams to translate business requirements into data science solutions"
-      ]
-    },
-    {
-      company: "KPMG",
-      title: "Data Scientist",
-      period: "2016 - 2017",
-      description: [
-        "Built predictive models to identify patterns in financial data",
-        "Implemented anomaly detection systems for fraud identification",
-        "Created dashboards and visualizations to communicate insights to stakeholders",
-        "Collaborated with audit teams to enhance their processes with data-driven approaches"
+        "Updated legacy Delphi code to align with modern programming standards, enhancing code maintainability and performance",
+        "Contributed to the development of detailed reporting solutions that supported business analytics and decision-making",
+        "Collaborated closely with the development team to ensure updates and reports were functional, accurate, and aligned with company requirements"
       ]
     }
   ];
 
   return (
-    <section id="experience" className="py-20 px-4 md:px-0">
+    <section id="experience" className="py-20 px-4 md:px-0 bg-gradient-to-b from-navy to-navy-light">
       <div className="container mx-auto">
         <h2 className="section-heading">
           <span className="section-heading-number">02.</span> Where I've Worked
@@ -69,7 +56,7 @@ const Experience = () => {
                     : "text-slate hover:text-accent hover:bg-navy-light/10"
                 )}
               >
-                {job.company}
+                {job.company} {index === 0 ? "" : "(Intern)"}
               </button>
             ))}
           </div>

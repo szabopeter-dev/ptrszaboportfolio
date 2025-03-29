@@ -3,9 +3,9 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="py-8 text-center text-slate-light text-sm">
+    <footer className="py-8 text-center text-slate-light text-sm bg-navy">
       <div className="container mx-auto">
-        <p>Designed & Built with ♥ in 2023</p>
+        <p>Designed & Built with ♥ in 2024</p>
         <p className="mt-2">
           <a 
             href="https://www.linkedin.com/in/ptrszabo7/"
