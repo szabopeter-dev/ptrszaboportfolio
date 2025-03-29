@@ -122,6 +122,21 @@
   .section-heading-number {
     @apply text-accent font-mono font-normal mr-2 text-xl;
   }
+  
+  .btn-accent {
+    @apply bg-transparent text-accent border border-accent hover:bg-accent/10 
+    transition-all duration-300 px-6 py-3 rounded flex items-center justify-center 
+    hover:shadow-[0_0_15px_rgba(100,255,218,0.3)];
+  }
+  
+  .btn-ghost {
+    @apply text-slate-light hover:text-accent transition-all duration-300 
+    flex items-center gap-2 px-4 py-2 rounded;
+  }
+  
+  .tag {
+    @apply bg-navy-lightest/40 text-accent text-xs py-1 px-3 rounded-full font-mono;
+  }
 }
 
 @layer utilities {
@@ -136,8 +151,38 @@
     }
   }
   
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
   }
   
   .hover-scale {
@@ -150,5 +195,30 @@
   
   .hover-glow:hover {
     @apply shadow-[0_0_15px_rgba(100,255,218,0.3)];
+  }
+  
+  .glass-card {
+    @apply bg-navy-light/70 backdrop-blur-sm border border-navy-lightest/30 rounded-lg
+    hover:border-accent/30 transition-all duration-300;
+  }
+  
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animate-delay-500 {
+    animation-delay: 500ms;
   }
 }
