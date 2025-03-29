@@ -10,16 +10,18 @@ const Hero = () => {
         <div className="max-w-3xl">
           <p className="text-accent font-mono mb-5">Hi, my name is</p>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-lightest mb-4">
-            Peter Szabo.
+            Péter Szabó.
           </h1>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate mb-6">
-            I build things with data.
+            I build things that work.
           </h2>
           <p className="text-slate text-lg md:text-xl mb-8 max-w-xl">
-            I'm a Senior Data Scientist at StageZero Technologies with expertise in applying 
-            artificial intelligence and machine learning to solve complex business problems. 
-            Currently, I'm focusing on developing innovative ML solutions for different 
-            industries.
+            I'm a Software Engineer specializing in React, TypeScript, and .NET. 
+            Currently, I'm focusing on redeveloping legacy applications into modern web-based 
+            platforms at ReComp Informatika Zrt. while pursuing my Computer Software Engineering degree.
+          </p>
+          <p className="text-slate text-lg md:text-xl mb-8 max-w-xl italic">
+            "I build things that work, matter, and maybe even make someone's day a bit easier. Code with a cause."
           </p>
           <div className="flex space-x-4">
             <a href="#contact">

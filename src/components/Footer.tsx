@@ -13,7 +13,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="text-slate hover:text-accent"
           >
-            Peter Szabo
+            Péter Szabó
           </a>
         </p>
       </div>

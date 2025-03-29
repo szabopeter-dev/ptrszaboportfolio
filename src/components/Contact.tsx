@@ -11,13 +11,13 @@ const Contact = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-slate-lightest mb-6">Get In Touch</h2>
         
         <p className="text-slate text-lg mb-8">
-          I'm currently open to new opportunities where I can leverage my data science expertise.
+          I'm currently focusing on my Software Engineering studies while working as a Software Developer. 
           Whether you have a question, want to collaborate, or just want to say hi, 
           feel free to reach out and I'll get back to you soon!
         </p>
         
         <div className="flex justify-center mb-10">
-          <a href="mailto:contact@peterszabo.ai">
+          <a href="mailto:handballcup77@gmail.com">
             <Button className="bg-transparent text-accent border border-accent hover:bg-accent/10 px-6 py-4 text-lg">
               Say Hello
             </Button>
@@ -26,7 +26,7 @@ const Contact = () => {
         
         <div className="flex justify-center space-x-6">
           <a 
-            href="mailto:contact@peterszabo.ai"
+            href="mailto:handballcup77@gmail.com"
             className="text-slate-light hover:text-accent transition-colors duration-300"
             aria-label="Email"
           >
@@ -42,7 +42,7 @@ const Contact = () => {
             <Linkedin size={24} />
           </a>
           <a 
-            href="https://github.com/"
+            href="https://github.com/szabopeter-dev"
             target="_blank"
             rel="noopener noreferrer"
             className="text-slate-light hover:text-accent transition-colors duration-300"

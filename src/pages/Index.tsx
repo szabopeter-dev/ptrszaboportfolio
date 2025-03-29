@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   useEffect(() => {
-    document.title = "Peter Szabo | Data Scientist";
+    document.title = "Péter Szabó | Software Engineer";
   }, []);
 
   // Smooth scrolling for anchor links
