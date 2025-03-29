@@ -5,47 +5,65 @@ import { ArrowDownCircle, Github, Mail, Smartphone, Linkedin } from "lucide-reac
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex flex-col justify-center pt-16 px-4 md:px-0 bg-gradient-to-b from-navy to-navy-light">
+    <section className="min-h-screen flex items-center pt-20 px-4 md:px-8 bg-gradient-to-b from-theme-lightest to-theme-light">
       <div className="container mx-auto">
-        <div className="max-w-3xl">
-          <p className="text-accent font-mono mb-5 animate-fade-in">Hi, my name is</p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-lightest mb-4 animate-fade-in" style={{ animationDelay: "200ms" }}>
-            Péter Szabó.
-          </h1>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate mb-6 animate-fade-in" style={{ animationDelay: "400ms" }}>
-            I build modern software solutions.
-          </h2>
-          <p className="text-slate text-lg md:text-xl mb-6 max-w-xl animate-fade-in" style={{ animationDelay: "600ms" }}>
-            I'm a Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.
-            Currently working at ReComp Informatika Zrt. while pursuing my Computer Software Engineering degree.
-          </p>
-          
-          <div className="flex flex-wrap gap-4 mb-10 animate-fade-in" style={{ animationDelay: "800ms" }}>
-            <a href="tel:+36306641452" className="flex items-center gap-2 text-slate-light hover:text-accent transition-all">
-              <Smartphone size={18} /> 06 30 664 1452
-            </a>
-            <a href="mailto:szabo.ptr7@gmail.com" className="flex items-center gap-2 text-slate-light hover:text-accent transition-all">
-              <Mail size={18} /> szabo.ptr7@gmail.com
-            </a>
-            <a href="https://linkedin.com/in/ptrszabo7" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-light hover:text-accent transition-all">
-              <Linkedin size={18} /> linkedin.com/in/ptrszabo7
-            </a>
-            <a href="https://github.com/szabopeter-dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-light hover:text-accent transition-all">
-              <Github size={18} /> github.com/szabopeter-dev
-            </a>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="order-2 lg:order-1">
+            <p className="text-theme-accent font-medium mb-4 animate-fade-in">Hi there, I'm</p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in animate-delay-100 text-gradient">
+              Péter Szabó
+            </h1>
+            <h2 className="text-3xl md:text-4xl font-display text-theme-dark/80 mb-6 animate-fade-in animate-delay-200">
+              I build modern software solutions
+            </h2>
+            <p className="text-theme-dark/70 text-lg mb-8 max-w-xl animate-fade-in animate-delay-300">
+              I'm a Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.
+              Currently working at ReComp Informatika Zrt. while pursuing my Computer Software Engineering degree.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 mb-10 animate-fade-in animate-delay-400">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
+                <Smartphone size={18} className="text-theme-accent" /> 
+                <span className="text-theme-dark">06 30 664 1452</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
+                <Mail size={18} className="text-theme-accent" /> 
+                <span className="text-theme-dark">szabo.ptr7@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
+                <Linkedin size={18} className="text-theme-accent" /> 
+                <span className="text-theme-dark">linkedin.com/in/ptrszabo7</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
+                <Github size={18} className="text-theme-accent" /> 
+                <span className="text-theme-dark">github.com/szabopeter-dev</span>
+              </div>
+            </div>
 
-          <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "1000ms" }}>
-            <a href="#contact">
-              <Button className="bg-transparent text-accent border border-accent hover:bg-accent/10 px-6 py-4 text-lg">
-                Get in touch
-              </Button>
-            </a>
-            <a href="#about">
-              <Button variant="ghost" className="text-slate-light flex items-center gap-2 hover:text-accent">
-                Learn more <ArrowDownCircle size={18} />
-              </Button>
-            </a>
+            <div className="flex flex-wrap gap-6 animate-fade-in animate-delay-500">
+              <a href="#contact">
+                <Button className="btn-primary">
+                  Get in touch
+                </Button>
+              </a>
+              <a href="#about">
+                <Button variant="ghost" className="flex items-center gap-2 text-theme hover:text-theme-accent font-medium">
+                  Learn more <ArrowDownCircle size={18} />
+                </Button>
+              </a>
+            </div>
+          </div>
+          
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 animate-float">
+              <div className="absolute inset-0 bg-gradient-radial rounded-full opacity-20"></div>
+              <div className="absolute inset-4 bg-white rounded-full shadow-xl"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-8xl md:text-9xl font-bold text-theme">P</span>
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-theme-accent rounded-full opacity-90"></div>
+              <div className="absolute -top-4 -left-4 w-16 h-16 bg-theme rounded-full opacity-80"></div>
+            </div>
           </div>
         </div>
       </div>

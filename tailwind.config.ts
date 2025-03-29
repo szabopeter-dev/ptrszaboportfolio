@@ -63,24 +63,18 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				navy: {
-					DEFAULT: '#0A192F',
-					light: '#112240',
-					lightest: '#233554'
-				},
-				slate: {
-					DEFAULT: '#8892B0',
-					light: '#A8B2D1',
-					lightest: '#CCD6F6'
-				},
-				accent: {
-					DEFAULT: '#64FFDA',
-					dark: '#5CDBC3'
+				theme: {
+					DEFAULT: '#3F72AF',
+					dark: '#112D4E',
+					light: '#DBE2EF',
+					lightest: '#F9F7F7',
+					accent: '#00ADB5'
 				}
 			},
 			fontFamily: {
-				sans: ['Calibre', 'San Francisco', 'SF Pro Text', 'system-ui', 'sans-serif'],
-				mono: ['SF Mono', 'Fira Code', 'monospace']
+				sans: ['Poppins', 'system-ui', 'sans-serif'],
+				mono: ['Space Mono', 'monospace'],
+				display: ['Montserrat', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -113,17 +107,38 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
+				},
+				slideIn: {
+					from: {
+						opacity: '0',
+						transform: 'translateX(-20px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				float: {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fadeIn 0.6s ease-out forwards'
+				'fade-in': 'fadeIn 0.6s ease-out forwards',
+				'slide-in': 'slideIn 0.6s ease-out forwards',
+				'float': 'float 4s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'gradient-hero': 'linear-gradient(135deg, #0A192F 0%, #233554 100%)',
-				'gradient-card': 'linear-gradient(to right, #112240 0%, #233554 100%)',
-				'gradient-cta': 'linear-gradient(60deg, #64FFDA 0%, #5CDBC3 100%)',
+				'gradient-radial': 'radial-gradient(circle, #3F72AF 0%, #112D4E 100%)',
+				'gradient-main': 'linear-gradient(135deg, #112D4E 0%, #3F72AF 100%)',
+				'gradient-card': 'linear-gradient(to right, #DBE2EF 0%, #F9F7F7 100%)',
+				'gradient-accent': 'linear-gradient(60deg, #00ADB5 0%, #089096 100%)',
 			}
 		}
 	},

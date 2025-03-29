@@ -90,118 +90,58 @@
   }
 
   body {
-    @apply bg-navy text-slate-light font-sans;
+    @apply bg-theme-lightest text-theme-dark font-sans;
     scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply text-slate-lightest font-semibold;
+    @apply text-theme-dark font-display font-bold;
   }
 
   a {
-    @apply text-accent hover:text-accent-dark transition-colors duration-300;
+    @apply text-theme hover:text-theme-accent transition-colors duration-300;
   }
 }
 
 @layer components {
   .section-heading {
-    @apply text-2xl sm:text-3xl font-semibold text-slate-lightest relative
-    mb-8 flex items-center;
+    @apply text-3xl sm:text-4xl font-bold text-theme-dark relative
+    mb-12 after:content-[''] after:block after:w-24 after:h-1 after:bg-theme-accent after:mt-4;
   }
-
-  .section-heading::before {
-    content: "";
-    @apply mr-4 font-mono text-accent text-lg;
+  
+  .section {
+    @apply py-24 px-4;
   }
-
-  .section-heading::after {
-    content: "";
-    @apply w-full h-px bg-navy-lightest ml-4;
+  
+  .btn-primary {
+    @apply bg-theme text-white hover:bg-theme-dark 
+    transition-all duration-300 px-6 py-3 rounded-lg shadow-lg
+    hover:shadow-xl flex items-center justify-center font-medium;
   }
-
-  .section-heading-number {
-    @apply text-accent font-mono font-normal mr-2 text-xl;
+  
+  .btn-outline {
+    @apply bg-transparent text-theme border-2 border-theme hover:bg-theme hover:text-white
+    transition-all duration-300 px-6 py-3 rounded-lg shadow-md
+    hover:shadow-lg flex items-center justify-center font-medium;
   }
   
   .btn-accent {
-    @apply bg-transparent text-accent border border-accent hover:bg-accent/10 
-    transition-all duration-300 px-6 py-3 rounded flex items-center justify-center 
-    hover:shadow-[0_0_15px_rgba(100,255,218,0.3)];
+    @apply bg-theme-accent text-white hover:bg-opacity-90
+    transition-all duration-300 px-6 py-3 rounded-lg shadow-lg
+    hover:shadow-xl flex items-center justify-center font-medium;
   }
   
-  .btn-ghost {
-    @apply text-slate-light hover:text-accent transition-all duration-300 
-    flex items-center gap-2 px-4 py-2 rounded;
+  .card {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300
+    border border-gray-100 overflow-hidden;
   }
   
   .tag {
-    @apply bg-navy-lightest/40 text-accent text-xs py-1 px-3 rounded-full font-mono;
+    @apply bg-theme-light text-theme px-3 py-1 text-sm rounded-full font-medium;
   }
 }
 
 @layer utilities {
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-  
-  .animate-slide-in-left {
-    animation: slideInLeft 0.5s ease-out forwards;
-  }
-  
-  .animate-slide-in-right {
-    animation: slideInRight 0.5s ease-out forwards;
-  }
-  
-  .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
-  }
-  
-  .hover-glow {
-    @apply transition-all duration-300;
-  }
-  
-  .hover-glow:hover {
-    @apply shadow-[0_0_15px_rgba(100,255,218,0.3)];
-  }
-  
-  .glass-card {
-    @apply bg-navy-light/70 backdrop-blur-sm border border-navy-lightest/30 rounded-lg
-    hover:border-accent/30 transition-all duration-300;
-  }
-  
   .animate-delay-100 {
     animation-delay: 100ms;
   }
@@ -220,5 +160,13 @@
   
   .animate-delay-500 {
     animation-delay: 500ms;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-main;
   }
 }

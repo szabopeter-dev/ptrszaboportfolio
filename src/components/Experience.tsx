@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Calendar, Briefcase } from "lucide-react";
 
 type Job = {
   company: string;
@@ -36,47 +37,58 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 px-4 md:px-0 bg-gradient-to-b from-navy to-navy-light">
+    <section id="experience" className="section bg-theme-lightest">
       <div className="container mx-auto">
-        <h2 className="section-heading">
-          <span className="section-heading-number">02.</span> Where I've Worked
-        </h2>
+        <h2 className="section-heading text-center">Professional Experience</h2>
         
-        <div className="flex flex-col md:flex-row max-w-4xl">
-          {/* Tab buttons */}
-          <div className="flex md:flex-col overflow-x-auto mb-6 md:mb-0 md:mr-8 border-b md:border-b-0 md:border-l border-navy-lightest">
-            {jobs.map((job, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(index)}
-                className={cn(
-                  "px-4 py-3 text-left font-mono whitespace-nowrap transition-all duration-200",
-                  activeTab === index 
-                    ? "text-accent border-accent md:border-l-2 border-b-2 md:border-b-0 bg-navy-light/30" 
-                    : "text-slate hover:text-accent hover:bg-navy-light/10"
-                )}
-              >
-                {job.company} {index === 0 ? "" : "(Intern)"}
-              </button>
-            ))}
-          </div>
-          
-          {/* Tab content */}
-          <div className="py-2 md:py-0 md:pl-4">
-            <h3 className="text-xl text-slate-lightest">
-              <span>{jobs[activeTab].title}</span>
-              <span className="text-accent"> @ {jobs[activeTab].company}</span>
-            </h3>
-            <p className="text-sm font-mono text-slate-light mb-4">{jobs[activeTab].period}</p>
-            
-            <ul className="space-y-3">
-              {jobs[activeTab].description.map((item, index) => (
-                <li key={index} className="flex text-slate">
-                  <span className="text-accent mr-2 flex-shrink-0 mt-1.5">▹</span>
-                  <span>{item}</span>
-                </li>
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
+            {/* Tab buttons */}
+            <div className="md:w-1/3 bg-theme-light">
+              {jobs.map((job, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                  className={cn(
+                    "w-full px-6 py-5 text-left font-medium transition-all duration-200 flex items-center",
+                    activeTab === index 
+                      ? "bg-theme text-white" 
+                      : "text-theme-dark hover:bg-theme-light/80"
+                  )}
+                >
+                  <Briefcase className={cn("mr-3", activeTab === index ? "text-white" : "text-theme")} size={20} />
+                  <div>
+                    <span className="block">{job.company}</span>
+                    <span className="text-sm opacity-80">{index === 0 ? "Junior Dev" : "Intern"}</span>
+                  </div>
+                </button>
               ))}
-            </ul>
+            </div>
+            
+            {/* Tab content */}
+            <div className="md:w-2/3 p-8">
+              <div className="flex items-center mb-4">
+                <h3 className="text-2xl font-bold text-theme-dark">
+                  {jobs[activeTab].title}
+                </h3>
+              </div>
+              
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mb-6">
+                <Calendar size={16} className="mr-2" />
+                <span className="text-sm font-medium">{jobs[activeTab].period}</span>
+              </div>
+              
+              <ul className="space-y-4">
+                {jobs[activeTab].description.map((item, index) => (
+                  <li key={index} className="flex">
+                    <div className="mr-4 mt-1">
+                      <div className="w-2 h-2 rounded-full bg-theme-accent"></div>
+                    </div>
+                    <p className="text-theme-dark/80">{item}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
