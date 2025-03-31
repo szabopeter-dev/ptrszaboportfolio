@@ -14,7 +14,7 @@ const About = () => {
             <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
               <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-theme-accent/60 flex-shrink-0">
                 <img 
-                  src="public/lovable-uploads/9d80321a-c5f8-4a89-8497-679c687229f3.png" 
+                  src="9d80321a-c5f8-4a89-8497-679c687229f3.png" 
                   alt="Péter Szabó" 
                   className="w-full h-full object-cover"
                 />
