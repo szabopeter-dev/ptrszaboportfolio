@@ -24,6 +24,15 @@ const Index = () => {
           e.preventDefault();
           const element = document.getElementById(id.substring(1));
           if (element) {
+            // Close any open drawers before scrolling
+            const drawerContent = document.querySelector('[data-state="open"]');
+            if (drawerContent) {
+              const closeButton = drawerContent.querySelector('button[aria-label="Close"]');
+              if (closeButton) {
+                (closeButton as HTMLButtonElement).click();
+              }
+            }
+            
             window.scrollTo({
               top: element.offsetTop - 100, // Increased offset for better spacing
               behavior: 'smooth',

@@ -3,9 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,18 +20,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMenuOpen]);
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -74,52 +67,49 @@ const Navbar = () => {
           </a>
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu - Using Drawer component */}
         <div className="md:hidden flex items-center">
-          <button 
-            className="text-theme-dark hover:text-theme"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <Drawer>
+            <DrawerTrigger asChild>
+              <button 
+                className="text-theme-dark hover:text-theme"
+                aria-label="Toggle menu"
+              >
+                <Menu size={24} />
+              </button>
+            </DrawerTrigger>
+            <DrawerContent className="p-0 h-full">
+              <div className="flex flex-col h-full bg-white pt-16 pb-8 px-6">
+                <DrawerClose className="absolute top-6 right-6">
+                  <X size={24} className="text-theme-dark hover:text-theme" />
+                </DrawerClose>
+                
+                <nav className="flex flex-col items-center space-y-8 text-xl mt-8">
+                  {navLinks.map((link) => (
+                    <a 
+                      key={link.name}
+                      href={link.href}
+                      className="text-theme-dark hover:text-theme-accent transition-colors duration-300 w-full text-center py-2"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                  <a 
+                    href="https://www.linkedin.com/in/ptrszabo7/" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 w-full flex justify-center"
+                  >
+                    <Button className="bg-theme hover:bg-theme-accent text-white px-4 py-2 rounded-md transition-colors duration-300 w-full max-w-xs">
+                      LinkedIn
+                    </Button>
+                  </a>
+                </nav>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
-
-      {/* Mobile Navigation - Fixed position instead of absolute for better control */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white/98 z-40 flex flex-col items-center justify-center md:hidden">
-          <nav className="flex flex-col items-center space-y-6 text-xl">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name}
-                href={link.href}
-                className="text-theme-dark hover:text-theme-accent transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-            <a 
-              href="https://www.linkedin.com/in/ptrszabo7/" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Button className="bg-theme hover:bg-theme-accent text-white px-4 py-2 rounded-md transition-colors duration-300">
-                LinkedIn
-              </Button>
-            </a>
-          </nav>
-          <button 
-            className="absolute top-6 right-6 text-theme-dark hover:text-theme"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <X size={24} />
-          </button>
-        </div>
-      )}
     </header>
   );
 };
