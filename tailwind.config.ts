@@ -2,7 +2,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-	darkMode: ["class"],
+	darkMode: 'class',
 	content: [
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
@@ -69,7 +69,8 @@ export default {
 					light: '#DBE2EF',
 					lightest: '#F9F7F7',
 					accent: '#00ADB5'
-				}
+				},
+				navy: '#0F172A'
 			},
 			fontFamily: {
 				sans: ['Poppins', 'system-ui', 'sans-serif'],

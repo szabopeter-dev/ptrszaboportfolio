@@ -90,22 +90,22 @@
   }
 
   body {
-    @apply bg-theme-lightest text-theme-dark font-sans;
+    @apply bg-theme-lightest dark:bg-navy text-theme-dark dark:text-white font-sans;
     scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply text-theme-dark font-display font-bold;
+    @apply text-theme-dark dark:text-white font-display font-bold;
   }
 
   a {
-    @apply text-theme hover:text-theme-accent transition-colors duration-300;
+    @apply text-theme dark:text-theme-accent hover:text-theme-accent dark:hover:text-white transition-colors duration-300;
   }
 }
 
 @layer components {
   .section-heading {
-    @apply text-3xl sm:text-4xl font-bold text-theme-dark relative
+    @apply text-3xl sm:text-4xl font-bold text-theme-dark dark:text-white relative
     mb-12 after:content-[''] after:block after:w-24 after:h-1 after:bg-theme-accent after:mt-4;
   }
   
@@ -132,12 +132,12 @@
   }
   
   .card {
-    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300
-    border border-gray-100 overflow-hidden;
+    @apply bg-white dark:bg-navy/30 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300
+    border border-gray-100 dark:border-white/10 overflow-hidden;
   }
   
   .tag {
-    @apply bg-theme-light text-theme px-3 py-1 text-sm rounded-full font-medium;
+    @apply bg-theme-light dark:bg-theme-dark/50 text-theme dark:text-white/80 px-3 py-1 text-sm rounded-full font-medium;
   }
 }
 

@@ -1,7 +1,8 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
-import { Calendar, Briefcase } from "lucide-react";
+import { Calendar, Briefcase, ArrowLeft, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type Job = {
   company: string;
@@ -11,7 +12,7 @@ type Job = {
 };
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
   
   const jobs: Job[] = [
     {
@@ -36,58 +37,87 @@ const Experience = () => {
     }
   ];
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === jobs.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? jobs.length - 1 : prev - 1));
+  };
+
   return (
-    <section id="experience" className="section bg-theme-lightest">
+    <section id="experience" className="section bg-theme-lightest dark:bg-navy">
       <div className="container mx-auto">
-        <h2 className="section-heading text-center">Professional Experience</h2>
+        <h2 className="section-heading text-center dark:text-white dark:after:bg-theme-accent">Professional Experience</h2>
         
         <div className="max-w-4xl mx-auto mt-16">
-          <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
-            {/* Tab buttons */}
-            <div className="md:w-1/3 bg-theme-light">
+          <div className="bg-white dark:bg-navy/50 rounded-xl shadow-lg overflow-hidden">
+            <div className="p-8 relative min-h-[400px]">
               {jobs.map((job, index) => (
-                <button
+                <div
                   key={index}
-                  onClick={() => setActiveTab(index)}
                   className={cn(
-                    "w-full px-6 py-5 text-left font-medium transition-all duration-200 flex items-center",
-                    activeTab === index 
-                      ? "bg-theme text-white" 
-                      : "text-theme-dark hover:bg-theme-light/80"
+                    "transition-opacity duration-300 absolute inset-0 p-8",
+                    currentSlide === index ? "opacity-100 z-10" : "opacity-0 -z-10"
                   )}
                 >
-                  <Briefcase className={cn("mr-3", activeTab === index ? "text-white" : "text-theme")} size={20} />
-                  <div>
-                    <span className="block">{job.company}</span>
-                    <span className="text-sm opacity-80">{index === 0 ? "Junior Dev" : "Intern"}</span>
+                  <div className="flex items-center mb-4">
+                    <h3 className="text-2xl font-bold text-theme-dark dark:text-white flex items-center">
+                      <Briefcase size={24} className="mr-3 text-theme-accent" />
+                      {job.title} <span className="ml-2 text-theme-accent">@{job.company}</span>
+                    </h3>
                   </div>
-                </button>
+                  
+                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 dark:bg-theme-accent/20 text-theme dark:text-theme-accent mb-6">
+                    <Calendar size={16} className="mr-2" />
+                    <span className="text-sm font-medium">{job.period}</span>
+                  </div>
+                  
+                  <ul className="space-y-4">
+                    {job.description.map((item, idx) => (
+                      <li key={idx} className="flex">
+                        <div className="mr-4 mt-1">
+                          <div className="w-2 h-2 rounded-full bg-theme-accent"></div>
+                        </div>
+                        <p className="text-theme-dark/80 dark:text-white/80">{item}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </div>
-            
-            {/* Tab content */}
-            <div className="md:w-2/3 p-8">
-              <div className="flex items-center mb-4">
-                <h3 className="text-2xl font-bold text-theme-dark">
-                  {jobs[activeTab].title}
-                </h3>
+              
+              <div className="absolute bottom-4 right-4 flex space-x-2">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  onClick={prevSlide}
+                  className="hover:bg-theme-accent/10 border-theme-accent/20 dark:border-theme-accent/30"
+                >
+                  <ArrowLeft className="h-4 w-4 text-theme-accent" />
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  onClick={nextSlide}
+                  className="hover:bg-theme-accent/10 border-theme-accent/20 dark:border-theme-accent/30"
+                >
+                  <ArrowRight className="h-4 w-4 text-theme-accent" />
+                </Button>
               </div>
               
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mb-6">
-                <Calendar size={16} className="mr-2" />
-                <span className="text-sm font-medium">{jobs[activeTab].period}</span>
-              </div>
-              
-              <ul className="space-y-4">
-                {jobs[activeTab].description.map((item, index) => (
-                  <li key={index} className="flex">
-                    <div className="mr-4 mt-1">
-                      <div className="w-2 h-2 rounded-full bg-theme-accent"></div>
-                    </div>
-                    <p className="text-theme-dark/80">{item}</p>
-                  </li>
+              <div className="absolute bottom-4 left-4 flex space-x-2">
+                {jobs.map((_, idx) => (
+                  <button
+                    key={idx}
+                    className={cn(
+                      "w-2 h-2 rounded-full transition-colors",
+                      currentSlide === idx ? "bg-theme-accent" : "bg-gray-300 dark:bg-gray-600"
+                    )}
+                    onClick={() => setCurrentSlide(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
