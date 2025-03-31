@@ -14,7 +14,7 @@ const Index = () => {
     document.title = "Péter Szabó | Software Engineer";
   }, []);
 
-  // Smooth scrolling for anchor links
+  // Smooth scrolling for anchor links with a higher offset to account for the navbar
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;
@@ -25,7 +25,7 @@ const Index = () => {
           const element = document.getElementById(id.substring(1));
           if (element) {
             window.scrollTo({
-              top: element.offsetTop - 80,
+              top: element.offsetTop - 100, // Increased offset for better spacing
               behavior: 'smooth',
             });
           }

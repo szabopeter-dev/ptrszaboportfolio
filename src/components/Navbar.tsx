@@ -16,6 +16,18 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   const navLinks = [
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
@@ -74,9 +86,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="fixed inset-0 bg-white/98 z-40 flex flex-col items-center justify-center">
+      {/* Mobile Navigation - Fixed position instead of absolute for better control */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-white/98 z-40 flex flex-col items-center justify-center md:hidden">
           <nav className="flex flex-col items-center space-y-6 text-xl">
             {navLinks.map((link) => (
               <a 
@@ -107,7 +119,7 @@ const Navbar = () => {
             <X size={24} />
           </button>
         </div>
-      </div>
+      )}
     </header>
   );
 };

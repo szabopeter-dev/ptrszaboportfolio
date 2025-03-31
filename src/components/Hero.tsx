@@ -17,26 +17,25 @@ const Hero = () => {
               I build modern software solutions
             </h2>
             <p className="text-theme-dark/70 text-lg mb-8 max-w-xl animate-fade-in animate-delay-300">
-              I'm a Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.
-              Currently working at ReComp Informatika Zrt. while pursuing my Computer Software Engineering degree.
+              Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.
             </p>
             
-            <div className="flex flex-wrap gap-4 mb-10 animate-fade-in animate-delay-400">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10 animate-fade-in animate-delay-400">
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Smartphone size={18} className="text-theme-accent" /> 
-                <span className="text-theme-dark">06 30 664 1452</span>
+                <Smartphone size={18} className="text-theme-accent flex-shrink-0" /> 
+                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">06 30 664 1452</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Mail size={18} className="text-theme-accent" /> 
-                <span className="text-theme-dark">szabo.ptr7@gmail.com</span>
+                <Mail size={18} className="text-theme-accent flex-shrink-0" /> 
+                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">szabo.ptr7@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Linkedin size={18} className="text-theme-accent" /> 
-                <span className="text-theme-dark">linkedin.com/in/ptrszabo7</span>
+                <Linkedin size={18} className="text-theme-accent flex-shrink-0" /> 
+                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">in/ptrszabo7</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Github size={18} className="text-theme-accent" /> 
-                <span className="text-theme-dark">github.com/szabopeter-dev</span>
+                <Github size={18} className="text-theme-accent flex-shrink-0" /> 
+                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">github.com/szabopeter-dev</span>
               </div>
             </div>
 

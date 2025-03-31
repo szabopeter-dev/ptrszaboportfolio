@@ -19,9 +19,9 @@ const Experience = () => {
       title: "Junior Software Developer",
       period: "September 2024 - Present",
       description: [
-        "Contributing to the modernization of a legacy attorney management platform, originally built in Delphi, as part of a full-stack redevelopment effort",
-        "Rebuilding the system using React, Next.js, and Tailwind CSS, with testing implemented in Jest and CI/CD pipelines managed through GitLab",
-        "Actively developing and shipping production-ready features, gaining hands-on experience while delivering real business value in a professional software engineering environment"
+        "Modernizing legacy attorney management platform with React, Next.js and Tailwind",
+        "Implementing CI/CD pipelines through GitLab and testing with Jest",
+        "Shipping production-ready features in a professional software engineering environment"
       ]
     },
     {
@@ -29,9 +29,9 @@ const Experience = () => {
       title: "Software Developer Intern",
       period: "June 2024 - September 2024",
       description: [
-        "Updated legacy Delphi code to align with modern programming standards, enhancing code maintainability and performance",
-        "Contributed to the development of detailed reporting solutions that supported business analytics and decision-making",
-        "Collaborated closely with the development team to ensure updates and reports were functional, accurate, and aligned with company requirements"
+        "Updated legacy Delphi code to modern programming standards",
+        "Developed reporting solutions for business analytics",
+        "Collaborated with dev team on company requirements"
       ]
     }
   ];

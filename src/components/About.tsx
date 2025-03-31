@@ -23,16 +23,17 @@ const About = () => {
               <div>
                 <p className="text-xl font-medium text-theme-accent mb-2">Software Engineer</p>
                 <p className="text-white/80 mb-4 text-lg">
-                  Hello! I'm a Software Engineer pursuing my B.S. in Software Engineering at the 
-                  University of Óbuda, passionate about building solutions that solve real-world problems.
+                  B.S. in Software Engineering at the University of Óbuda, 
+                  focused on building solutions that solve real-world problems.
                 </p>
               </div>
             </div>
             
             <div className="space-y-4 text-white/80">
               <p className="text-lg leading-relaxed">
-                At ReComp Informatikai Zrt., I work on modernizing legacy systems using React, Next.js, and .NET. 
-                Currently, I'm focused on an ML-based ATM cash level prediction thesis.
+                Working at ReComp Informatikai Zrt. on modernizing legacy systems 
+                with React, Next.js, and .NET. Currently focused on ML-based ATM cash 
+                level prediction for my thesis.
               </p>
             </div>
             
@@ -56,7 +57,7 @@ const About = () => {
             </div>
             
             <div className="mt-8 flex justify-center">
-              <a href="/szabopeter-cv.pdf" download>
+              <a href="/szabopeter-cv.pdf" download="szabopeter-cv.pdf">
                 <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-6 py-6 text-lg rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2">
                   <Download size={20} />
                   Download CV
