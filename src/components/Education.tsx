@@ -1,15 +1,37 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
 
 const Education = () => {
+  // Animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const educationCard = document.querySelector('.education-card');
+    if (educationCard) {
+      observer.observe(educationCard);
+      // Add initial invisible class
+      educationCard.classList.add('opacity-0');
+    }
+
+    return () => {
+      if (educationCard) observer.unobserve(educationCard);
+    };
+  }, []);
+
   return (
     <section id="education" className="section bg-white">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <h2 className="section-heading text-center">Education</h2>
         
         <div className="max-w-4xl mx-auto mt-16">
-          <div className="card p-8">
+          <div className="education-card card p-6 md:p-8 opacity-0 transition-opacity duration-500">
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex items-start">
                 <div className="p-4 rounded-full bg-theme/10">
@@ -20,7 +42,7 @@ const Education = () => {
               <div className="flex-grow">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                   <h3 className="text-2xl font-bold text-theme-dark">University of Óbuda</h3>
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme">
+                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mt-2 md:mt-0">
                     <Calendar size={16} className="mr-2" />
                     <span className="text-sm font-medium">July 2022 - February 2026</span>
                   </div>
@@ -28,7 +50,7 @@ const Education = () => {
                 
                 <p className="text-lg font-medium text-theme mb-6">B.S. Software Engineering, Software Design and Development</p>
                 
-                <div className="bg-theme-lightest rounded-lg p-6 mb-6">
+                <div className="bg-theme-lightest rounded-lg p-4 md:p-6 mb-6">
                   <div className="flex items-center mb-3">
                     <BookOpen className="h-5 w-5 text-theme-accent mr-2" />
                     <h4 className="font-medium text-theme-dark">Relevant Coursework</h4>

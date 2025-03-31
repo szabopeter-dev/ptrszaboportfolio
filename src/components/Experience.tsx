@@ -1,8 +1,7 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { Calendar, Briefcase, ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Briefcase, Calendar } from "lucide-react";
 
 type Job = {
   company: string;
@@ -12,7 +11,7 @@ type Job = {
 };
 
 const Experience = () => {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const timelineRef = useRef<HTMLDivElement>(null);
   
   const jobs: Job[] = [
     {
@@ -37,88 +36,80 @@ const Experience = () => {
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === jobs.length - 1 ? 0 : prev + 1));
-  };
+  // Animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? jobs.length - 1 : prev - 1));
-  };
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach(item => {
+      observer.observe(item);
+      // Add initial invisible class
+      item.classList.add('opacity-0');
+    });
+
+    return () => {
+      timelineItems.forEach(item => {
+        observer.unobserve(item);
+      });
+    };
+  }, []);
 
   return (
-    <section id="experience" className="section bg-theme-lightest dark:bg-navy">
-      <div className="container mx-auto">
-        <h2 className="section-heading text-center dark:text-white dark:after:bg-theme-accent">Professional Experience</h2>
+    <section id="experience" className="section bg-theme-lightest py-24">
+      <div className="container mx-auto px-4">
+        <h2 className="section-heading text-center">Professional Experience</h2>
         
         <div className="max-w-4xl mx-auto mt-16">
-          <div className="bg-white dark:bg-navy/50 rounded-xl shadow-lg overflow-hidden">
-            <div className="p-8 relative min-h-[400px]">
-              {jobs.map((job, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    "transition-opacity duration-300 absolute inset-0 p-8",
-                    currentSlide === index ? "opacity-100 z-10" : "opacity-0 -z-10"
-                  )}
-                >
-                  <div className="flex items-center mb-4">
-                    <h3 className="text-2xl font-bold text-theme-dark dark:text-white flex items-center">
-                      <Briefcase size={24} className="mr-3 text-theme-accent" />
-                      {job.title} <span className="ml-2 text-theme-accent">@{job.company}</span>
-                    </h3>
+          <div ref={timelineRef} className="relative">
+            {/* Timeline center line */}
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-theme-light md:left-1/2 md:-ml-0.5"></div>
+            
+            {jobs.map((job, index) => (
+              <div key={index} className="timeline-item mb-12 opacity-0 transition-opacity duration-500">
+                <div className={cn(
+                  "relative flex flex-col md:flex-row items-start",
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                )}>
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 w-8 h-8 rounded-full bg-white border-4 border-theme-accent z-10 transform -translate-x-1/2 md:left-1/2">
+                    <Briefcase className="w-4 h-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-theme-accent" />
                   </div>
                   
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 dark:bg-theme-accent/20 text-theme dark:text-theme-accent mb-6">
-                    <Calendar size={16} className="mr-2" />
-                    <span className="text-sm font-medium">{job.period}</span>
+                  {/* Content */}
+                  <div className={cn(
+                    "ml-12 md:ml-0 md:w-[calc(50%-2rem)] p-6",
+                    index % 2 === 0 ? "md:mr-12" : "md:ml-12"
+                  )}>
+                    <div className="bg-white rounded-xl shadow-lg p-6 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                      <h3 className="text-xl font-bold text-theme-dark">{job.title}</h3>
+                      <p className="text-theme-accent font-medium mb-2">{job.company}</p>
+                      
+                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mb-4">
+                        <Calendar size={16} className="mr-2" />
+                        <span className="text-sm font-medium">{job.period}</span>
+                      </div>
+                      
+                      <ul className="space-y-3">
+                        {job.description.map((item, idx) => (
+                          <li key={idx} className="flex">
+                            <div className="mr-3 mt-1.5">
+                              <div className="w-2 h-2 rounded-full bg-theme-accent"></div>
+                            </div>
+                            <p className="text-theme-dark/80 text-sm">{item}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  
-                  <ul className="space-y-4">
-                    {job.description.map((item, idx) => (
-                      <li key={idx} className="flex">
-                        <div className="mr-4 mt-1">
-                          <div className="w-2 h-2 rounded-full bg-theme-accent"></div>
-                        </div>
-                        <p className="text-theme-dark/80 dark:text-white/80">{item}</p>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-              ))}
-              
-              <div className="absolute bottom-4 right-4 flex space-x-2">
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  onClick={prevSlide}
-                  className="hover:bg-theme-accent/10 border-theme-accent/20 dark:border-theme-accent/30"
-                >
-                  <ArrowLeft className="h-4 w-4 text-theme-accent" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  onClick={nextSlide}
-                  className="hover:bg-theme-accent/10 border-theme-accent/20 dark:border-theme-accent/30"
-                >
-                  <ArrowRight className="h-4 w-4 text-theme-accent" />
-                </Button>
               </div>
-              
-              <div className="absolute bottom-4 left-4 flex space-x-2">
-                {jobs.map((_, idx) => (
-                  <button
-                    key={idx}
-                    className={cn(
-                      "w-2 h-2 rounded-full transition-colors",
-                      currentSlide === idx ? "bg-theme-accent" : "bg-gray-300 dark:bg-gray-600"
-                    )}
-                    onClick={() => setCurrentSlide(idx)}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

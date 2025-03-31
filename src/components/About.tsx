@@ -23,28 +23,20 @@ const About = () => {
               <div>
                 <p className="text-xl font-medium text-theme-accent mb-2">Software Engineer</p>
                 <p className="text-white/80 mb-4 text-lg">
-                  Hello! I'm a Software Engineer currently pursuing my B.S. in Software Engineering at the 
-                  University of Óbuda. I'm passionate about building software solutions that solve real-world problems 
-                  and enhance user experiences.
+                  Hello! I'm a Software Engineer pursuing my B.S. in Software Engineering at the 
+                  University of Óbuda, passionate about building solutions that solve real-world problems.
                 </p>
               </div>
             </div>
             
-            <div className="space-y-6 text-white/80">
+            <div className="space-y-4 text-white/80">
               <p className="text-lg leading-relaxed">
-                At ReComp Informatikai Zrt., I contribute to modernizing legacy systems, bringing them up to 
-                current technology standards with React, Next.js, and .NET. My academic focus includes 
-                machine learning applications, and I'm currently working on an ML-based ATM cash level prediction thesis.
-              </p>
-              
-              <p className="text-lg leading-relaxed">
-                Outside of my professional work, I value maintaining a healthy lifestyle and played handball competitively
-                for many years, which instilled strong teamwork abilities that I apply in collaborative development environments.
-                I'm also passionate about knowledge sharing and plan to work as a teaching assistant in my final semester.
+                At ReComp Informatikai Zrt., I work on modernizing legacy systems using React, Next.js, and .NET. 
+                Currently, I'm focused on an ML-based ATM cash level prediction thesis.
               </p>
             </div>
             
-            <div className="mt-10">
+            <div className="mt-8">
               <h3 className="text-xl font-medium text-white mb-4">
                 Technologies I've been working with recently:
               </h3>
@@ -63,7 +55,7 @@ const About = () => {
               </div>
             </div>
             
-            <div className="mt-10 flex justify-center">
+            <div className="mt-8 flex justify-center">
               <a href="/szabopeter-cv.pdf" download>
                 <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-6 py-6 text-lg rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2">
                   <Download size={20} />

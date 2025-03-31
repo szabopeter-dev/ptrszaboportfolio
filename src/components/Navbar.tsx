@@ -1,14 +1,12 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/hooks/use-theme";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,14 +29,14 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300 py-4",
         scrolled 
-          ? "dark:bg-navy/95 bg-white/95 backdrop-blur shadow-md" 
+          ? "bg-white/95 backdrop-blur shadow-md" 
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <a href="#" className="text-2xl font-display font-bold group">
           <span className="text-theme-accent group-hover:text-theme transition-colors duration-300">P</span>
-          <span className="text-theme dark:text-white group-hover:text-theme-accent transition-colors duration-300">S</span>
+          <span className="text-theme group-hover:text-theme-accent transition-colors duration-300">S</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -47,7 +45,7 @@ const Navbar = () => {
             <a 
               key={link.name}
               href={link.href}
-              className="text-theme-dark dark:text-white hover:text-theme-accent transition-colors duration-300 font-medium"
+              className="text-theme-dark hover:text-theme-accent transition-colors duration-300 font-medium"
             >
               {link.name}
             </a>
@@ -62,27 +60,14 @@ const Navbar = () => {
               LinkedIn
             </Button>
           </a>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-theme-light dark:bg-navy hover:bg-theme-accent/20 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-theme-light dark:bg-navy hover:bg-theme-accent/20 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+        <div className="md:hidden flex items-center">
           <button 
-            className="text-theme-dark dark:text-white hover:text-theme"
+            className="text-theme-dark hover:text-theme"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -91,13 +76,13 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="fixed inset-0 bg-white/98 dark:bg-navy/98 z-40 flex flex-col items-center justify-center">
+        <div className="fixed inset-0 bg-white/98 z-40 flex flex-col items-center justify-center">
           <nav className="flex flex-col items-center space-y-6 text-xl">
             {navLinks.map((link) => (
               <a 
                 key={link.name}
                 href={link.href}
-                className="text-theme-dark dark:text-white hover:text-theme-accent transition-colors duration-300"
+                className="text-theme-dark hover:text-theme-accent transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
@@ -116,7 +101,7 @@ const Navbar = () => {
             </a>
           </nav>
           <button 
-            className="absolute top-6 right-6 text-theme-dark dark:text-white hover:text-theme"
+            className="absolute top-6 right-6 text-theme-dark hover:text-theme"
             onClick={() => setIsMenuOpen(false)}
           >
             <X size={24} />
