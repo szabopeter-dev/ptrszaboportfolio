@@ -85,15 +85,17 @@ const Navbar = () => {
                 </DrawerClose>
                 
                 <nav className="flex flex-col items-center space-y-8 text-xl mt-8">
-                  {navLinks.map((link) => (
-                    <a 
-                      key={link.name}
-                      href={link.href}
-                      className="text-theme-dark hover:text-theme-accent transition-colors duration-300 w-full text-center py-2"
-                    >
-                      {link.name}
-                    </a>
-                  ))}
+                {navLinks.map((link) => (
+                <DrawerClose asChild key={link.name}>
+                  <a 
+                    href={link.href}
+                    className="text-theme-dark hover:text-theme-accent transition-colors duration-300 w-full text-center py-2"
+                  >
+                    {link.name}
+                  </a>
+                </DrawerClose>
+                 ))}
+
                   <a 
                     href="https://www.linkedin.com/in/ptrszabo7/" 
                     target="_blank"

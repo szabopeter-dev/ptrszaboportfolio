@@ -32,7 +32,7 @@ const About = () => {
             <div className="space-y-4 text-white/80">
               <p className="text-lg leading-relaxed">
                 Working at ReComp Informatikai Zrt. on modernizing legacy systems 
-                with React, Next.js, and .NET. Currently focused on ML-based ATM cash 
+                with React, Next.js and Tailwind. Currently focused on ML-based ATM cash 
                 level prediction for my thesis.
               </p>
             </div>

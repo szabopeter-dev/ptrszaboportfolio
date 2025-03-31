@@ -21,23 +21,39 @@ const Hero = () => {
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10 animate-fade-in animate-delay-400">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Smartphone size={18} className="text-theme-accent flex-shrink-0" /> 
-                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">06 30 664 1452</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Mail size={18} className="text-theme-accent flex-shrink-0" /> 
-                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">szabo.ptr7@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Linkedin size={18} className="text-theme-accent flex-shrink-0" /> 
-                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">in/ptrszabo7</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md">
-                <Github size={18} className="text-theme-accent flex-shrink-0" /> 
-                <span className="text-theme-dark text-sm whitespace-nowrap overflow-hidden text-ellipsis">github.com/szabopeter-dev</span>
-              </div>
-            </div>
+  <a 
+    href="tel:+36306641452" 
+    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md hover:bg-theme-accent/10 transition"
+  >
+    <Smartphone size={18} className="text-theme-accent flex-shrink-0" /> 
+    <span className="text-theme-dark text-sm">+36 30 664 1452</span>
+  </a>
+  <a 
+    href="mailto:szabo.ptr7@gmail.com" 
+    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md hover:bg-theme-accent/10 transition"
+  >
+    <Mail size={18} className="text-theme-accent flex-shrink-0" /> 
+    <span className="text-theme-dark text-sm">szabo.ptr7@gmail.com</span>
+  </a>
+  <a 
+    href="https://www.linkedin.com/in/ptrszabo7/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md hover:bg-theme-accent/10 transition"
+  >
+    <Linkedin size={18} className="text-theme-accent flex-shrink-0" /> 
+    <span className="text-theme-dark text-sm">LinkedIn Profile</span>
+  </a>
+  <a 
+    href="https://github.com/szabopeter-dev" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md hover:bg-theme-accent/10 transition"
+  >
+    <Github size={18} className="text-theme-accent flex-shrink-0" /> 
+    <span className="text-theme-dark text-sm">GitHub Profile</span>
+  </a>
+</div>
 
             <div className="flex flex-wrap gap-6 animate-fade-in animate-delay-500">
               <a href="#contact">
