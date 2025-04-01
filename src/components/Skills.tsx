@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { 
   Code, 
   Server, 
@@ -16,6 +16,40 @@ type Skill = {
 };
 
 const Skills = () => {
+  // Create ref container for each skill card to handle animations
+  const skillsRef = useRef<HTMLDivElement>(null);
+
+  // Enhanced animation with sequential card reveals
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const skillCards = entry.target.querySelectorAll('.skill-card');
+          skillCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('animate-fade-in');
+            }, 150 * index); // Staggered animation timing
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const skillsContainer = skillsRef.current;
+    if (skillsContainer) {
+      observer.observe(skillsContainer);
+      
+      // Set initial state for skill cards
+      const skillCards = skillsContainer.querySelectorAll('.skill-card');
+      skillCards.forEach(card => {
+        card.classList.add('opacity-0');
+      });
+    }
+
+    return () => {
+      if (skillsContainer) observer.unobserve(skillsContainer);
+    };
+  }, []);
+
   const skills: Skill[] = [
     {
       category: "Frontend Development",
@@ -96,20 +130,23 @@ const Skills = () => {
       <div className="container mx-auto">
         <h2 className="section-heading text-center">Skills & Technologies</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+        <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
           {skills.map((skill, index) => (
-            <div key={index} className="card hover:-translate-y-2">
+            <div 
+              key={index} 
+              className="skill-card card hover:-translate-y-2 transition-all duration-300 hover:shadow-xl"
+            >
               <div className="h-2 bg-theme-accent rounded-t-xl"></div>
               <div className="p-6">
                 <div className="flex items-center mb-6">
-                  <div className="p-3 bg-theme-light rounded-lg mr-3">
+                  <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
                     {skill.icon}
                   </div>
                   <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
                 </div>
                 <ul className="space-y-2">
                   {skill.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center text-theme-dark/80">
+                    <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
                       <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
                       <span>{item}</span>
                     </li>

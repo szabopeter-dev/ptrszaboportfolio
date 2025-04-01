@@ -14,7 +14,7 @@ const Index = () => {
     document.title = "Péter Szabó | Software Engineer";
   }, []);
 
-  // Optimized smooth scrolling for anchor links
+  // Optimized smooth scrolling for anchor links with improved performance
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -37,17 +37,28 @@ const Index = () => {
             }
           }
           
-          // Calculate optimal offset based on viewport height for better spacing
+          // Calculate optimal offset based on viewport height and width for better spacing
           const navbarHeight = 100;
           const isMobile = window.innerWidth < 768;
-          const offset = isMobile ? navbarHeight - 20 : navbarHeight;
+          const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
           
-          setTimeout(() => {
+          // Adjust offset based on device type for better positioning
+          let offset;
+          if (isMobile) {
+            offset = navbarHeight - 20;
+          } else if (isTablet) {
+            offset = navbarHeight - 10;
+          } else {
+            offset = navbarHeight;
+          }
+          
+          // Use requestAnimationFrame for smoother scrolling
+          requestAnimationFrame(() => {
             window.scrollTo({
               top: element.offsetTop - offset,
               behavior: 'smooth',
             });
-          }, 50); // Reduced delay for better responsiveness
+          });
         }
       }
     };
