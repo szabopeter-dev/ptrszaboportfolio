@@ -14,7 +14,7 @@ const Index = () => {
     document.title = "Péter Szabó | Software Engineer";
   }, []);
 
-  // Smooth scrolling for anchor links with a higher offset to account for the navbar
+  // Smooth scrolling for anchor links with improved behavior
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;
@@ -33,10 +33,17 @@ const Index = () => {
               }
             }
             
-            window.scrollTo({
-              top: element.offsetTop - 100, // Increased offset for better spacing
-              behavior: 'smooth',
-            });
+            // Calculate offset based on viewport height for better spacing
+            const navbarHeight = 100;
+            const isMobile = window.innerWidth < 768;
+            const offset = isMobile ? navbarHeight : navbarHeight;
+            
+            setTimeout(() => {
+              window.scrollTo({
+                top: element.offsetTop - offset,
+                behavior: 'smooth',
+              });
+            }, 100); // Small delay for better UX, especially after drawer closing
           }
         }
       }

@@ -32,14 +32,14 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300 py-4",
+        "fixed top-0 z-50 w-full transition-all duration-500 py-4",
         scrolled 
-          ? "bg-white/95 backdrop-blur shadow-md" 
+          ? "bg-white/95 backdrop-blur-md shadow-lg" 
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <a href="#" className="text-2xl font-display font-bold group relative z-50">
+        <a href="#" className="text-2xl font-display font-bold group relative z-50 transition-all duration-300 hover:scale-110">
           <span className="text-theme-accent group-hover:text-theme transition-colors duration-300">P</span>
           <span className="text-theme group-hover:text-theme-accent transition-colors duration-300">S</span>
         </a>
@@ -61,7 +61,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="inline-flex"
           >
-            <Button className="bg-theme hover:bg-theme-accent text-white px-4 py-2 rounded-md transition-colors duration-300 shadow-md hover:shadow-lg">
+            <Button className="bg-theme hover:bg-theme-accent text-white px-5 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105">
               LinkedIn
             </Button>
           </a>
@@ -72,24 +72,24 @@ const Navbar = () => {
           <Drawer>
             <DrawerTrigger asChild>
               <button 
-                className="text-theme-dark hover:text-theme rounded-full p-2 hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
+                className="text-theme-dark hover:text-theme-accent rounded-full p-2 hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
                 aria-label="Toggle menu"
               >
                 <Menu size={24} />
               </button>
             </DrawerTrigger>
             <DrawerContent className="p-0 h-[70vh] rounded-t-3xl">
-              <div className="flex flex-col h-full bg-gradient-to-b from-theme-light to-theme-lightest pt-16 pb-8 px-6 rounded-t-3xl">
-                <DrawerClose className="absolute top-6 right-6">
-                  <X size={24} className="text-theme-dark hover:text-theme p-1 hover:bg-white/60 rounded-full transition-all duration-300" />
+              <div className="flex flex-col h-full bg-gradient-to-b from-theme-light to-theme-lightest pt-12 pb-8 px-6 rounded-t-3xl">
+                <DrawerClose className="absolute top-4 right-4">
+                  <X size={24} className="text-theme-dark hover:text-theme-accent p-1 hover:bg-white/60 rounded-full transition-all duration-300" />
                 </DrawerClose>
                 
-                <nav className="flex flex-col items-center space-y-8 text-xl mt-8">
+                <nav className="flex flex-col items-center justify-center space-y-6 text-xl mt-8 h-full">
                   {navLinks.map((link) => (
                     <DrawerClose asChild key={link.name}>
                       <a 
                         href={link.href}
-                        className="text-theme-dark hover:text-theme-accent transition-colors duration-300 w-full text-center py-2 relative overflow-hidden group"
+                        className="text-theme-dark hover:text-theme-accent transition-all duration-300 w-full text-center py-3 relative overflow-hidden group font-medium"
                       >
                         <span className="relative z-10">{link.name}</span>
                         <span className="absolute bottom-0 left-0 w-full h-0.5 bg-theme-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
@@ -103,7 +103,7 @@ const Navbar = () => {
                     rel="noopener noreferrer"
                     className="mt-4 w-full flex justify-center"
                   >
-                    <Button className="bg-theme hover:bg-theme-accent text-white px-4 py-2 rounded-md transition-colors duration-300 w-full max-w-xs shadow-md">
+                    <Button className="bg-theme hover:bg-theme-accent text-white px-6 py-3 rounded-md transition-all duration-300 w-full max-w-xs shadow-md hover:shadow-lg hover:scale-105">
                       LinkedIn
                     </Button>
                   </a>
