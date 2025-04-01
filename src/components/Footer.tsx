@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -47,7 +47,9 @@ const Footer = () => {
           
           <div className="text-white/50 text-sm text-center">
             <p className="mb-2">© {currentYear} Péter Szabó. All rights reserved.</p>
-            <p className="text-xs text-white/30">Crafted with passion and creativity</p>
+            <p className="text-xs text-white/30 flex items-center justify-center gap-1.5">
+              Crafted with <Heart size={12} className="text-theme-accent animate-pulse" /> and creativity
+            </p>
           </div>
         </div>
       </div>
