@@ -47,9 +47,6 @@ const Footer = () => {
           
           <div className="text-white/50 text-sm text-center">
             <p className="mb-2">© {currentYear} Péter Szabó. All rights reserved.</p>
-            <p className="text-xs text-white/30 italic">
-              "Az élet egyetlen esély, amit nem szabad elszalasztani."
-            </p>
           </div>
         </div>
       </div>
