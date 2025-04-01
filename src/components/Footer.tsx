@@ -47,11 +47,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-white/5 text-center">
-          <p className="text-white/40 text-sm">
-            Designed & Built with <span className="text-theme-accent">♥</span>
-          </p>
-        </div>
+        
       </div>
     </footer>
   );
