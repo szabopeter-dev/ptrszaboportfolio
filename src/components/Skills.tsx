@@ -7,20 +7,17 @@ import {
   Database, 
   TerminalSquare, 
   BrainCircuit,
-  ChevronDown,
-  ChevronUp,
   X
 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import {
   Card,
   CardContent
 } from "@/components/ui/card";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent
+} from "@/components/ui/hover-card";
 import {
   Collapsible,
   CollapsibleContent,
@@ -74,10 +71,16 @@ const Skills = () => {
 
   // Toggle collapsible state for a skill
   const toggleOpenState = (skillId: string) => {
-    setOpenStates(prev => ({
-      ...prev,
-      [skillId]: !prev[skillId]
-    }));
+    setOpenStates(prev => {
+      const newStates = { ...prev };
+      // Close all other open skills
+      Object.keys(newStates).forEach(key => {
+        if (key !== skillId) newStates[key] = false;
+      });
+      // Toggle the current skill
+      newStates[skillId] = !prev[skillId];
+      return newStates;
+    });
   };
 
   // Handle skill hover or click for mobile
@@ -211,69 +214,72 @@ const Skills = () => {
             <Collapsible
               key={index}
               open={openStates[skill.category]}
-              onOpenChange={() => toggleOpenState(skill.category)}
               className="w-full"
             >
-              <Card 
-                className={`skill-card hover:-translate-y-2 transition-all duration-300 hover:shadow-xl ${
-                  activeSkill === skill.category ? 'ring-2 ring-theme-accent/50 shadow-lg' : ''
-                }`}
-                onClick={() => handleSkillInteraction(skill.category)}
-              >
-                <div className="h-2 bg-theme-accent rounded-t-xl"></div>
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-6">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300 cursor-pointer">
-                            {skill.icon}
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent side="top" className="max-w-xs bg-theme-dark text-white p-3 text-sm">
-                          <p>{skill.description}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <Card 
+                    className={`skill-card hover:-translate-y-2 transition-all duration-300 hover:shadow-xl cursor-pointer ${
+                      activeSkill === skill.category ? 'ring-2 ring-theme-accent/50 shadow-lg' : ''
+                    } ${openStates[skill.category] ? 'bg-theme-light/30' : ''}`}
+                    onClick={() => toggleOpenState(skill.category)}
+                  >
+                    <div className="h-2 bg-theme-accent rounded-t-xl"></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-6">
+                        <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
+                          {skill.icon}
+                        </div>
+                        <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+                      </div>
+                      <ul className="space-y-2">
+                        {skill.items.map((item, idx) => (
+                          <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
+                            <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      <CollapsibleTrigger asChild>
+                        <div className="mt-4 text-xs text-theme/70 flex items-center justify-end cursor-pointer hover:text-theme transition-colors">
+                          <span>{openStates[skill.category] ? 'Hide details' : 'Click for details'}</span>
+                        </div>
+                      </CollapsibleTrigger>
+                    </CardContent>
+                  </Card>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80 p-0 bg-white/90 backdrop-blur-sm">
+                  <div className="p-3">
+                    <h4 className="font-medium text-theme">{skill.category}</h4>
+                    <p className="text-xs text-theme-dark/70">{skill.description}</p>
                   </div>
-                  <ul className="space-y-2">
-                    {skill.items.map((item, idx) => (
-                      <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
-                        <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <CollapsibleTrigger asChild>
-                    <div className="mt-4 text-xs text-theme/70 flex items-center justify-end cursor-pointer hover:text-theme transition-colors">
-                      <span>{openStates[skill.category] ? 'Hide details' : 'Click for details'}</span>
-                      {openStates[skill.category] ? 
-                        <ChevronUp size={14} className="ml-1" /> : 
-                        <ChevronDown size={14} className="ml-1" />
-                      }
-                    </div>
-                  </CollapsibleTrigger>
-                </CardContent>
-              </Card>
+                </HoverCardContent>
+              </HoverCard>
               
               <CollapsibleContent>
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-b-xl shadow-lg border border-theme-light/50 mt-1 transform transition-all duration-300">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-bold text-theme-dark">{skill.category} Details</h3>
-                    <CollapsibleTrigger asChild>
-                      <button className="p-1 hover:bg-theme-light/50 rounded-full transition-colors">
-                        <X size={16} className="text-theme-dark/70" />
+                <div 
+                  className="bg-white rounded-xl shadow-lg border border-theme-light/50 mt-2 transform transition-all duration-300 overflow-hidden"
+                  style={{ animationDuration: '400ms' }}
+                >
+                  <div className="p-5">
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-lg font-bold text-theme">{skill.category} Details</h3>
+                      <button 
+                        onClick={() => toggleOpenState(skill.category)}
+                        className="p-2 hover:bg-theme-light/50 rounded-full transition-all duration-300 hover:rotate-90"
+                      >
+                        <X size={18} className="text-theme-dark/70" />
                       </button>
-                    </CollapsibleTrigger>
-                  </div>
-                  <div className="space-y-3">
-                    {skill.detailedDescription.map((para, idx) => (
-                      <p key={idx} className="text-theme-dark/80 leading-relaxed">
-                        {para}
-                      </p>
-                    ))}
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {skill.detailedDescription.map((para, idx) => (
+                        <p key={idx} className="text-theme-dark/80 leading-relaxed text-sm">
+                          {para}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </CollapsibleContent>
@@ -281,6 +287,42 @@ const Skills = () => {
           ))}
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes collapsible-down {
+          from {
+            height: 0;
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          to {
+            height: var(--radix-collapsible-content-height);
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes collapsible-up {
+          from {
+            height: var(--radix-collapsible-content-height);
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            height: 0;
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+        }
+        
+        .animate-collapsible-down {
+          animation: collapsible-down 0.3s ease-out;
+        }
+        
+        .animate-collapsible-up {
+          animation: collapsible-up 0.3s ease-out;
+        }
+      `}</style>
     </section>
   );
 };

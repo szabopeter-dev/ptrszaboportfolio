@@ -89,6 +89,17 @@ const Index = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
       }
+      
+      // Skills animation on hover
+      const skillCards = document.querySelectorAll('.skill-card');
+      skillCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('scale-105');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('scale-105');
+        });
+      });
     };
 
     document.addEventListener('click', handleAnchorClick);
@@ -111,24 +122,51 @@ const Index = () => {
       <Contact />
       <Footer />
       
-      <style>
-      {`
+      <style jsx>{`
         .timeline-animate {
           animation: timelineFill 1.5s ease-out forwards;
         }
         
         @keyframes timelineFill {
           from {
-            background: linear-gradient(to bottom, transparent, transparent);
             height: 0%;
           }
           to {
-            background: linear-gradient(to bottom, transparent, var(--theme-color, #8B5CF6), transparent);
             height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--theme-color, #3F72AF), transparent);
           }
         }
-      `}
-      </style>
+        
+        @keyframes collapsible-down {
+          from {
+            height: 0;
+            opacity: 0;
+          }
+          to {
+            height: var(--radix-collapsible-content-height);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes collapsible-up {
+          from {
+            height: var(--radix-collapsible-content-height);
+            opacity: 1;
+          }
+          to {
+            height: 0;
+            opacity: 0;
+          }
+        }
+        
+        .animate-collapsible-down {
+          animation: collapsible-down 0.3s ease-out;
+        }
+        
+        .animate-collapsible-up {
+          animation: collapsible-up 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

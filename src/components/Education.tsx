@@ -84,11 +84,12 @@ const Education = () => {
         </h2>
         
         <div ref={educationCardsRef} className="max-w-4xl mx-auto space-y-8">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          {/* Changed to a vertical stack layout */}
+          <div className="flex flex-col gap-8">
             {educationData.map((education, index) => (
               <Card 
                 key={education.id}
-                className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 h-full"
+                className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-1"
               >
                 <CardContent className="p-6">
                   <div className="flex items-start mb-4">
