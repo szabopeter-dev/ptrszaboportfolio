@@ -74,17 +74,40 @@ const Hero = () => {
           
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
             <div className="relative w-64 h-64 md:w-80 md:h-80 animate-float">
-              <div className="absolute inset-0 bg-gradient-radial rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-radial rounded-full opacity-20"></div>
               <div className="absolute inset-4 bg-white/90 rounded-full shadow-xl backdrop-blur-sm"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-8xl md:text-9xl font-bold text-theme">P</span>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-theme-accent rounded-full opacity-90 animate-pulse"></div>
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-theme rounded-full opacity-80 animate-pulse"></div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-theme-accent rounded-full opacity-90 animate-subtle-pulse"></div>
+              <div className="absolute -top-4 -left-4 w-16 h-16 bg-theme rounded-full opacity-80 animate-subtle-pulse"></div>
             </div>
           </div>
         </div>
       </div>
+      
+      <style>
+      {`
+        @keyframes subtlePulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          50% {
+            transform: scale(1.05);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+        }
+        
+        .animate-subtle-pulse {
+          animation: subtlePulse 3s ease-in-out infinite;
+        }
+      `}
+      </style>
     </section>
   );
 };

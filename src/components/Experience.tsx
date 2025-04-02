@@ -12,6 +12,7 @@ type Job = {
 
 const Experience = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const timelineLineRef = useRef<HTMLDivElement>(null);
   
   const jobs: Job[] = [
     {
@@ -57,6 +58,11 @@ const Experience = () => {
               }
             }, 300 * index); // Staggered delay for each item
           });
+          
+          // Animate timeline line
+          if (timelineLineRef.current) {
+            timelineLineRef.current.classList.add('timeline-animate');
+          }
         }
       });
     }, { threshold: 0.1 });
@@ -77,8 +83,36 @@ const Experience = () => {
       });
     }
 
+    // Scroll-based timeline animation
+    const handleScroll = () => {
+      if (!timelineLineRef.current) return;
+      
+      const rect = timelineRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      
+      const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+      
+      // Check if timeline is in view
+      if (rect && !(rect.bottom < 0 || rect.top - viewHeight >= 0)) {
+        // Calculate how much to fill the timeline based on scroll position
+        const scrollPercentage = Math.min(
+          1, 
+          (viewHeight - rect.top) / (viewHeight + rect.height)
+        );
+        
+        if (scrollPercentage > 0) {
+          const fillAmount = Math.max(0, Math.min(100, scrollPercentage * 150));
+          timelineLineRef.current.style.height = `${fillAmount}%`;
+          timelineLineRef.current.style.opacity = `${Math.min(1, scrollPercentage * 2)}`;
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       if (timelineContainer) observer.unobserve(timelineContainer);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -89,8 +123,12 @@ const Experience = () => {
         
         <div className="max-w-4xl mx-auto mt-16">
           <div ref={timelineRef} className="relative">
-            {/* Timeline center line with animation */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-theme-light md:left-1/2 md:-ml-0.5 timeline-line"></div>
+            {/* Timeline center line with scroll-based animation */}
+            <div 
+              ref={timelineLineRef}
+              className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-theme-accent to-transparent md:left-1/2 md:-ml-0.5 opacity-0 transition-all duration-700"
+              style={{ height: '0%' }}
+            ></div>
             
             {jobs.map((job, index) => (
               <div key={index} className="timeline-item mb-12 opacity-0 transition-all duration-500">
@@ -136,6 +174,36 @@ const Experience = () => {
           </div>
         </div>
       </div>
+      
+      <style>
+      {`
+        .pulse-dot::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: rgba(0, 173, 181, 0.3);
+          z-index: -1;
+          animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          70% {
+            transform: scale(1.3);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0;
+          }
+        }
+      `}
+      </style>
     </section>
   );
 };

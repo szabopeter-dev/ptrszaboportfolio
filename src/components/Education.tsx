@@ -65,9 +65,9 @@ const Education = () => {
       institution: "BMSZC Bláthy Ottó Titusz Informatikai Technikum",
       degree: "High School Diploma, Information Technology",
       period: "September 2017 - June 2022",
-      grade: "Grade: 5",
-      highlights: [
-        "IT-focused secondary school diploma – software, databases, networking, Windows & Linux servers",
+      coursework: "IT-focused secondary school curriculum, software development, databases, networking, Windows & Linux servers",
+      achievements: [
+        "Grade: 5",
         "Cisco CCNA R&S Modules 1–3 – IP addressing, routing protocols, and basic network configuration"
       ]
     }
@@ -108,12 +108,6 @@ const Education = () => {
                   
                   <div className="flex items-center mb-3">
                     <p className="text-base md:text-lg font-medium text-theme">{education.degree}</p>
-                    {education.grade && (
-                      <div className="inline-flex items-center ml-2 px-2 py-1 rounded-full bg-theme-accent/10 text-theme-accent text-xs">
-                        <Award className="h-3 w-3 mr-1" />
-                        {education.grade}
-                      </div>
-                    )}
                   </div>
                   
                   {education.coursework && (
@@ -128,9 +122,9 @@ const Education = () => {
                     </div>
                   )}
                   
-                  {(education.achievements || education.highlights) && (
+                  {education.achievements && (
                     <div className="grid grid-cols-1 gap-3">
-                      {(education.achievements || education.highlights || []).map((item, i) => (
+                      {education.achievements.map((item, i) => (
                         <div key={i} className="flex items-start p-3 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                           <Award className="h-5 w-5 text-theme-accent flex-shrink-0 mr-2" />
                           <p className="text-sm text-theme-dark/80">{item}</p>
@@ -145,7 +139,8 @@ const Education = () => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>
+        {`
         .animate-slide-in-bottom {
           animation: slideInBottom 0.6s ease forwards;
         }
@@ -175,7 +170,8 @@ const Education = () => {
             transform: translateY(0);
           }
         }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };

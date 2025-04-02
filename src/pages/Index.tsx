@@ -63,8 +63,41 @@ const Index = () => {
       }
     };
 
+    // Timeline animation effect on scroll
+    const setupTimelineAnimation = () => {
+      const timeline = document.querySelector('.timeline-line');
+      if (timeline) {
+        const handleScroll = () => {
+          const timelineSection = document.getElementById('experience');
+          if (!timelineSection) return;
+          
+          const rect = timelineSection.getBoundingClientRect();
+          const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+          
+          // Check if timeline is in view
+          if (!(rect.bottom< 0 || rect.top - viewHeight >= 0)) {
+            // Calculate how much of the section is visible
+            const sectionVisibility = (viewHeight - Math.max(0, rect.top)) / viewHeight;
+            
+            // Apply animation based on scroll position
+            if (sectionVisibility > 0.1) {
+              timeline.classList.add('timeline-animate');
+            }
+          }
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
     document.addEventListener('click', handleAnchorClick);
-    return () => document.removeEventListener('click', handleAnchorClick);
+    const cleanup = setupTimelineAnimation();
+    
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+      if (cleanup) cleanup();
+    };
   }, []);
 
   return (
@@ -77,6 +110,25 @@ const Index = () => {
       <Skills />
       <Contact />
       <Footer />
+      
+      <style>
+      {`
+        .timeline-animate {
+          animation: timelineFill 1.5s ease-out forwards;
+        }
+        
+        @keyframes timelineFill {
+          from {
+            background: linear-gradient(to bottom, transparent, transparent);
+            height: 0%;
+          }
+          to {
+            background: linear-gradient(to bottom, transparent, var(--theme-color, #8B5CF6), transparent);
+            height: 100%;
+          }
+        }
+      `}
+      </style>
     </div>
   );
 };
