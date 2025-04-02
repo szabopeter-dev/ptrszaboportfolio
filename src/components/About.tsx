@@ -57,7 +57,7 @@ const About = () => {
             </div>
             
             <div className="mt-8 flex justify-center">
-              <a href="/szabopeter-cv.pdf" download="szabopeter-cv.pdf">
+              <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf">
                 <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-6 py-6 text-lg rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2">
                   <Download size={20} />
                   Download CV

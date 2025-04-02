@@ -64,7 +64,7 @@ const Contact = () => {
                 Say Hello
               </Button>
             </a>
-            <a href="/szabopeter-cv.pdf" download className="inline-block">
+            <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf" className="inline-block">
               <Button className="bg-theme hover:bg-theme/80 text-white px-8 py-6 text-lg rounded-lg shadow-lg transition-all duration-300">
                 Download CV
               </Button>
