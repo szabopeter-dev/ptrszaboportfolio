@@ -288,41 +288,43 @@ const Skills = () => {
         </div>
       </div>
       
-      <style jsx>{`
-        @keyframes collapsible-down {
-          from {
-            height: 0;
-            opacity: 0;
-            transform: translateY(-8px);
+      <style>
+        {`
+          @keyframes collapsible-down {
+            from {
+              height: 0;
+              opacity: 0;
+              transform: translateY(-8px);
+            }
+            to {
+              height: var(--radix-collapsible-content-height);
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            height: var(--radix-collapsible-content-height);
-            opacity: 1;
-            transform: translateY(0);
+          
+          @keyframes collapsible-up {
+            from {
+              height: var(--radix-collapsible-content-height);
+              opacity: 1;
+              transform: translateY(0);
+            }
+            to {
+              height: 0;
+              opacity: 0;
+              transform: translateY(-8px);
+            }
           }
-        }
-        
-        @keyframes collapsible-up {
-          from {
-            height: var(--radix-collapsible-content-height);
-            opacity: 1;
-            transform: translateY(0);
+          
+          .animate-collapsible-down {
+            animation: collapsible-down 0.3s ease-out;
           }
-          to {
-            height: 0;
-            opacity: 0;
-            transform: translateY(-8px);
+          
+          .animate-collapsible-up {
+            animation: collapsible-up 0.3s ease-out;
           }
-        }
-        
-        .animate-collapsible-down {
-          animation: collapsible-down 0.3s ease-out;
-        }
-        
-        .animate-collapsible-up {
-          animation: collapsible-up 0.3s ease-out;
-        }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };
