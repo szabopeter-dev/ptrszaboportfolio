@@ -1,12 +1,13 @@
+
 import React, { useEffect, useRef } from "react";
 import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Education = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const universityRef = useRef<HTMLDivElement>(null);
-  const highSchoolRef = useRef<HTMLDivElement>(null);
+  const educationCardsRef = useRef<HTMLDivElement>(null);
 
-  // Enhanced animations with slide-in effect
+  // Enhanced animations with optimized observer logic
   useEffect(() => {
     // Section title animation
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -21,43 +22,56 @@ const Education = () => {
     const cardsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add delay between university and high school animations
-          if (entry.target.id === 'university-card') {
-            entry.target.classList.add('animate-slide-in-right');
-          } else if (entry.target.id === 'highschool-card') {
+          const cards = entry.target.querySelectorAll('.education-card');
+          cards.forEach((card, index) => {
             setTimeout(() => {
-              entry.target.classList.add('animate-slide-in-left');
-            }, 300); // Delay the high school animation
-          }
+              card.classList.add('animate-fade-in');
+              card.classList.remove('opacity-0');
+            }, 200 * index);
+          });
         }
       });
-    }, { threshold: 0.1, rootMargin: '-50px 0px -100px 0px' });
+    }, { threshold: 0.1 });
 
-    const sectionElement = sectionRef.current;
-    const universitySection = universityRef.current;
-    const highSchoolSection = highSchoolRef.current;
-    
-    if (sectionElement) {
-      sectionObserver.observe(sectionElement);
-      sectionElement.classList.add('opacity-0');
+    if (sectionRef.current) {
+      sectionObserver.observe(sectionRef.current);
+      sectionRef.current.classList.add('opacity-0');
     }
     
-    if (universitySection) {
-      cardsObserver.observe(universitySection);
-      universitySection.classList.add('opacity-0', 'translate-x-8');
-    }
-    
-    if (highSchoolSection) {
-      cardsObserver.observe(highSchoolSection);
-      highSchoolSection.classList.add('opacity-0', 'translate-x-8');
+    if (educationCardsRef.current) {
+      cardsObserver.observe(educationCardsRef.current);
     }
 
     return () => {
-      if (sectionElement) sectionObserver.unobserve(sectionElement);
-      if (universitySection) cardsObserver.unobserve(universitySection);
-      if (highSchoolSection) cardsObserver.unobserve(highSchoolSection);
+      if (sectionRef.current) sectionObserver.unobserve(sectionRef.current);
+      if (educationCardsRef.current) cardsObserver.unobserve(educationCardsRef.current);
     };
   }, []);
+
+  const educationData = [
+    {
+      id: "university",
+      institution: "University of Óbuda",
+      degree: "B.S. Software Engineering, Software Design and Development",
+      period: "September 2022 - February 2026",
+      coursework: "Algorithms and Data Structures, Software Testing and Quality Assurance, Data Science and Deep Learning, Parallel and Distributed Systems Programming, Modern Software Technologies, Linear Algebra, Probability and Statistics",
+      achievements: [
+        "Working on an ML-based ATM cash level prediction thesis",
+        "Ranked in the top 5 of class"
+      ]
+    },
+    {
+      id: "highschool",
+      institution: "BMSZC Bláthy Ottó Titusz Informatikai Technikum",
+      degree: "High School Diploma, Information Technology",
+      period: "September 2017 - June 2022",
+      grade: "Grade: 5",
+      highlights: [
+        "IT-focused secondary school diploma – software, databases, networking, Windows & Linux servers",
+        "Cisco CCNA R&S Modules 1–3 – IP addressing, routing protocols, and basic network configuration"
+      ]
+    }
+  ];
 
   return (
     <section id="education" className="section bg-white py-16 md:py-24">
@@ -69,140 +83,85 @@ const Education = () => {
           Education
         </h2>
         
-        <div className="max-w-4xl mx-auto space-y-6 md:space-y-10">
-          {/* University of Óbuda */}
-          <div 
-            id="university-card"
-            ref={universityRef} 
-            className="education-card card p-5 md:p-8 opacity-0 transition-all duration-700 ease-out hover:shadow-2xl group rounded-2xl"
-          >
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="flex items-start">
-                <div className="p-3 md:p-4 rounded-full bg-theme/10 group-hover:bg-theme/20 transition-colors duration-300">
-                  <GraduationCap className="h-8 w-8 md:h-10 md:w-10 text-theme group-hover:scale-110 transition-transform duration-300" />
-                </div>
-              </div>
-              
-              <div className="flex-grow">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-xl md:text-2xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300">University of Óbuda</h3>
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mt-2 md:mt-0 group-hover:bg-theme/20 transition-colors duration-300 whitespace-nowrap">
-                    <Calendar size={16} className="mr-2" />
-                    <span className="text-sm font-medium">September 2022 - February 2026</span>
-                  </div>
-                </div>
-                
-                <p className="text-base md:text-lg font-medium text-theme mb-4 md:mb-6">B.S. Software Engineering, Software Design and Development</p>
-                
-                <div className="bg-theme-lightest rounded-lg p-4 md:p-6 mb-4 md:mb-6 group-hover:bg-theme-light/30 transition-colors duration-300">
-                  <div className="flex items-center mb-2 md:mb-3">
-                    <BookOpen className="h-5 w-5 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
-                    <h4 className="font-medium text-theme-dark">Relevant Coursework</h4>
-                  </div>
-                  <p className="text-sm md:text-base text-theme-dark/80">
-                    Algorithms and Data Structures, Software Testing and Quality Assurance, 
-                    Data Science and Deep Learning, Parallel and Distributed Systems Programming, 
-                    Modern Software Technologies, Linear Algebra, Probability and Statistics
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                  <div className="flex items-start p-3 md:p-4 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <Award className="h-5 w-5 md:h-6 md:w-6 text-theme-accent flex-shrink-0 mr-2 md:mr-3" />
-                    <p className="text-sm md:text-base text-theme-dark/80">Working on an ML-based ATM cash level prediction thesis</p>
-                  </div>
-                  <div className="flex items-start p-3 md:p-4 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <Award className="h-5 w-5 md:h-6 md:w-6 text-theme-accent flex-shrink-0 mr-2 md:mr-3" />
-                    <p className="text-sm md:text-base text-theme-dark/80">Ranked in the top 5 of class</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-            
-          {/* High School */}
-          <div 
-            id="highschool-card"
-            ref={highSchoolRef} 
-            className="education-card card p-5 md:p-8 opacity-0 transition-all duration-700 ease-out hover:shadow-2xl group rounded-2xl"
-          >
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="flex items-start">
-                <div className="p-3 md:p-4 rounded-full bg-theme/10 group-hover:bg-theme/20 transition-colors duration-300">
-                  <GraduationCap className="h-8 w-8 md:h-10 md:w-10 text-theme group-hover:scale-110 transition-transform duration-300" />
-                </div>
-              </div>
-              
-              <div className="flex-grow">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-xl md:text-2xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300">BMSZC Bláthy Ottó Titusz Informatikai Technikum</h3>
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mt-2 md:mt-0 group-hover:bg-theme/20 transition-colors duration-300 whitespace-nowrap">
-                    <Calendar size={16} className="mr-2" />
-                    <span className="text-sm font-medium">September 2017 - June 2022</span>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-4 md:mb-6">
-                  <p className="text-base md:text-lg font-medium text-theme">High School Diploma, Information Technology</p>
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme group-hover:bg-theme/20 transition-colors duration-300 w-max">
-                    <Award className="h-4 w-4 text-theme-accent mr-1" />
-                    <span className="text-sm font-medium">Grade: 5</span>
-                  </div>
-                </div>
-                
-                <div className="bg-theme-lightest rounded-lg p-4 md:p-6 mb-4 md:mb-6 group-hover:bg-theme-light/30 transition-colors duration-300">
-                  <div className="flex items-center mb-2 md:mb-3">
-                    <BookOpen className="h-5 w-5 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
-                    <h4 className="font-medium text-theme-dark">Education Highlights</h4>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mt-3 md:mt-4">
-                    <div className="flex items-start p-3 rounded-lg bg-white/70 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-sm">
-                      <p className="text-sm md:text-base text-theme-dark/80">IT-focused secondary school diploma – software, databases, networking, Windows & Linux servers</p>
+        <div ref={educationCardsRef} className="max-w-4xl mx-auto space-y-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {educationData.map((education, index) => (
+              <Card 
+                key={education.id}
+                className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 h-full"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start mb-4">
+                    <div className="p-3 rounded-full bg-theme/10 group-hover:bg-theme/20 transition-colors duration-300">
+                      <GraduationCap className="h-7 w-7 text-theme group-hover:scale-110 transition-transform duration-300" />
                     </div>
-                    <div className="flex items-start p-3 rounded-lg bg-white/70 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-sm">
-                      <p className="text-sm md:text-base text-theme-dark/80">Cisco CCNA R&S Modules 1–3 – IP addressing, routing protocols, and basic network configuration</p>
+                    <div className="ml-4">
+                      <h3 className="text-xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300 line-clamp-2">
+                        {education.institution}
+                      </h3>
+                      <div className="inline-flex items-center mt-1 px-2 py-1 rounded-full bg-theme/10 text-theme group-hover:bg-theme/20 transition-colors duration-300">
+                        <Calendar size={14} className="mr-1" />
+                        <span className="text-xs font-medium">{education.period}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                  
+                  <div className="flex items-center mb-3">
+                    <p className="text-base md:text-lg font-medium text-theme">{education.degree}</p>
+                    {education.grade && (
+                      <div className="inline-flex items-center ml-2 px-2 py-1 rounded-full bg-theme-accent/10 text-theme-accent text-xs">
+                        <Award className="h-3 w-3 mr-1" />
+                        {education.grade}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {education.coursework && (
+                    <div className="bg-theme-lightest rounded-lg p-4 mb-4 group-hover:bg-theme-light/30 transition-colors duration-300">
+                      <div className="flex items-center mb-2">
+                        <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
+                        <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
+                      </div>
+                      <p className="text-sm text-theme-dark/80">
+                        {education.coursework}
+                      </p>
+                    </div>
+                  )}
+                  
+                  {(education.achievements || education.highlights) && (
+                    <div className="grid grid-cols-1 gap-3">
+                      {(education.achievements || education.highlights || []).map((item, i) => (
+                        <div key={i} className="flex items-start p-3 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                          <Award className="h-5 w-5 text-theme-accent flex-shrink-0 mr-2" />
+                          <p className="text-sm text-theme-dark/80">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
       
-      {/* Add animation styles */}
       <style jsx>{`
-        .animate-slide-in-right {
-          animation: slideInRight 0.8s ease forwards;
-        }
-        
-        .animate-slide-in-left {
-          animation: slideInLeft 0.8s ease forwards;
-        }
-        
         .animate-slide-in-bottom {
           animation: slideInBottom 0.6s ease forwards;
         }
         
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        .animate-fade-in {
+          animation: fadeIn 0.6s ease forwards;
         }
         
-        @keyframes slideInLeft {
+        @keyframes fadeIn {
           from {
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateY(20px);
           }
           to {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
           }
         }
         
