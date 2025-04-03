@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import { GraduationCap, Calendar, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -84,7 +85,7 @@ const Education = () => {
   ];
 
   return (
-    <section id="education" className="section bg-white py-16 md:py-24 relative">
+    <section id="education" className="section bg-white py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-12 md:mb-16">
           Education
@@ -95,7 +96,7 @@ const Education = () => {
             {/* Timeline center line */}
             <div 
               ref={timelineLineRef}
-              className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-theme-accent to-transparent md:left-1/2 md:-ml-0.5 opacity-0 transition-all duration-700"
+              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-ml-0.5 bg-gradient-to-b from-transparent via-theme-accent to-transparent opacity-0"
               style={{ height: '0%' }}
             ></div>
             
@@ -116,7 +117,7 @@ const Education = () => {
                     "ml-12 md:ml-0 md:w-[calc(50%-2rem)] p-6",
                     index % 2 === 0 ? "md:mr-12" : "md:ml-12"
                   )}>
-                    <div className="timeline-content bg-white rounded-xl shadow-lg p-6 transform transition-all duration-500 hover:scale-105 hover:shadow-xl">
+                    <div className="timeline-content opacity-0 bg-white rounded-xl shadow-lg p-6 transform transition-all duration-500 hover:shadow-xl">
                       <h3 className="text-xl font-bold text-theme-dark">{education.degree}</h3>
                       <p className="text-theme-accent font-medium mb-2">{education.institution}</p>
                       
@@ -125,7 +126,7 @@ const Education = () => {
                         <span className="text-sm font-medium">{education.period}</span>
                       </div>
                       
-                      <div className="space-y-3">
+                      <div className="space-y-3 mt-4">
                         {education.achievements.map((achievement, i) => (
                           <div key={i} className="flex items-center space-x-2 p-2 bg-theme-lightest rounded-lg">
                             <Star className="h-4 w-4 text-theme-accent flex-shrink-0" />
@@ -141,6 +142,81 @@ const Education = () => {
           </div>
         </div>
       </div>
+      
+      <style>
+        {`
+        .animate-slide-in-bottom {
+          animation: slideInBottom 0.6s ease forwards;
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slideInBottom {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .timeline-animate {
+          animation: timelineFill 1.5s ease-out forwards;
+        }
+        
+        @keyframes timelineFill {
+          from {
+            height: 0%;
+            opacity: 0;
+          }
+          to {
+            height: 100%;
+            opacity: 1;
+          }
+        }
+        
+        .pulse-dot::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: rgba(0, 173, 181, 0.3);
+          z-index: -1;
+          animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          70% {
+            transform: scale(1.3);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0;
+          }
+        }
+        `}
+      </style>
     </section>
   );
 };
