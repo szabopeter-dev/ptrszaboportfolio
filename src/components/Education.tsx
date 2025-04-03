@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import { GraduationCap, Calendar, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -90,7 +91,7 @@ const Education = () => {
           Education
         </h2>
         
-        <div className="max-w-4xl mx-auto mt-16">
+        <div className="max-w-6xl mx-auto mt-16">
           <div ref={timelineRef} className="relative">
             {/* Timeline center line */}
             <div 
