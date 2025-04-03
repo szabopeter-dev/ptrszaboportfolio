@@ -83,65 +83,97 @@ const Education = () => {
           Education
         </h2>
         
-        <div ref={educationCardsRef} className="max-w-4xl mx-auto space-y-8">
-          {/* Changed to a vertical stack layout */}
-          <div className="flex flex-col gap-8">
-            {educationData.map((education, index) => (
-              <Card 
-                key={education.id}
-                className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-1"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start mb-4">
-                    <div className="p-3 rounded-full bg-theme/10 group-hover:bg-theme/20 transition-colors duration-300">
-                      <GraduationCap className="h-7 w-7 text-theme group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300 line-clamp-2">
-                        {education.institution}
-                      </h3>
-                      <div className="inline-flex items-center mt-1 px-2 py-1 rounded-full bg-theme/10 text-theme group-hover:bg-theme/20 transition-colors duration-300">
-                        <Calendar size={14} className="mr-1" />
-                        <span className="text-xs font-medium">{education.period}</span>
-                      </div>
-                    </div>
+        <div ref={educationCardsRef} className="max-w-4xl mx-auto">
+          {/* Education Timeline */}
+          <div className="relative">
+            {/* Timeline vertical line */}
+            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-theme-light z-0">
+              <div className="h-full w-full timeline-line"></div>
+            </div>
+            
+            {/* Education cards */}
+            <div className="space-y-12">
+              {educationData.map((education, index) => (
+                <div key={education.id} className="relative z-10">
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-8 h-8 rounded-full border-4 border-theme bg-white shadow-lg flex items-center justify-center z-20">
+                    <GraduationCap className="h-4 w-4 text-theme" />
                   </div>
                   
-                  <div className="flex items-center mb-3">
-                    <p className="text-base md:text-lg font-medium text-theme">{education.degree}</p>
-                  </div>
-                  
-                  {education.coursework && (
-                    <div className="bg-theme-lightest rounded-lg p-4 mb-4 group-hover:bg-theme-light/30 transition-colors duration-300">
-                      <div className="flex items-center mb-2">
-                        <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
-                        <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
-                      </div>
-                      <p className="text-sm text-theme-dark/80">
-                        {education.coursework}
-                      </p>
-                    </div>
-                  )}
-                  
-                  {education.achievements && (
-                    <div className="grid grid-cols-1 gap-3">
-                      {education.achievements.map((item, i) => (
-                        <div key={i} className="flex items-start p-3 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                          <Award className="h-5 w-5 text-theme-accent flex-shrink-0 mr-2" />
-                          <p className="text-sm text-theme-dark/80">{item}</p>
+                  {/* Timeline card - alternate sides on desktop */}
+                  <div className={`pl-12 md:pl-0 ${index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2'}`}>
+                    <Card 
+                      className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-2"
+                    >
+                      <div className={`h-1.5 ${index % 2 === 0 ? 'bg-theme' : 'bg-theme-accent'} rounded-t-xl`}></div>
+                      <CardContent className="p-6">
+                        <div className="flex items-start mb-4">
+                          <div className={`p-3 rounded-full bg-${index % 2 === 0 ? 'theme' : 'theme-accent'}/10 group-hover:bg-${index % 2 === 0 ? 'theme' : 'theme-accent'}/20 transition-colors duration-300`}>
+                            <GraduationCap className={`h-7 w-7 text-${index % 2 === 0 ? 'theme' : 'theme-accent'} group-hover:scale-110 transition-transform duration-300`} />
+                          </div>
+                          <div className="ml-4">
+                            <h3 className="text-xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300 line-clamp-2">
+                              {education.institution}
+                            </h3>
+                            <div className="inline-flex items-center mt-1 px-2 py-1 rounded-full bg-theme/10 text-theme group-hover:bg-theme/20 transition-colors duration-300">
+                              <Calendar size={14} className="mr-1" />
+                              <span className="text-xs font-medium">{education.period}</span>
+                            </div>
+                          </div>
                         </div>
-                      ))}
+                        
+                        <div className="flex items-center mb-3">
+                          <p className="text-base md:text-lg font-medium text-theme">{education.degree}</p>
+                        </div>
+                        
+                        {education.coursework && (
+                          <div className="bg-theme-lightest rounded-lg p-4 mb-4 group-hover:bg-theme-light/30 transition-colors duration-300">
+                            <div className="flex items-center mb-2">
+                              <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
+                              <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
+                            </div>
+                            <p className="text-sm text-theme-dark/80">
+                              {education.coursework}
+                            </p>
+                          </div>
+                        )}
+                        
+                        {education.achievements && (
+                          <div className="grid grid-cols-1 gap-3">
+                            {education.achievements.map((item, i) => (
+                              <div key={i} className="flex items-start p-3 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <Award className="h-5 w-5 text-theme-accent flex-shrink-0 mr-2" />
+                                <p className="text-sm text-theme-dark/80">{item}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  {/* Year marker */}
+                  <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 -mt-2">
+                    <div className={`px-4 py-1 rounded-full ${index % 2 === 0 ? 'bg-theme' : 'bg-theme-accent'} text-white text-xs font-medium`}>
+                      {education.period.split(' - ')[0].split(' ')[0]}
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
       
       <style>
         {`
+        .timeline-line {
+          height: 0%;
+          width: 100%;
+          background: linear-gradient(to bottom, var(--theme-color, #3F72AF), var(--theme-color, #3F72AF));
+          transition: height 1.5s ease-out;
+        }
+        
         .animate-slide-in-bottom {
           animation: slideInBottom 0.6s ease forwards;
         }
@@ -169,6 +201,13 @@ const Education = () => {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+        
+        /* Media queries for responsive timeline layout */
+        @media (max-width: 768px) {
+          .pl-12 {
+            padding-left: 3rem;
           }
         }
         `}
