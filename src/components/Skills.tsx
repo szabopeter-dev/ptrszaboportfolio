@@ -7,9 +7,17 @@ import {
   Database, 
   TerminalSquare, 
   BrainCircuit,
-  RotateCw,
+  RotateCw
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent
+} from "@/components/ui/card";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent
+} from "@/components/ui/hover-card";
 
 type Skill = {
   category: string;
@@ -23,7 +31,7 @@ const Skills = () => {
   // Create ref container for each skill card to handle animations
   const skillsRef = useRef<HTMLDivElement>(null);
   const [flippedCard, setFlippedCard] = useState<string | null>(null);
-  
+
   // Enhanced animation with sequential card reveals
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -55,9 +63,8 @@ const Skills = () => {
     };
   }, []);
 
-  // Toggle card flip
-  const toggleCardFlip = (skillId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
+  // Handle card flip
+  const handleFlip = (skillId: string) => {
     setFlippedCard(flippedCard === skillId ? null : skillId);
   };
 
@@ -184,30 +191,49 @@ const Skills = () => {
         
         <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
           {skills.map((skill, index) => (
-            <div key={index} className="flip-card-container">
-              <div className={`flip-card ${flippedCard === skill.category ? 'flipped' : ''}`}>
-                {/* Front of the Card */}
-                <Card className="flip-card-front skill-card h-full hover:shadow-xl transition-shadow">
+            <div key={index} className="skill-card-wrapper h-full perspective-1000">
+              <div className={`skill-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d ${flippedCard === skill.category ? 'rotate-y-180' : ''}`}>
+                {/* Front of card */}
+                <Card className="skill-card front absolute w-full h-full backface-hidden hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
                   <div className="h-2 bg-theme-accent rounded-t-xl"></div>
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex justify-between items-center mb-6">
                       <div className="flex items-center">
-                        <div className="p-3 bg-theme-light rounded-lg mr-3">
+                        <div className="p-3 bg-theme-light rounded-lg mr-3 transition-colors duration-300">
                           {skill.icon}
                         </div>
                         <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
                       </div>
+                      
                       <button 
-                        onClick={(e) => toggleCardFlip(skill.category, e)} 
-                        className="h-8 w-8 rounded-full flex items-center justify-center bg-theme-light hover:bg-theme hover:text-white transition-all duration-300"
-                        title="Flip for details"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleFlip(skill.category);
+                        }}
+                        className="p-2 bg-theme-light/70 rounded-full hover:bg-theme-light transition-all duration-300 group"
+                        aria-label="Flip card for details"
                       >
-                        <RotateCw className="h-4 w-4" />
+                        <RotateCw size={16} className="text-theme group-hover:rotate-90 transition-transform duration-500" />
                       </button>
                     </div>
+                    
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <div className="cursor-help mb-4">
+                          <p className="text-sm text-theme-dark/80 italic">{skill.description}</p>
+                        </div>
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-80 p-0 bg-white/90 backdrop-blur-sm">
+                        <div className="p-3">
+                          <h4 className="font-medium text-theme">{skill.category}</h4>
+                          <p className="text-xs text-theme-dark/70">{skill.description}</p>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                    
                     <ul className="space-y-2">
                       {skill.items.map((item, idx) => (
-                        <li key={idx} className="flex items-center text-theme-dark/80">
+                        <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
                           <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
                           <span>{item}</span>
                         </li>
@@ -216,35 +242,37 @@ const Skills = () => {
                   </CardContent>
                 </Card>
                 
-                {/* Back of the Card */}
-                <Card className="flip-card-back h-full bg-theme-light/30">
+                {/* Back of card */}
+                <Card className="skill-card back absolute w-full h-full backface-hidden rotate-y-180 bg-theme/5">
                   <div className="h-2 bg-theme rounded-t-xl"></div>
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center">
-                        <div className="p-3 bg-white rounded-lg mr-3">
-                          {skill.icon}
-                        </div>
-                        <h3 className="text-xl font-bold text-theme">{skill.category} Details</h3>
-                      </div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-bold text-theme">{skill.category} Details</h3>
                       <button 
-                        onClick={(e) => toggleCardFlip(skill.category, e)} 
-                        className="h-8 w-8 rounded-full flex items-center justify-center bg-white hover:bg-theme-dark hover:text-white transition-all duration-300"
-                        title="Flip back"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleFlip(skill.category);
+                        }}
+                        className="p-2 bg-theme-light/70 rounded-full hover:bg-theme-light transition-all duration-300 group"
+                        aria-label="Flip card back"
                       >
-                        <RotateCw className="h-4 w-4" />
+                        <RotateCw size={16} className="text-theme group-hover:-rotate-90 transition-transform duration-500" />
                       </button>
                     </div>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-4 mt-4">
                       {skill.detailedDescription.map((para, idx) => (
-                        <div 
-                          key={idx} 
-                          className="p-3 bg-white rounded-lg"
-                        >
-                          <p className="text-theme-dark/80 leading-relaxed text-sm">{para}</p>
+                        <div key={idx} className="flex items-start mb-3">
+                          <div className="w-2 h-2 rounded-full bg-theme-accent mt-2 mr-3"></div>
+                          <p className="text-theme-dark/80 leading-relaxed text-sm">
+                            {para}
+                          </p>
                         </div>
                       ))}
+                    </div>
+                    
+                    <div className="absolute bottom-4 right-4">
+                      <div className="text-xs text-theme-accent/70 italic">Flip to return</div>
                     </div>
                   </CardContent>
                 </Card>
@@ -256,35 +284,19 @@ const Skills = () => {
       
       <style>
         {`
-          .flip-card-container {
+          .perspective-1000 {
             perspective: 1000px;
-            height: 100%;
           }
           
-          .flip-card {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
+          .transform-style-3d {
             transform-style: preserve-3d;
           }
           
-          .flipped {
-            transform: rotateY(180deg);
-          }
-          
-          .flip-card-front,
-          .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
+          .backface-hidden {
             backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
           }
           
-          .flip-card-back {
+          .rotate-y-180 {
             transform: rotateY(180deg);
           }
           
@@ -297,6 +309,10 @@ const Skills = () => {
               opacity: 1;
               transform: translateY(0);
             }
+          }
+          
+          .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
           }
         `}
       </style>

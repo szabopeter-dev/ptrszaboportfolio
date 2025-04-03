@@ -1,61 +1,50 @@
 
 import React, { useEffect, useRef } from "react";
-import { GraduationCap, Calendar, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Education = () => {
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const timelineLineRef = useRef<HTMLDivElement>(null);
-  
-  // Animation setup
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const educationCardsRef = useRef<HTMLDivElement>(null);
+
+  // Enhanced animations with optimized observer logic
   useEffect(() => {
     // Section title animation
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-slide-in-bottom');
-          entry.target.classList.remove('opacity-0');
         }
       });
     }, { threshold: 0.1 });
 
-    // Education items animation
-    const itemsObserver = new IntersectionObserver((entries) => {
+    // Education cards animation with sequence
+    const cardsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.timeline-item');
-          
-          // Progressive animation of items
-          items.forEach((item, index) => {
+          const cards = entry.target.querySelectorAll('.education-card');
+          cards.forEach((card, index) => {
             setTimeout(() => {
-              item.classList.add('animate-fade-in');
-              item.classList.remove('opacity-0');
-              
-              // Animate the content inside each timeline item with additional delay
-              const content = item.querySelector('.timeline-content');
-              if (content) {
-                setTimeout(() => {
-                  content.classList.add('animate-fade-in');
-                  content.classList.remove('opacity-0');
-                }, 200);
-              }
-            }, 300 * index); // Staggered delay for each item
+              card.classList.add('animate-fade-in');
+              card.classList.remove('opacity-0');
+            }, 200 * index);
           });
-          
-          // Animate timeline line
-          if (timelineLineRef.current) {
-            timelineLineRef.current.classList.add('timeline-animate');
-          }
         }
       });
     }, { threshold: 0.1 });
 
-    if (timelineRef.current) {
-      itemsObserver.observe(timelineRef.current);
+    if (sectionRef.current) {
+      sectionObserver.observe(sectionRef.current);
+      sectionRef.current.classList.add('opacity-0');
+    }
+    
+    if (educationCardsRef.current) {
+      cardsObserver.observe(educationCardsRef.current);
     }
 
     return () => {
-      if (timelineRef.current) itemsObserver.unobserve(timelineRef.current);
+      if (sectionRef.current) sectionObserver.unobserve(sectionRef.current);
+      if (educationCardsRef.current) cardsObserver.unobserve(educationCardsRef.current);
     };
   }, []);
 
@@ -87,64 +76,104 @@ const Education = () => {
   return (
     <section id="education" className="section bg-white py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-12 md:mb-16">
+        <h2 
+          ref={sectionRef}
+          className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-12 md:mb-16 opacity-0 transition-all duration-700"
+        >
           Education
         </h2>
         
-        <div className="max-w-4xl mx-auto mt-16">
-          <div ref={timelineRef} className="relative">
-            {/* Timeline center line */}
-            <div 
-              ref={timelineLineRef}
-              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-ml-0.5 bg-gradient-to-b from-transparent via-theme-accent to-transparent opacity-0"
-              style={{ height: '0%' }}
-            ></div>
+        <div ref={educationCardsRef} className="max-w-4xl mx-auto">
+          {/* Education Timeline */}
+          <div className="relative">
+            {/* Timeline vertical line */}
+            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-theme-light z-0">
+              <div className="h-full w-full timeline-line"></div>
+            </div>
             
-            {educationData.map((education, index) => (
-              <div key={education.id} className="timeline-item mb-12 opacity-0">
-                <div className={cn(
-                  "relative flex flex-col md:flex-row items-start",
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                )}>
-                  {/* Timeline dot with pulse effect */}
-                  <div className="absolute left-4 w-8 h-8 rounded-full bg-white border-4 border-theme-accent z-10 transform -translate-x-1/2 md:left-1/2 pulse-dot">
-                    <GraduationCap className="w-4 h-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-theme-accent" />
-                    <span className="absolute w-full h-full rounded-full bg-theme-accent/30 animate-ping"></span>
+            {/* Education cards */}
+            <div className="space-y-12">
+              {educationData.map((education, index) => (
+                <div key={education.id} className="relative z-10">
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-8 h-8 rounded-full border-4 border-theme bg-white shadow-lg flex items-center justify-center z-20">
+                    <GraduationCap className="h-4 w-4 text-theme" />
                   </div>
                   
-                  {/* Content */}
-                  <div className={cn(
-                    "ml-12 md:ml-0 md:w-[calc(50%-2rem)] p-6",
-                    index % 2 === 0 ? "md:mr-12" : "md:ml-12"
-                  )}>
-                    <div className="timeline-content opacity-0 bg-white rounded-xl shadow-lg p-6 transform transition-all duration-500 hover:shadow-xl">
-                      <h3 className="text-xl font-bold text-theme-dark">{education.degree}</h3>
-                      <p className="text-theme-accent font-medium mb-2">{education.institution}</p>
-                      
-                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mb-4 hover:bg-theme/20 transition-colors duration-300">
-                        <Calendar size={16} className="mr-2" />
-                        <span className="text-sm font-medium">{education.period}</span>
-                      </div>
-                      
-                      <div className="space-y-3 mt-4">
-                        {education.achievements.map((achievement, i) => (
-                          <div key={i} className="flex items-center space-x-2 p-2 bg-theme-lightest rounded-lg">
-                            <Star className="h-4 w-4 text-theme-accent flex-shrink-0" />
-                            <p className="text-sm text-theme-dark/80">{achievement}</p>
+                  {/* Timeline card - alternate sides on desktop */}
+                  <div className={`pl-12 md:pl-0 ${index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2'}`}>
+                    <Card 
+                      className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-2"
+                    >
+                      <div className={`h-1.5 ${index % 2 === 0 ? 'bg-theme' : 'bg-theme-accent'} rounded-t-xl`}></div>
+                      <CardContent className="p-6">
+                        <div className="flex items-start mb-4">
+                          <div className={`p-3 rounded-full bg-${index % 2 === 0 ? 'theme' : 'theme-accent'}/10 group-hover:bg-${index % 2 === 0 ? 'theme' : 'theme-accent'}/20 transition-colors duration-300`}>
+                            <GraduationCap className={`h-7 w-7 text-${index % 2 === 0 ? 'theme' : 'theme-accent'} group-hover:scale-110 transition-transform duration-300`} />
                           </div>
-                        ))}
-                      </div>
+                          <div className="ml-4">
+                            <h3 className="text-xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300 line-clamp-2">
+                              {education.institution}
+                            </h3>
+                            <div className="inline-flex items-center mt-1 px-2 py-1 rounded-full bg-theme/10 text-theme group-hover:bg-theme/20 transition-colors duration-300">
+                              <Calendar size={14} className="mr-1" />
+                              <span className="text-xs font-medium">{education.period}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center mb-3">
+                          <p className="text-base md:text-lg font-medium text-theme">{education.degree}</p>
+                        </div>
+                        
+                        {education.coursework && (
+                          <div className="bg-theme-lightest rounded-lg p-4 mb-4 group-hover:bg-theme-light/30 transition-colors duration-300">
+                            <div className="flex items-center mb-2">
+                              <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
+                              <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
+                            </div>
+                            <p className="text-sm text-theme-dark/80">
+                              {education.coursework}
+                            </p>
+                          </div>
+                        )}
+                        
+                        {education.achievements && (
+                          <div className="grid grid-cols-1 gap-3">
+                            {education.achievements.map((item, i) => (
+                              <div key={i} className="flex items-start p-3 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <Award className="h-5 w-5 text-theme-accent flex-shrink-0 mr-2" />
+                                <p className="text-sm text-theme-dark/80">{item}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  {/* Year marker */}
+                  <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 -mt-2">
+                    <div className={`px-4 py-1 rounded-full ${index % 2 === 0 ? 'bg-theme' : 'bg-theme-accent'} text-white text-xs font-medium`}>
+                      {education.period.split(' - ')[0].split(' ')[0]}
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
       
       <style>
         {`
+        .timeline-line {
+          height: 0%;
+          width: 100%;
+          background: linear-gradient(to bottom, var(--theme-color, #3F72AF), var(--theme-color, #3F72AF));
+          transition: height 1.5s ease-out;
+        }
+        
         .animate-slide-in-bottom {
           animation: slideInBottom 0.6s ease forwards;
         }
@@ -175,44 +204,10 @@ const Education = () => {
           }
         }
         
-        .timeline-animate {
-          animation: timelineFill 1.5s ease-out forwards;
-        }
-        
-        @keyframes timelineFill {
-          from {
-            height: 0%;
-            opacity: 0;
-          }
-          to {
-            height: 100%;
-            opacity: 1;
-          }
-        }
-        
-        .pulse-dot::after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          background-color: rgba(0, 173, 181, 0.3);
-          z-index: -1;
-          animation: pulse 3s infinite;
-        }
-        
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-            opacity: 0.8;
-          }
-          70% {
-            transform: scale(1.3);
-            opacity: 0;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 0;
+        /* Media queries for responsive timeline layout */
+        @media (max-width: 768px) {
+          .pl-12 {
+            padding-left: 3rem;
           }
         }
         `}
