@@ -7,11 +7,7 @@ import {
   Database, 
   TerminalSquare, 
   BrainCircuit,
-  Plus,
-  X,
-  ChevronUp,
-  ChevronDown,
-  Info
+  X
 } from "lucide-react";
 import {
   Card,
@@ -226,29 +222,15 @@ const Skills = () => {
                     className={`skill-card hover:-translate-y-2 transition-all duration-300 hover:shadow-xl cursor-pointer ${
                       activeSkill === skill.category ? 'ring-2 ring-theme-accent/50 shadow-lg' : ''
                     } ${openStates[skill.category] ? 'bg-theme-light/30' : ''}`}
-                    onClick={() => handleSkillInteraction(skill.category)}
+                    onClick={() => toggleOpenState(skill.category)}
                   >
                     <div className="h-2 bg-theme-accent rounded-t-xl"></div>
                     <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center">
-                          <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
-                            {skill.icon}
-                          </div>
-                          <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+                      <div className="flex items-center mb-6">
+                        <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
+                          {skill.icon}
                         </div>
-                        <CollapsibleTrigger 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleOpenState(skill.category);
-                          }} 
-                          className="h-8 w-8 rounded-full flex items-center justify-center bg-theme-light hover:bg-theme hover:text-white transition-all duration-300"
-                        >
-                          {openStates[skill.category] ? 
-                            <ChevronUp className="h-4 w-4" /> : 
-                            <Plus className="h-4 w-4" />
-                          }
-                        </CollapsibleTrigger>
+                        <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
                       </div>
                       <ul className="space-y-2">
                         {skill.items.map((item, idx) => (
@@ -259,10 +241,11 @@ const Skills = () => {
                         ))}
                       </ul>
                       
-                      <div className="mt-4 text-xs text-theme/70 flex items-center justify-end cursor-pointer hover:text-theme transition-colors">
-                        <Info size={14} className="mr-1" />
-                        <span>Hover for overview</span>
-                      </div>
+                      <CollapsibleTrigger asChild>
+                        <div className="mt-4 text-xs text-theme/70 flex items-center justify-end cursor-pointer hover:text-theme transition-colors">
+                          <span>{openStates[skill.category] ? 'Hide details' : 'Click for details'}</span>
+                        </div>
+                      </CollapsibleTrigger>
                     </CardContent>
                   </Card>
                 </HoverCardTrigger>
@@ -276,14 +259,12 @@ const Skills = () => {
               
               <CollapsibleContent>
                 <div 
-                  className="skill-details bg-white rounded-xl shadow-lg border border-theme-light/50 mt-3 transform transition-all duration-500 overflow-hidden"
+                  className="bg-white rounded-xl shadow-lg border border-theme-light/50 mt-2 transform transition-all duration-300 overflow-hidden"
+                  style={{ animationDuration: '400ms' }}
                 >
                   <div className="p-5">
-                    <div className="flex justify-between items-center mb-4">
-                      <div className="flex items-center">
-                        {skill.icon}
-                        <h3 className="ml-2 text-lg font-bold text-theme">{skill.category} Details</h3>
-                      </div>
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-lg font-bold text-theme">{skill.category} Details</h3>
                       <button 
                         onClick={() => toggleOpenState(skill.category)}
                         className="p-2 hover:bg-theme-light/50 rounded-full transition-all duration-300 hover:rotate-90"
@@ -292,14 +273,11 @@ const Skills = () => {
                       </button>
                     </div>
                     
-                    <div className="space-y-4 skill-details-content animate-fade-in">
+                    <div className="space-y-3">
                       {skill.detailedDescription.map((para, idx) => (
-                        <div 
-                          key={idx} 
-                          className="p-3 bg-theme-lightest rounded-lg hover:bg-theme-light/20 transition-colors duration-300 transform hover:-translate-y-1"
-                        >
-                          <p className="text-theme-dark/80 leading-relaxed text-sm">{para}</p>
-                        </div>
+                        <p key={idx} className="text-theme-dark/80 leading-relaxed text-sm">
+                          {para}
+                        </p>
                       ))}
                     </div>
                   </div>
@@ -312,53 +290,6 @@ const Skills = () => {
       
       <style>
         {`
-          .skill-details {
-            animation: slideDown 0.4s ease-out forwards;
-          }
-          
-          .skill-details-content > div {
-            opacity: 0;
-            animation: fadeSlideUp 0.5s ease-out forwards;
-          }
-          
-          .skill-details-content > div:nth-child(1) {
-            animation-delay: 0.1s;
-          }
-          
-          .skill-details-content > div:nth-child(2) {
-            animation-delay: 0.2s;
-          }
-          
-          .skill-details-content > div:nth-child(3) {
-            animation-delay: 0.3s;
-          }
-          
-          .skill-details-content > div:nth-child(4) {
-            animation-delay: 0.4s;
-          }
-          
-          @keyframes slideDown {
-            from {
-              opacity: 0;
-              transform: translateY(-10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes fadeSlideUp {
-            from {
-              opacity: 0;
-              transform: translateY(10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
           @keyframes collapsible-down {
             from {
               height: 0;

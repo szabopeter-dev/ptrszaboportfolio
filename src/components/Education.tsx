@@ -1,10 +1,11 @@
 
 import React, { useEffect, useRef } from "react";
-import { GraduationCap, Award, BookOpen, Calendar, Star } from "lucide-react";
+import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Education = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const educationCardsRef = useRef<HTMLDivElement>(null);
 
   // Enhanced animations with optimized observer logic
   useEffect(() => {
@@ -17,34 +18,17 @@ const Education = () => {
       });
     }, { threshold: 0.1 });
 
-    // Timeline animation
-    const timelineObserver = new IntersectionObserver((entries) => {
+    // Education cards animation with sequence
+    const cardsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const timelineItems = entry.target.querySelectorAll('.education-item');
-          
-          // Progressive animation of timeline items
-          timelineItems.forEach((item, index) => {
+          const cards = entry.target.querySelectorAll('.education-card');
+          cards.forEach((card, index) => {
             setTimeout(() => {
-              item.classList.add('animate-fade-in');
-              item.classList.remove('opacity-0');
-              
-              // Animate the content inside each timeline item with additional delay
-              const content = item.querySelector('.education-content');
-              if (content) {
-                setTimeout(() => {
-                  content.classList.add('animate-fade-in');
-                  content.classList.remove('opacity-0');
-                }, 200);
-              }
-            }, 300 * index); // Staggered delay for each item
+              card.classList.add('animate-fade-in');
+              card.classList.remove('opacity-0');
+            }, 200 * index);
           });
-          
-          // Animate timeline line
-          const timeline = entry.target.querySelector('.timeline-line');
-          if (timeline) {
-            timeline.classList.add('education-timeline-animate');
-          }
         }
       });
     }, { threshold: 0.1 });
@@ -54,13 +38,13 @@ const Education = () => {
       sectionRef.current.classList.add('opacity-0');
     }
     
-    if (timelineRef.current) {
-      timelineObserver.observe(timelineRef.current);
+    if (educationCardsRef.current) {
+      cardsObserver.observe(educationCardsRef.current);
     }
 
     return () => {
       if (sectionRef.current) sectionObserver.unobserve(sectionRef.current);
-      if (timelineRef.current) timelineObserver.unobserve(timelineRef.current);
+      if (educationCardsRef.current) cardsObserver.unobserve(educationCardsRef.current);
     };
   }, []);
 
@@ -99,133 +83,71 @@ const Education = () => {
           Education
         </h2>
         
-        <div ref={timelineRef} className="max-w-4xl mx-auto relative">
-          {/* Timeline center line with unique styling different from Experience */}
-          <div className="timeline-line absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-theme-light via-theme to-theme-light md:left-1/2 md:-ml-0.5 opacity-0">
-            <div className="absolute top-0 left-1/2 -ml-1.5 -mt-1.5 w-4 h-4 rounded-full bg-theme-accent"></div>
-            <div className="absolute bottom-0 left-1/2 -ml-1.5 -mb-1.5 w-4 h-4 rounded-full bg-theme-accent"></div>
-          </div>
-          
-          {educationData.map((education, index) => (
-            <div 
-              key={education.id}
-              className="education-item opacity-0 mb-12 relative z-10"
-            >
-              <div className="flex items-center absolute left-4 md:left-1/2 transform -translate-x-1/2">
-                <div className="w-8 h-8 rounded-full bg-white border-4 border-theme shadow-lg flex items-center justify-center">
-                  <GraduationCap className="h-4 w-4 text-theme" />
-                  <span className="animate-ping absolute h-5 w-5 rounded-full bg-theme-accent opacity-30"></span>
-                </div>
-              </div>
-              
-              <div className={`grid grid-cols-1 md:grid-cols-2 items-center ${
-                index % 2 === 0 ? 'md:education-even' : 'md:education-odd'
-              }`}>
-                {/* Year bubble - visible only on mobile */}
-                <div className="md:hidden pl-16 mb-3">
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme-light/50 text-theme">
-                    <Calendar size={14} className="mr-2" />
-                    <span className="text-xs font-medium">{education.period}</span>
+        <div ref={educationCardsRef} className="max-w-4xl mx-auto space-y-8">
+          {/* Changed to a vertical stack layout */}
+          <div className="flex flex-col gap-8">
+            {educationData.map((education, index) => (
+              <Card 
+                key={education.id}
+                className="education-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-1"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start mb-4">
+                    <div className="p-3 rounded-full bg-theme/10 group-hover:bg-theme/20 transition-colors duration-300">
+                      <GraduationCap className="h-7 w-7 text-theme group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-xl font-bold text-theme-dark group-hover:text-theme transition-colors duration-300 line-clamp-2">
+                        {education.institution}
+                      </h3>
+                      <div className="inline-flex items-center mt-1 px-2 py-1 rounded-full bg-theme/10 text-theme group-hover:bg-theme/20 transition-colors duration-300">
+                        <Calendar size={14} className="mr-1" />
+                        <span className="text-xs font-medium">{education.period}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Left side content (or empty for odd indices on desktop) */}
-                <div className={`pl-16 md:pl-0 md:pr-10 ${
-                  index % 2 === 0 ? '' : 'md:hidden'
-                }`}>
-                  {index % 2 === 0 && (
-                    <div className="education-content opacity-0 bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                      <h3 className="text-xl font-bold text-theme">{education.institution}</h3>
-                      <p className="text-theme-dark/80 mb-3">{education.degree}</p>
-                      
-                      {/* Year bubble - visible only on desktop for even items */}
-                      <div className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-theme-light/50 text-theme mb-3">
-                        <Calendar size={14} className="mr-2" />
-                        <span className="text-xs font-medium">{education.period}</span>
+                  
+                  <div className="flex items-center mb-3">
+                    <p className="text-base md:text-lg font-medium text-theme">{education.degree}</p>
+                  </div>
+                  
+                  {education.coursework && (
+                    <div className="bg-theme-lightest rounded-lg p-4 mb-4 group-hover:bg-theme-light/30 transition-colors duration-300">
+                      <div className="flex items-center mb-2">
+                        <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
+                        <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
                       </div>
-                      
-                      <div className="mt-4 space-y-3">
-                        {education.achievements.map((achievement, i) => (
-                          <div key={i} className="flex items-center space-x-2 p-2 bg-theme-lightest rounded-lg hover:bg-theme-light/30 transition-colors">
-                            <Star className="h-4 w-4 text-theme-accent flex-shrink-0" />
-                            <p className="text-sm text-theme-dark/80">{achievement}</p>
-                          </div>
-                        ))}
-                      </div>
+                      <p className="text-sm text-theme-dark/80">
+                        {education.coursework}
+                      </p>
                     </div>
                   )}
-                </div>
-                
-                {/* Right side content (or empty for even indices on desktop) */}
-                <div className={`pl-16 md:pl-10 ${
-                  index % 2 === 0 ? 'md:hidden' : ''
-                }`}>
-                  {(index % 2 !== 0 || window.innerWidth < 768) && (
-                    <div className="education-content opacity-0 bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                      <h3 className="text-xl font-bold text-theme">{education.institution}</h3>
-                      <p className="text-theme-dark/80 mb-3">{education.degree}</p>
-                      
-                      {/* Year bubble - visible only on desktop for odd items */}
-                      <div className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-theme-light/50 text-theme mb-3">
-                        <Calendar size={14} className="mr-2" />
-                        <span className="text-xs font-medium">{education.period}</span>
-                      </div>
-                      
-                      <div className="mt-4 space-y-3">
-                        {education.achievements.map((achievement, i) => (
-                          <div key={i} className="flex items-center space-x-2 p-2 bg-theme-lightest rounded-lg hover:bg-theme-light/30 transition-colors">
-                            <Star className="h-4 w-4 text-theme-accent flex-shrink-0" />
-                            <p className="text-sm text-theme-dark/80">{achievement}</p>
-                          </div>
-                        ))}
-                      </div>
+                  
+                  {education.achievements && (
+                    <div className="grid grid-cols-1 gap-3">
+                      {education.achievements.map((item, i) => (
+                        <div key={i} className="flex items-start p-3 rounded-lg bg-theme-light/50 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                          <Award className="h-5 w-5 text-theme-accent flex-shrink-0 mr-2" />
+                          <p className="text-sm text-theme-dark/80">{item}</p>
+                        </div>
+                      ))}
                     </div>
                   )}
-                </div>
-              </div>
-            </div>
-          ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
       
       <style>
         {`
-        .education-odd .education-content {
-          transform: translateX(20px);
-          transition: transform 0.3s ease;
-        }
-        
-        .education-even .education-content {
-          transform: translateX(-20px);
-          transition: transform 0.3s ease;
-        }
-        
-        .education-odd:hover .education-content,
-        .education-even:hover .education-content {
-          transform: translateX(0);
-        }
-        
         .animate-slide-in-bottom {
           animation: slideInBottom 0.6s ease forwards;
         }
         
         .animate-fade-in {
           animation: fadeIn 0.6s ease forwards;
-        }
-        
-        .education-timeline-animate {
-          animation: educationTimelineFill 1.8s ease-out forwards;
-        }
-        
-        @keyframes educationTimelineFill {
-          from {
-            height: 0%;
-            opacity: 0.3;
-          }
-          to {
-            height: 100%;
-            opacity: 1;
-          }
         }
         
         @keyframes fadeIn {
