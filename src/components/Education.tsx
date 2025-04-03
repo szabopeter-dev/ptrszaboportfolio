@@ -1,11 +1,12 @@
 
 import React, { useEffect, useRef } from "react";
 import { GraduationCap, Calendar, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Education = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<HTMLDivElement>(null);
-
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const timelineLineRef = useRef<HTMLDivElement>(null);
+  
   // Animation setup
   useEffect(() => {
     // Section title animation
@@ -22,31 +23,39 @@ const Education = () => {
     const itemsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.education-item');
+          const items = entry.target.querySelectorAll('.timeline-item');
           
           // Progressive animation of items
           items.forEach((item, index) => {
             setTimeout(() => {
               item.classList.add('animate-fade-in');
               item.classList.remove('opacity-0');
+              
+              // Animate the content inside each timeline item with additional delay
+              const content = item.querySelector('.timeline-content');
+              if (content) {
+                setTimeout(() => {
+                  content.classList.add('animate-fade-in');
+                  content.classList.remove('opacity-0');
+                }, 200);
+              }
             }, 300 * index); // Staggered delay for each item
           });
+          
+          // Animate timeline line
+          if (timelineLineRef.current) {
+            timelineLineRef.current.classList.add('timeline-animate');
+          }
         }
       });
     }, { threshold: 0.1 });
 
-    if (sectionRef.current) {
-      sectionObserver.observe(sectionRef.current);
-      sectionRef.current.classList.add('opacity-0');
-    }
-    
-    if (itemsRef.current) {
-      itemsObserver.observe(itemsRef.current);
+    if (timelineRef.current) {
+      itemsObserver.observe(timelineRef.current);
     }
 
     return () => {
-      if (sectionRef.current) sectionObserver.unobserve(sectionRef.current);
-      if (itemsRef.current) itemsObserver.unobserve(itemsRef.current);
+      if (timelineRef.current) itemsObserver.unobserve(timelineRef.current);
     };
   }, []);
 
@@ -78,45 +87,59 @@ const Education = () => {
   return (
     <section id="education" className="section bg-white py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 
-          ref={sectionRef}
-          className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-12 md:mb-16 opacity-0"
-        >
+        <h2 className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-12 md:mb-16">
           Education
         </h2>
         
-        <div ref={itemsRef} className="max-w-3xl mx-auto space-y-8">
-          {educationData.map((education, index) => (
+        <div className="max-w-4xl mx-auto mt-16">
+          <div ref={timelineRef} className="relative">
+            {/* Timeline center line */}
             <div 
-              key={education.id}
-              className="education-item opacity-0 bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 ml-6 md:ml-12"
-            >
-              <div className="flex items-center absolute -left-3 md:-left-6 transform">
-                <div className="w-10 h-10 rounded-full bg-theme-accent shadow-lg flex items-center justify-center">
-                  <GraduationCap className="h-5 w-5 text-white" />
-                </div>
-              </div>
-              
-              <div className="ml-8">
-                <h3 className="text-xl font-bold text-theme mb-1">{education.institution}</h3>
-                <p className="text-theme-dark/80 mb-3">{education.degree}</p>
-                
-                <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme-light/50 text-theme mb-4">
-                  <Calendar size={14} className="mr-2" />
-                  <span className="text-xs font-medium">{education.period}</span>
-                </div>
-                
-                <div className="space-y-3 mt-4">
-                  {education.achievements.map((achievement, i) => (
-                    <div key={i} className="flex items-center space-x-2 p-2 bg-theme-lightest rounded-lg hover:bg-theme-light/30 transition-colors">
-                      <Star className="h-4 w-4 text-theme-accent flex-shrink-0" />
-                      <p className="text-sm text-theme-dark/80">{achievement}</p>
+              ref={timelineLineRef}
+              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-ml-0.5 bg-gradient-to-b from-transparent via-theme-accent to-transparent opacity-0"
+              style={{ height: '0%' }}
+            ></div>
+            
+            {educationData.map((education, index) => (
+              <div key={education.id} className="timeline-item mb-12 opacity-0">
+                <div className={cn(
+                  "relative flex flex-col md:flex-row items-start",
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                )}>
+                  {/* Timeline dot with pulse effect */}
+                  <div className="absolute left-4 w-8 h-8 rounded-full bg-white border-4 border-theme-accent z-10 transform -translate-x-1/2 md:left-1/2 pulse-dot">
+                    <GraduationCap className="w-4 h-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-theme-accent" />
+                    <span className="absolute w-full h-full rounded-full bg-theme-accent/30 animate-ping"></span>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className={cn(
+                    "ml-12 md:ml-0 md:w-[calc(50%-2rem)] p-6",
+                    index % 2 === 0 ? "md:mr-12" : "md:ml-12"
+                  )}>
+                    <div className="timeline-content opacity-0 bg-white rounded-xl shadow-lg p-6 transform transition-all duration-500 hover:shadow-xl">
+                      <h3 className="text-xl font-bold text-theme-dark">{education.degree}</h3>
+                      <p className="text-theme-accent font-medium mb-2">{education.institution}</p>
+                      
+                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-theme/10 text-theme mb-4 hover:bg-theme/20 transition-colors duration-300">
+                        <Calendar size={16} className="mr-2" />
+                        <span className="text-sm font-medium">{education.period}</span>
+                      </div>
+                      
+                      <div className="space-y-3 mt-4">
+                        {education.achievements.map((achievement, i) => (
+                          <div key={i} className="flex items-center space-x-2 p-2 bg-theme-lightest rounded-lg">
+                            <Star className="h-4 w-4 text-theme-accent flex-shrink-0" />
+                            <p className="text-sm text-theme-dark/80">{achievement}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       
@@ -152,18 +175,45 @@ const Education = () => {
           }
         }
         
-        .education-item {
-          position: relative;
+        .timeline-animate {
+          animation: timelineFill 1.5s ease-out forwards;
         }
         
-        .education-item:not(:last-child)::after {
+        @keyframes timelineFill {
+          from {
+            height: 0%;
+            opacity: 0;
+          }
+          to {
+            height: 100%;
+            opacity: 1;
+          }
+        }
+        
+        .pulse-dot::after {
           content: '';
           position: absolute;
-          left: -0.5rem;
-          top: 3rem;
-          bottom: -3rem;
-          width: 2px;
-          background: linear-gradient(to bottom, var(--theme-color, #3F72AF), transparent);
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: rgba(0, 173, 181, 0.3);
+          z-index: -1;
+          animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          70% {
+            transform: scale(1.3);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0;
+          }
         }
         `}
       </style>

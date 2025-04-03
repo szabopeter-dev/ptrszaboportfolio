@@ -187,12 +187,12 @@ const Skills = () => {
             <div key={index} className="flip-card-container">
               <div className={`flip-card ${flippedCard === skill.category ? 'flipped' : ''}`}>
                 {/* Front of the Card */}
-                <Card className="flip-card-front skill-card hover:shadow-xl transition-shadow">
+                <Card className="flip-card-front skill-card h-full hover:shadow-xl transition-shadow">
                   <div className="h-2 bg-theme-accent rounded-t-xl"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center">
-                        <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
+                        <div className="p-3 bg-theme-light rounded-lg mr-3">
                           {skill.icon}
                         </div>
                         <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
@@ -207,7 +207,7 @@ const Skills = () => {
                     </div>
                     <ul className="space-y-2">
                       {skill.items.map((item, idx) => (
-                        <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
+                        <li key={idx} className="flex items-center text-theme-dark/80">
                           <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
                           <span>{item}</span>
                         </li>
@@ -217,7 +217,7 @@ const Skills = () => {
                 </Card>
                 
                 {/* Back of the Card */}
-                <Card className="flip-card-back bg-theme-light/30">
+                <Card className="flip-card-back h-full bg-theme-light/30">
                   <div className="h-2 bg-theme rounded-t-xl"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-6">
@@ -240,7 +240,7 @@ const Skills = () => {
                       {skill.detailedDescription.map((para, idx) => (
                         <div 
                           key={idx} 
-                          className="p-3 bg-white rounded-lg hover:bg-theme-lightest transition-colors duration-300 transform hover:-translate-y-1"
+                          className="p-3 bg-white rounded-lg"
                         >
                           <p className="text-theme-dark/80 leading-relaxed text-sm">{para}</p>
                         </div>
@@ -265,7 +265,6 @@ const Skills = () => {
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 300px;
             transition: transform 0.8s;
             transform-style: preserve-3d;
           }
