@@ -20,8 +20,8 @@ type Skill = {
 };
 
 const Skills = () => {
-  // Create ref container for each skill card to handle animations
   const skillsRef = useRef<HTMLDivElement>(null);
+  const timelineLineRef = useRef<HTMLDivElement>(null);
   const [flippedCard, setFlippedCard] = useState<string | null>(null);
   
   // Enhanced animation with sequential card reveals
@@ -178,79 +178,88 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section bg-theme-lightest">
+    <section id="skills" className="section bg-theme-lightest relative">
       <div className="container mx-auto">
         <h2 className="section-heading text-center">Skills & Technologies</h2>
         
-        <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
-          {skills.map((skill, index) => (
-            <div key={index} className="flip-card-container">
-              <div className={`flip-card ${flippedCard === skill.category ? 'flipped' : ''}`}>
-                {/* Front of the Card */}
-                <Card className="flip-card-front skill-card h-full hover:shadow-xl transition-shadow">
-                  <div className="h-2 bg-theme-accent rounded-t-xl"></div>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center">
-                        <div className="p-3 bg-theme-light rounded-lg mr-3">
-                          {skill.icon}
+        <div className="relative max-w-4xl mx-auto mt-16">
+          {/* Timeline center line */}
+          <div 
+            ref={timelineLineRef}
+            className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-theme-accent to-transparent md:left-1/2 md:-ml-0.5 opacity-0 transition-all duration-700"
+            style={{ height: '0%' }}
+          ></div>
+
+          <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skills.map((skill, index) => (
+              <div key={index} className="flip-card-container relative">
+                <div className={`flip-card ${flippedCard === skill.category ? 'flipped' : ''}`}>
+                  {/* Front of the Card */}
+                  <Card className="flip-card-front skill-card h-full hover:shadow-xl transition-shadow">
+                    <div className="h-2 bg-theme-accent rounded-t-xl"></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center">
+                          <div className="p-3 bg-theme-light rounded-lg mr-3">
+                            {skill.icon}
+                          </div>
+                          <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
                         </div>
-                        <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
-                      </div>
-                      <button 
-                        onClick={(e) => toggleCardFlip(skill.category, e)} 
-                        className="h-8 w-8 rounded-full flex items-center justify-center bg-theme-light hover:bg-theme hover:text-white transition-all duration-300"
-                        title="Flip for details"
-                      >
-                        <RotateCw className="h-4 w-4" />
-                      </button>
-                    </div>
-                    <ul className="space-y-2">
-                      {skill.items.map((item, idx) => (
-                        <li key={idx} className="flex items-center text-theme-dark/80">
-                          <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-                
-                {/* Back of the Card */}
-                <Card className="flip-card-back h-full bg-theme-light/30">
-                  <div className="h-2 bg-theme rounded-t-xl"></div>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center">
-                        <div className="p-3 bg-white rounded-lg mr-3">
-                          {skill.icon}
-                        </div>
-                        <h3 className="text-xl font-bold text-theme">{skill.category} Details</h3>
-                      </div>
-                      <button 
-                        onClick={(e) => toggleCardFlip(skill.category, e)} 
-                        className="h-8 w-8 rounded-full flex items-center justify-center bg-white hover:bg-theme-dark hover:text-white transition-all duration-300"
-                        title="Flip back"
-                      >
-                        <RotateCw className="h-4 w-4" />
-                      </button>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {skill.detailedDescription.map((para, idx) => (
-                        <div 
-                          key={idx} 
-                          className="p-3 bg-white rounded-lg"
+                        <button 
+                          onClick={(e) => toggleCardFlip(skill.category, e)} 
+                          className="h-8 w-8 rounded-full flex items-center justify-center bg-theme-light hover:bg-theme hover:text-white transition-all duration-300"
+                          title="Flip for details"
                         >
-                          <p className="text-theme-dark/80 leading-relaxed text-sm">{para}</p>
+                          <RotateCw className="h-4 w-4" />
+                        </button>
+                      </div>
+                      <ul className="space-y-2">
+                        {skill.items.map((item, idx) => (
+                          <li key={idx} className="flex items-center text-theme-dark/80">
+                            <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                  
+                  {/* Back of the Card */}
+                  <Card className="flip-card-back h-full bg-theme-light/30">
+                    <div className="h-2 bg-theme rounded-t-xl"></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center">
+                          <div className="p-3 bg-white rounded-lg mr-3">
+                            {skill.icon}
+                          </div>
+                          <h3 className="text-xl font-bold text-theme">{skill.category} Details</h3>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                        <button 
+                          onClick={(e) => toggleCardFlip(skill.category, e)} 
+                          className="h-8 w-8 rounded-full flex items-center justify-center bg-white hover:bg-theme-dark hover:text-white transition-all duration-300"
+                          title="Flip back"
+                        >
+                          <RotateCw className="h-4 w-4" />
+                        </button>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        {skill.detailedDescription.map((para, idx) => (
+                          <div 
+                            key={idx} 
+                            className="p-3 bg-white rounded-lg"
+                          >
+                            <p className="text-theme-dark/80 leading-relaxed text-sm">{para}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       
@@ -305,3 +314,4 @@ const Skills = () => {
 };
 
 export default Skills;
+
