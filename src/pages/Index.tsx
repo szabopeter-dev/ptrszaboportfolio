@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -62,51 +63,10 @@ const Index = () => {
       }
     };
 
-    // Timeline animation effect on scroll
-    const setupTimelineAnimation = () => {
-      const timeline = document.querySelector('.timeline-line');
-      if (timeline) {
-        const handleScroll = () => {
-          const timelineSection = document.getElementById('experience');
-          if (!timelineSection) return;
-          
-          const rect = timelineSection.getBoundingClientRect();
-          const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-          
-          // Check if timeline is in view
-          if (!(rect.bottom< 0 || rect.top - viewHeight >= 0)) {
-            // Calculate how much of the section is visible
-            const sectionVisibility = (viewHeight - Math.max(0, rect.top)) / viewHeight;
-            
-            // Apply animation based on scroll position
-            if (sectionVisibility > 0.1) {
-              timeline.classList.add('timeline-animate');
-            }
-          }
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-      }
-      
-      // Skills animation on hover
-      const skillCards = document.querySelectorAll('.skill-card');
-      skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.classList.add('scale-105');
-        });
-        card.addEventListener('mouseleave', () => {
-          card.classList.remove('scale-105');
-        });
-      });
-    };
-
     document.addEventListener('click', handleAnchorClick);
-    const cleanup = setupTimelineAnimation();
     
     return () => {
       document.removeEventListener('click', handleAnchorClick);
-      if (cleanup) cleanup();
     };
   }, []);
 
@@ -135,36 +95,6 @@ const Index = () => {
               height: 100%;
               background: linear-gradient(to bottom, transparent, var(--theme-color, #3F72AF), transparent);
             }
-          }
-          
-          @keyframes collapsible-down {
-            from {
-              height: 0;
-              opacity: 0;
-            }
-            to {
-              height: var(--radix-collapsible-content-height);
-              opacity: 1;
-            }
-          }
-          
-          @keyframes collapsible-up {
-            from {
-              height: var(--radix-collapsible-content-height);
-              opacity: 1;
-            }
-            to {
-              height: 0;
-              opacity: 0;
-            }
-          }
-          
-          .animate-collapsible-down {
-            animation: collapsible-down 0.3s ease-out;
-          }
-          
-          .animate-collapsible-up {
-            animation: collapsible-up 0.3s ease-out;
           }
         `}
       </style>

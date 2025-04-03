@@ -7,26 +7,9 @@ import {
   Database, 
   TerminalSquare, 
   BrainCircuit,
-  Plus,
-  X,
-  ChevronUp,
-  ChevronDown,
-  Info
+  RotateCw,
 } from "lucide-react";
-import {
-  Card,
-  CardContent
-} from "@/components/ui/card";
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent
-} from "@/components/ui/hover-card";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Card, CardContent } from "@/components/ui/card";
 
 type Skill = {
   category: string;
@@ -39,9 +22,8 @@ type Skill = {
 const Skills = () => {
   // Create ref container for each skill card to handle animations
   const skillsRef = useRef<HTMLDivElement>(null);
-  const [activeSkill, setActiveSkill] = useState<string | null>(null);
-  const [openStates, setOpenStates] = useState<Record<string, boolean>>({});
-
+  const [flippedCard, setFlippedCard] = useState<string | null>(null);
+  
   // Enhanced animation with sequential card reveals
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -73,23 +55,10 @@ const Skills = () => {
     };
   }, []);
 
-  // Toggle collapsible state for a skill
-  const toggleOpenState = (skillId: string) => {
-    setOpenStates(prev => {
-      const newStates = { ...prev };
-      // Close all other open skills
-      Object.keys(newStates).forEach(key => {
-        if (key !== skillId) newStates[key] = false;
-      });
-      // Toggle the current skill
-      newStates[skillId] = !prev[skillId];
-      return newStates;
-    });
-  };
-
-  // Handle skill hover or click for mobile
-  const handleSkillInteraction = (skillId: string) => {
-    setActiveSkill(activeSkill === skillId ? null : skillId);
+  // Toggle card flip
+  const toggleCardFlip = (skillId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setFlippedCard(flippedCard === skillId ? null : skillId);
   };
 
   const skills: Skill[] = [
@@ -215,182 +184,120 @@ const Skills = () => {
         
         <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
           {skills.map((skill, index) => (
-            <Collapsible
-              key={index}
-              open={openStates[skill.category]}
-              className="w-full"
-            >
-              <HoverCard>
-                <HoverCardTrigger asChild>
-                  <Card 
-                    className={`skill-card hover:-translate-y-2 transition-all duration-300 hover:shadow-xl cursor-pointer ${
-                      activeSkill === skill.category ? 'ring-2 ring-theme-accent/50 shadow-lg' : ''
-                    } ${openStates[skill.category] ? 'bg-theme-light/30' : ''}`}
-                    onClick={() => handleSkillInteraction(skill.category)}
-                  >
-                    <div className="h-2 bg-theme-accent rounded-t-xl"></div>
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center">
-                          <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
-                            {skill.icon}
-                          </div>
-                          <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
-                        </div>
-                        <CollapsibleTrigger 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleOpenState(skill.category);
-                          }} 
-                          className="h-8 w-8 rounded-full flex items-center justify-center bg-theme-light hover:bg-theme hover:text-white transition-all duration-300"
-                        >
-                          {openStates[skill.category] ? 
-                            <ChevronUp className="h-4 w-4" /> : 
-                            <Plus className="h-4 w-4" />
-                          }
-                        </CollapsibleTrigger>
-                      </div>
-                      <ul className="space-y-2">
-                        {skill.items.map((item, idx) => (
-                          <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
-                            <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      <div className="mt-4 text-xs text-theme/70 flex items-center justify-end cursor-pointer hover:text-theme transition-colors">
-                        <Info size={14} className="mr-1" />
-                        <span>Hover for overview</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </HoverCardTrigger>
-                <HoverCardContent className="w-80 p-0 bg-white/90 backdrop-blur-sm">
-                  <div className="p-3">
-                    <h4 className="font-medium text-theme">{skill.category}</h4>
-                    <p className="text-xs text-theme-dark/70">{skill.description}</p>
-                  </div>
-                </HoverCardContent>
-              </HoverCard>
-              
-              <CollapsibleContent>
-                <div 
-                  className="skill-details bg-white rounded-xl shadow-lg border border-theme-light/50 mt-3 transform transition-all duration-500 overflow-hidden"
-                >
-                  <div className="p-5">
-                    <div className="flex justify-between items-center mb-4">
+            <div key={index} className="flip-card-container">
+              <div className={`flip-card ${flippedCard === skill.category ? 'flipped' : ''}`}>
+                {/* Front of the Card */}
+                <Card className="flip-card-front skill-card hover:shadow-xl transition-shadow">
+                  <div className="h-2 bg-theme-accent rounded-t-xl"></div>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center">
-                        {skill.icon}
-                        <h3 className="ml-2 text-lg font-bold text-theme">{skill.category} Details</h3>
+                        <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
+                          {skill.icon}
+                        </div>
+                        <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
                       </div>
                       <button 
-                        onClick={() => toggleOpenState(skill.category)}
-                        className="p-2 hover:bg-theme-light/50 rounded-full transition-all duration-300 hover:rotate-90"
+                        onClick={(e) => toggleCardFlip(skill.category, e)} 
+                        className="h-8 w-8 rounded-full flex items-center justify-center bg-theme-light hover:bg-theme hover:text-white transition-all duration-300"
+                        title="Flip for details"
                       >
-                        <X size={18} className="text-theme-dark/70" />
+                        <RotateCw className="h-4 w-4" />
+                      </button>
+                    </div>
+                    <ul className="space-y-2">
+                      {skill.items.map((item, idx) => (
+                        <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
+                          <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                {/* Back of the Card */}
+                <Card className="flip-card-back bg-theme-light/30">
+                  <div className="h-2 bg-theme rounded-t-xl"></div>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center">
+                        <div className="p-3 bg-white rounded-lg mr-3">
+                          {skill.icon}
+                        </div>
+                        <h3 className="text-xl font-bold text-theme">{skill.category} Details</h3>
+                      </div>
+                      <button 
+                        onClick={(e) => toggleCardFlip(skill.category, e)} 
+                        className="h-8 w-8 rounded-full flex items-center justify-center bg-white hover:bg-theme-dark hover:text-white transition-all duration-300"
+                        title="Flip back"
+                      >
+                        <RotateCw className="h-4 w-4" />
                       </button>
                     </div>
                     
-                    <div className="space-y-4 skill-details-content animate-fade-in">
+                    <div className="space-y-4">
                       {skill.detailedDescription.map((para, idx) => (
                         <div 
                           key={idx} 
-                          className="p-3 bg-theme-lightest rounded-lg hover:bg-theme-light/20 transition-colors duration-300 transform hover:-translate-y-1"
+                          className="p-3 bg-white rounded-lg hover:bg-theme-lightest transition-colors duration-300 transform hover:-translate-y-1"
                         >
                           <p className="text-theme-dark/80 leading-relaxed text-sm">{para}</p>
                         </div>
                       ))}
                     </div>
-                  </div>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
       
       <style>
         {`
-          .skill-details {
-            animation: slideDown 0.4s ease-out forwards;
+          .flip-card-container {
+            perspective: 1000px;
+            height: 100%;
           }
           
-          .skill-details-content > div {
-            opacity: 0;
-            animation: fadeSlideUp 0.5s ease-out forwards;
+          .flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
           }
           
-          .skill-details-content > div:nth-child(1) {
-            animation-delay: 0.1s;
+          .flipped {
+            transform: rotateY(180deg);
           }
           
-          .skill-details-content > div:nth-child(2) {
-            animation-delay: 0.2s;
+          .flip-card-front,
+          .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
           }
           
-          .skill-details-content > div:nth-child(3) {
-            animation-delay: 0.3s;
+          .flip-card-back {
+            transform: rotateY(180deg);
           }
           
-          .skill-details-content > div:nth-child(4) {
-            animation-delay: 0.4s;
-          }
-          
-          @keyframes slideDown {
+          @keyframes fadeIn {
             from {
               opacity: 0;
-              transform: translateY(-10px);
+              transform: translateY(20px);
             }
             to {
               opacity: 1;
               transform: translateY(0);
             }
-          }
-          
-          @keyframes fadeSlideUp {
-            from {
-              opacity: 0;
-              transform: translateY(10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes collapsible-down {
-            from {
-              height: 0;
-              opacity: 0;
-              transform: translateY(-8px);
-            }
-            to {
-              height: var(--radix-collapsible-content-height);
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes collapsible-up {
-            from {
-              height: var(--radix-collapsible-content-height);
-              opacity: 1;
-              transform: translateY(0);
-            }
-            to {
-              height: 0;
-              opacity: 0;
-              transform: translateY(-8px);
-            }
-          }
-          
-          .animate-collapsible-down {
-            animation: collapsible-down 0.3s ease-out;
-          }
-          
-          .animate-collapsible-up {
-            animation: collapsible-up 0.3s ease-out;
           }
         `}
       </style>
