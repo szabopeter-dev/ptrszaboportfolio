@@ -7,8 +7,6 @@ import {
   Database, 
   TerminalSquare, 
   BrainCircuit,
-  ChevronDown,
-  ChevronUp,
   ArrowUpRight,
   RotateCcw,
   Lightbulb,
@@ -22,11 +20,6 @@ import {
   Card,
   CardContent
 } from "@/components/ui/card";
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent
-} from "@/components/ui/hover-card";
 
 type Skill = {
   category: string;
@@ -260,7 +253,7 @@ const Skills = () => {
                     
                     <div className="mt-auto pt-4 flex items-center justify-center">
                       <button className="flex items-center justify-center gap-1 py-2 px-4 rounded-lg bg-theme-light/70 text-theme-dark/70 hover:bg-theme-light text-sm transition-all">
-                        <span>Kattints a részletekért</span>
+                        <span>Click for details</span>
                         <ArrowUpRight className="h-4 w-4" />
                       </button>
                     </div>
@@ -302,7 +295,7 @@ const Skills = () => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .perspective-1000 {
           perspective: 1000px;
         }

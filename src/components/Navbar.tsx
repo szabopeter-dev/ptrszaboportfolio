@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Drawer,
@@ -9,11 +9,19 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const { language, setLanguage, t } = useLanguage();
 
   // Optimized scroll handler with throttling
   const handleScroll = useCallback(() => {
@@ -53,12 +61,16 @@ const Navbar = () => {
   }, [handleScroll]);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Education", href: "#education" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" }
+    { name: 'about', href: "#about" },
+    { name: 'experience', href: "#experience" },
+    { name: 'education', href: "#education" },
+    { name: 'skills', href: "#skills" },
+    { name: 'contact', href: "#contact" }
   ];
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'hu' : 'en');
+  };
 
   return (
     <header 
@@ -84,9 +96,34 @@ const Navbar = () => {
               href={link.href}
               className="text-theme-dark hover:text-theme-accent transition-colors duration-300 font-medium relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:-bottom-1 after:left-0 after:bg-theme-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
             >
-              {link.name}
+              {t(link.name)}
             </a>
           ))}
+          
+          {/* Language Selector */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2"
+              >
+                <Globe className="h-4 w-4" />
+                <span>{language.toUpperCase()}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setLanguage('en')}>
+                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>EN</span>
+                <span className="text-xs text-muted-foreground">English</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('hu')}>
+                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>HU</span>
+                <span className="text-xs text-muted-foreground">Magyar</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
           <a 
             href="https://www.linkedin.com/in/ptrszabo7/" 
             target="_blank"
@@ -94,13 +131,24 @@ const Navbar = () => {
             className="inline-flex"
           >
             <Button className="bg-theme hover:bg-theme-accent text-white px-5 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1">
-              LinkedIn
+              {t('linkedin')}
             </Button>
           </a>
         </nav>
 
         {/* Mobile Menu - Using Drawer component with improved animations */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center space-x-2">
+          {/* Mobile Language Selector */}
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={toggleLanguage}
+            className="flex items-center gap-1 text-theme-dark hover:text-theme-accent"
+          >
+            <Globe className="h-4 w-4" />
+            <span>{language.toUpperCase()}</span>
+          </Button>
+          
           <Drawer>
             <DrawerTrigger asChild>
               <button 
@@ -124,7 +172,7 @@ const Navbar = () => {
                         className="text-theme-dark hover:text-theme-accent transition-all duration-300 w-full text-center py-3 relative overflow-hidden group font-medium"
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
-                        <span className="relative z-10">{link.name}</span>
+                        <span className="relative z-10">{t(link.name)}</span>
                         <span className="absolute bottom-0 left-0 w-full h-0.5 bg-theme-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                       </a>
                     </DrawerClose>
@@ -137,7 +185,7 @@ const Navbar = () => {
                     className="mt-4 w-full flex justify-center"
                   >
                     <Button className="bg-theme hover:bg-theme-accent text-white px-6 py-3 rounded-md transition-all duration-300 w-full max-w-xs shadow-md hover:shadow-lg hover:-translate-y-1">
-                      LinkedIn
+                      {t('linkedin')}
                     </Button>
                   </a>
                 </nav>
