@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from "react";
-import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
+import { GraduationCap, Award, BookOpen, Calendar, Code, Database, BrainCircuit } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Education = () => {
@@ -54,7 +54,15 @@ const Education = () => {
       institution: "University of Óbuda",
       degree: "B.S. Software Engineering, Software Design and Development",
       period: "September 2022 - February 2026",
-      coursework: "Algorithms and Data Structures, Software Testing and Quality Assurance, Data Science and Deep Learning, Parallel and Distributed Systems Programming, Modern Software Technologies, Linear Algebra, Probability and Statistics",
+      coursework: [
+        { name: "Algorithms and Data Structures", type: "frontend" },
+        { name: "Software Testing and Quality Assurance", type: "backend" },
+        { name: "Data Science and Deep Learning", type: "ml" },
+        { name: "Parallel and Distributed Systems Programming", type: "backend" },
+        { name: "Modern Software Technologies", type: "frontend" },
+        { name: "Linear Algebra", type: "ml" },
+        { name: "Probability and Statistics", type: "ml" }
+      ],
       achievements: [
         "Working on an ML-based ATM cash level prediction thesis",
         "Ranked in the top 5 of class"
@@ -65,13 +73,36 @@ const Education = () => {
       institution: "BMSZC Bláthy Ottó Titusz Informatikai Technikum",
       degree: "High School Diploma, Information Technology",
       period: "September 2017 - June 2022",
-      coursework: "IT-focused secondary school curriculum, software development, databases, networking, Windows & Linux servers",
+      coursework: [
+        { name: "Software Development", type: "frontend" },
+        { name: "Databases", type: "backend" },
+        { name: "Networking", type: "backend" },
+        { name: "Windows & Linux servers", type: "backend" }
+      ],
       achievements: [
         "Grade: 5",
         "Cisco CCNA R&S Modules 1–3 – IP addressing, routing protocols, and basic network configuration"
       ]
     }
   ];
+
+  const getIconForCourseType = (type: string) => {
+    switch (type) {
+      case "frontend": return <Code size={14} className="text-tech-frontend" />;
+      case "backend": return <Database size={14} className="text-tech-backend" />;
+      case "ml": return <BrainCircuit size={14} className="text-tech-ml" />;
+      default: return <BookOpen size={14} className="text-theme-accent" />;
+    }
+  };
+
+  const getBadgeClassForType = (type: string) => {
+    switch (type) {
+      case "frontend": return "tech-badge-frontend";
+      case "backend": return "tech-badge-backend";
+      case "ml": return "tech-badge-ml";
+      default: return "";
+    }
+  };
 
   return (
     <section id="education" className="section bg-white py-16 md:py-24">
@@ -84,8 +115,11 @@ const Education = () => {
         </h2>
         
         <div ref={educationCardsRef} className="max-w-4xl mx-auto space-y-8">
-          {/* Changed to a vertical stack layout */}
-          <div className="flex flex-col gap-8">
+          {/* Timeline visual element */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-theme-light/50 transform -translate-x-1/2"></div>
+          
+          {/* Education cards */}
+          <div className="flex flex-col gap-8 relative">
             {educationData.map((education, index) => (
               <Card 
                 key={education.id}
@@ -117,9 +151,14 @@ const Education = () => {
                         <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
                         <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
                       </div>
-                      <p className="text-sm text-theme-dark/80">
-                        {education.coursework}
-                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {education.coursework.map((course, i) => (
+                          <div key={i} className={`flex items-center py-1 px-2 rounded-full text-xs ${getBadgeClassForType(course.type)}`}>
+                            {getIconForCourseType(course.type)}
+                            <span className="ml-1">{course.name}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                   

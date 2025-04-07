@@ -7,7 +7,14 @@ import {
   Database, 
   TerminalSquare, 
   BrainCircuit,
-  X
+  X,
+  ReactIcon,
+  FileCode2,
+  GanttChartSquare,
+  Bot,
+  Cpu,
+  Binary,
+  Dumbbell
 } from "lucide-react";
 import {
   Card,
@@ -27,6 +34,7 @@ import {
 type Skill = {
   category: string;
   icon: React.ReactNode;
+  type: "frontend" | "backend" | "ml" | "fitness" | "general";
   items: string[];
   description: string;
   detailedDescription: string[];
@@ -88,10 +96,31 @@ const Skills = () => {
     setActiveSkill(activeSkill === skillId ? null : skillId);
   };
 
+  const getBadgeClass = (type: string) => {
+    switch (type) {
+      case "frontend": return "tech-badge-frontend";
+      case "backend": return "tech-badge-backend";
+      case "ml": return "tech-badge-ml";
+      case "fitness": return "tech-badge-fitness";
+      default: return "";
+    }
+  };
+
+  const getIconColor = (type: string) => {
+    switch (type) {
+      case "frontend": return "text-tech-frontend";
+      case "backend": return "text-tech-backend";
+      case "ml": return "text-tech-ml";
+      case "fitness": return "text-tech-fitness";
+      default: return "text-theme-accent";
+    }
+  };
+
   const skills: Skill[] = [
     {
       category: "Frontend Development",
-      icon: <Code className="h-6 w-6 text-theme-accent" />,
+      icon: <Code className="h-6 w-6" />,
+      type: "frontend",
       description: "Building modern, responsive web interfaces with the latest frontend technologies",
       items: [
         "JavaScript / TypeScript",
@@ -109,7 +138,8 @@ const Skills = () => {
     },
     {
       category: "Backend Development",
-      icon: <Server className="h-6 w-6 text-theme-accent" />,
+      icon: <Server className="h-6 w-6" />,
+      type: "backend",
       description: "Creating robust server-side applications and APIs with industry standard technologies",
       items: [
         "C# / .NET Core",
@@ -128,7 +158,8 @@ const Skills = () => {
     },
     {
       category: "Machine Learning",
-      icon: <BrainCircuit className="h-6 w-6 text-theme-accent" />,
+      icon: <BrainCircuit className="h-6 w-6" />,
+      type: "ml",
       description: "Developing intelligent systems using various machine learning techniques and frameworks",
       items: [
         "Python",
@@ -147,7 +178,8 @@ const Skills = () => {
     },
     {
       category: "Database & Data",
-      icon: <Database className="h-6 w-6 text-theme-accent" />,
+      icon: <Database className="h-6 w-6" />,
+      type: "backend",
       description: "Working with various database technologies and data processing techniques",
       items: [
         "SQL",
@@ -166,7 +198,8 @@ const Skills = () => {
     },
     {
       category: "DevOps & Tooling",
-      icon: <TerminalSquare className="h-6 w-6 text-theme-accent" />,
+      icon: <TerminalSquare className="h-6 w-6" />,
+      type: "general",
       description: "Implementing CI/CD pipelines and modern development workflows",
       items: [
         "Git",
@@ -184,22 +217,23 @@ const Skills = () => {
       ]
     },
     {
-      category: "Systems & Theory",
-      icon: <Layers className="h-6 w-6 text-theme-accent" />,
-      description: "Understanding fundamental computer science concepts and systems programming",
+      category: "Fitness & Discipline",
+      icon: <Dumbbell className="h-6 w-6" />,
+      type: "fitness",
+      description: "Applying fitness discipline and growth mindset to software development",
       items: [
-        "Operating Systems",
-        "Assembly",
-        "C++",
-        "Linear Algebra",
-        "Statistics",
-        "Parallel Programming"
+        "Consistency",
+        "Goal Setting",
+        "Progress Tracking",
+        "Problem Solving",
+        "Discipline",
+        "Growth Mindset"
       ],
       detailedDescription: [
-        "Studied and worked with various operating systems including Windows and Linux.",
-        "Gained practical knowledge of low-level programming through x86 Assembly.",
-        "Although initially challenging, I grew to appreciate the power and elegance of low-level systems.",
-        "Enjoy diving deep into system-level concepts to understand how things work under the hood."
+        "Apply the same discipline from fitness training to my coding practices and learning approach.",
+        "Believe in consistent growth through measurable improvements and goal setting.",
+        "Develop mental resilience through both physical training and complex programming challenges.",
+        "Bring energy, focus and determination to both my fitness regimen and software development projects."
       ]
     }
   ];
@@ -209,7 +243,16 @@ const Skills = () => {
       <div className="container mx-auto">
         <h2 className="section-heading text-center">Skills & Technologies</h2>
         
-        <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+        <div className="flex justify-center mb-8">
+          <div className="flex flex-wrap gap-2 justify-center">
+            <div className="tech-badge tech-badge-frontend flex items-center">Frontend</div>
+            <div className="tech-badge tech-badge-backend flex items-center">Backend</div>
+            <div className="tech-badge tech-badge-ml flex items-center">Machine Learning</div>
+            <div className="tech-badge tech-badge-fitness flex items-center">Fitness & Mindset</div>
+          </div>
+        </div>
+        
+        <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {skills.map((skill, index) => (
             <Collapsible
               key={index}
@@ -220,23 +263,30 @@ const Skills = () => {
                 <HoverCardTrigger asChild>
                   <Card 
                     className={`skill-card hover:-translate-y-2 transition-all duration-300 hover:shadow-xl cursor-pointer ${
-                      activeSkill === skill.category ? 'ring-2 ring-theme-accent/50 shadow-lg' : ''
+                      activeSkill === skill.category ? 'ring-2 ring-theme/50 shadow-lg' : ''
                     } ${openStates[skill.category] ? 'bg-theme-light/30' : ''}`}
                     onClick={() => toggleOpenState(skill.category)}
                   >
-                    <div className="h-2 bg-theme-accent rounded-t-xl"></div>
+                    <div className={`h-2 rounded-t-xl bg-${skill.type === 'general' ? 'theme' : `tech-${skill.type}`}`}></div>
                     <CardContent className="p-6">
-                      <div className="flex items-center mb-6">
-                        <div className="p-3 bg-theme-light rounded-lg mr-3 group-hover:bg-theme-accent/20 transition-colors duration-300">
-                          {skill.icon}
+                      <div className="flex items-center mb-4">
+                        <div className={`p-3 rounded-lg mr-3 ${skill.type === 'general' ? 'bg-theme/10' : `bg-tech-${skill.type}/10`}`}>
+                          <div className={skill.type === 'general' ? 'text-theme' : getIconColor(skill.type)}>
+                            {skill.icon}
+                          </div>
                         </div>
-                        <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+                        <div>
+                          <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+                          <span className={`tech-badge ${getBadgeClass(skill.type)} text-xs mt-1`}>
+                            {skill.type.charAt(0).toUpperCase() + skill.type.slice(1)}
+                          </span>
+                        </div>
                       </div>
                       <ul className="space-y-2">
                         {skill.items.map((item, idx) => (
                           <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
                             <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
-                            <span>{item}</span>
+                            <span className="keyword-highlight">{item}</span>
                           </li>
                         ))}
                       </ul>
