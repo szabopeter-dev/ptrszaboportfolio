@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -122,6 +121,25 @@
   .timeline-line {
     background: linear-gradient(to bottom, transparent, var(--theme-color, #8B5CF6), transparent);
     animation: flowLine 2s ease-in-out infinite;
+  }
+  
+  /* Card flip styles */
+  .flip-card-inner {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
   }
 }
 
