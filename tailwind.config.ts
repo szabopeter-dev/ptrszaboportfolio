@@ -63,20 +63,19 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Simplified color palette
 				theme: {
-					DEFAULT: '#6366F1', // Indigo as primary color
-					dark: '#1F2937',    // Dark gray for text
-					light: '#E0E7FF',   // Light indigo for backgrounds
-					lightest: '#F9FAFB', // Almost white for main background
-					accent: '#EC4899'    // Pink as accent color
+					DEFAULT: '#8B5CF6', // Updated to vibrant purple
+					dark: '#1A1F2C',    // Updated to dark purple-grey
+					light: '#D6BCFA',   // Updated to light purple
+					lightest: '#F9F7F7',
+					accent: '#F97316'   // Updated to bright orange for contrast
 				},
-				// Simplified tech interest colors
+				navy: '#0F172A',
 				tech: {
-					frontend: '#3B82F6', // Blue for frontend
-					backend: '#10B981',  // Green for backend
-					ml: '#8B5CF6',       // Purple for machine learning
-					fitness: '#F43F5E'   // Red for fitness
+					frontend: '#0EA5E9', // Bright blue for frontend
+					backend: '#6E59A5',  // Purple for backend
+					ml: '#D946EF',       // Magenta for ML
+					fitness: '#22C55E'   // Green for fitness interest
 				}
 			},
 			fontFamily: {
@@ -143,11 +142,11 @@ export default {
 				'float': 'float 4s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'gradient-radial': 'radial-gradient(circle, #6366F1 0%, #1F2937 100%)',
-				'gradient-main': 'linear-gradient(135deg, #1F2937 0%, #6366F1 100%)',
-				'gradient-card': 'linear-gradient(to right, #E0E7FF 0%, #F9FAFB 100%)',
-				'gradient-accent': 'linear-gradient(60deg, #EC4899 0%, #F472B6 100%)',
-				'gradient-tech': 'linear-gradient(to right, #3B82F6, #10B981, #8B5CF6)',
+				'gradient-radial': 'radial-gradient(circle, #8B5CF6 0%, #1A1F2C 100%)',
+				'gradient-main': 'linear-gradient(135deg, #1A1F2C 0%, #8B5CF6 100%)',
+				'gradient-card': 'linear-gradient(to right, #D6BCFA 0%, #F9F7F7 100%)',
+				'gradient-accent': 'linear-gradient(60deg, #F97316 0%, #F59E0B 100%)',
+				'gradient-tech': 'linear-gradient(to right, #0EA5E9, #8B5CF6, #D946EF)',
 			}
 		}
 	},

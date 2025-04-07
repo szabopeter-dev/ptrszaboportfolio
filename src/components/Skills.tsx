@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { 
   Code, 
@@ -7,6 +8,7 @@ import {
   TerminalSquare, 
   BrainCircuit,
   X,
+  ReactIcon,
   FileCode2,
   GanttChartSquare,
   Bot,
