@@ -106,14 +106,14 @@
     animation: fadeIn 0.6s ease-out forwards;
   }
   
-  /* Pulse animation for timeline dots */
+  /* New pulse animation for timeline dots */
   .pulse-dot::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: rgba(139, 92, 246, 0.3); /* Updated to match theme */
+    background-color: rgba(139, 92, 246, 0.3);
     z-index: -1;
     animation: pulse 2s infinite;
   }
@@ -122,37 +122,6 @@
   .timeline-line {
     background: linear-gradient(to bottom, transparent, var(--theme-color, #8B5CF6), transparent);
     animation: flowLine 2s ease-in-out infinite;
-  }
-  
-  /* Tech badge classes - new */
-  .tech-badge {
-    @apply px-3 py-1 text-xs font-medium rounded-full;
-  }
-  
-  .tech-badge-frontend {
-    @apply bg-tech-frontend/20 text-tech-frontend;
-  }
-  
-  .tech-badge-backend {
-    @apply bg-tech-backend/20 text-tech-backend;
-  }
-  
-  .tech-badge-ml {
-    @apply bg-tech-ml/20 text-tech-ml;
-  }
-  
-  .tech-badge-fitness {
-    @apply bg-tech-fitness/20 text-tech-fitness;
-  }
-  
-  /* Skill card hover effects - new */
-  .skill-card-hover {
-    @apply transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg;
-  }
-  
-  /* Gradient text - new */
-  .text-gradient-tech {
-    @apply bg-gradient-tech bg-clip-text text-transparent;
   }
 }
 
@@ -218,15 +187,5 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-main;
-  }
-  
-  /* Keyword highlight - new */
-  .keyword-highlight {
-    @apply bg-theme/10 px-1 py-0.5 rounded text-theme font-medium;
-  }
-  
-  /* Fitness indicator - new */
-  .fitness-indicator {
-    @apply bg-tech-fitness/20 text-tech-fitness rounded-full;
   }
 }

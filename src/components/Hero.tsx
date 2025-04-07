@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDownCircle, Github, Mail, Smartphone, Linkedin, Code, Server, BrainCircuit, Dumbbell } from "lucide-react";
+import { ArrowDownCircle, Github, Mail, Smartphone, Linkedin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
@@ -12,81 +12,55 @@ const Hero = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <p className="text-theme-accent font-medium mb-4 animate-fade-in flex items-center">
-              <span className="bg-theme-accent/20 text-theme-accent px-3 py-1 rounded-full text-sm mr-2">Available for hire</span>
-              Hi there, I'm
-            </p>
+            <p className="text-theme-accent font-medium mb-4 animate-fade-in">Hi there, I'm</p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in animate-delay-100 text-gradient">
               Péter Szabó
             </h1>
             <h2 className="text-3xl md:text-4xl font-display text-theme-dark/80 mb-6 animate-fade-in animate-delay-200">
-              I build <span className="text-gradient-tech">modern software solutions</span>
+              I build modern software solutions
             </h2>
-            
-            <div className="flex flex-wrap gap-3 my-6 animate-fade-in animate-delay-200">
-              <span className="tech-badge tech-badge-frontend flex items-center">
-                <Code size={14} className="mr-1" /> Frontend Dev
-              </span>
-              <span className="tech-badge tech-badge-backend flex items-center">
-                <Server size={14} className="mr-1" /> Backend Dev
-              </span>
-              <span className="tech-badge tech-badge-ml flex items-center">
-                <BrainCircuit size={14} className="mr-1" /> ML Engineer
-              </span>
-              <span className="tech-badge tech-badge-fitness flex items-center">
-                <Dumbbell size={14} className="mr-1" /> Fitness Enthusiast
-              </span>
-            </div>
-            
             <p className="text-theme-dark/70 text-lg mb-8 max-w-xl animate-fade-in animate-delay-300">
-              <span className="keyword-highlight">Software Engineer</span> specializing in 
-              <span className="keyword-highlight ml-1">React</span>, 
-              <span className="keyword-highlight ml-1">Next.js</span>, 
-              <span className="keyword-highlight ml-1">.NET</span>, and 
-              <span className="keyword-highlight ml-1">machine learning</span> technologies.
-              Committed to delivering <span className="keyword-highlight">high-performance</span>, 
-              <span className="keyword-highlight ml-1">user-friendly</span> applications with 
-              <span className="keyword-highlight ml-1">clean code</span>.
+              Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 animate-fade-in animate-delay-400">
               <a 
                 href="tel:+36306641452" 
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme/10 transition transform hover:scale-105 backdrop-blur-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition transform hover:scale-105 backdrop-blur-sm"
               >
-                <Smartphone size={18} className="text-theme flex-shrink-0" /> 
+                <Smartphone size={18} className="text-theme-accent flex-shrink-0" /> 
                 <span className="text-theme-dark text-sm truncate">{isMobile ? "Phone" : "+36 30 664 1452"}</span>
               </a>
               <a 
                 href="mailto:szabo.ptr7@gmail.com" 
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme/10 transition transform hover:scale-105 backdrop-blur-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition transform hover:scale-105 backdrop-blur-sm"
               >
-                <Mail size={18} className="text-theme flex-shrink-0" /> 
+                <Mail size={18} className="text-theme-accent flex-shrink-0" /> 
                 <span className="text-theme-dark text-sm truncate">{isMobile ? "Email" : "szabo.ptr7@gmail.com"}</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/ptrszabo7/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme/10 transition transform hover:scale-105 backdrop-blur-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition transform hover:scale-105 backdrop-blur-sm"
               >
-                <Linkedin size={18} className="text-theme flex-shrink-0" /> 
+                <Linkedin size={18} className="text-theme-accent flex-shrink-0" /> 
                 <span className="text-theme-dark text-sm truncate">LinkedIn</span>
               </a>
               <a 
                 href="https://github.com/szabopeter-dev" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme/10 transition transform hover:scale-105 backdrop-blur-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition transform hover:scale-105 backdrop-blur-sm"
               >
-                <Github size={18} className="text-theme flex-shrink-0" /> 
+                <Github size={18} className="text-theme-accent flex-shrink-0" /> 
                 <span className="text-theme-dark text-sm truncate">GitHub</span>
               </a>
             </div>
 
             <div className="flex flex-wrap gap-6 animate-fade-in animate-delay-500">
               <a href="#contact">
-                <Button className="bg-theme text-white hover:bg-theme-dark px-6 py-6 rounded-lg shadow-lg transition-all duration-300">
+                <Button className="btn-primary">
                   Get in touch
                 </Button>
               </a>

@@ -64,19 +64,13 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				theme: {
-					DEFAULT: '#8B5CF6', // Updated to vibrant purple
-					dark: '#1A1F2C',    // Updated to dark purple-grey
-					light: '#D6BCFA',   // Updated to light purple
+					DEFAULT: '#3F72AF',
+					dark: '#112D4E',
+					light: '#DBE2EF',
 					lightest: '#F9F7F7',
-					accent: '#F97316'   // Updated to bright orange for contrast
+					accent: '#00ADB5'
 				},
-				navy: '#0F172A',
-				tech: {
-					frontend: '#0EA5E9', // Bright blue for frontend
-					backend: '#6E59A5',  // Purple for backend
-					ml: '#D946EF',       // Magenta for ML
-					fitness: '#22C55E'   // Green for fitness interest
-				}
+				navy: '#0F172A'
 			},
 			fontFamily: {
 				sans: ['Poppins', 'system-ui', 'sans-serif'],
@@ -142,11 +136,10 @@ export default {
 				'float': 'float 4s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'gradient-radial': 'radial-gradient(circle, #8B5CF6 0%, #1A1F2C 100%)',
-				'gradient-main': 'linear-gradient(135deg, #1A1F2C 0%, #8B5CF6 100%)',
-				'gradient-card': 'linear-gradient(to right, #D6BCFA 0%, #F9F7F7 100%)',
-				'gradient-accent': 'linear-gradient(60deg, #F97316 0%, #F59E0B 100%)',
-				'gradient-tech': 'linear-gradient(to right, #0EA5E9, #8B5CF6, #D946EF)',
+				'gradient-radial': 'radial-gradient(circle, #3F72AF 0%, #112D4E 100%)',
+				'gradient-main': 'linear-gradient(135deg, #112D4E 0%, #3F72AF 100%)',
+				'gradient-card': 'linear-gradient(to right, #DBE2EF 0%, #F9F7F7 100%)',
+				'gradient-accent': 'linear-gradient(60deg, #00ADB5 0%, #089096 100%)',
 			}
 		}
 	},
