@@ -17,6 +17,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Flag emojis with country names for language selection
+const languageOptions = [
+  { code: 'en', flag: '🇬🇧', name: 'English' },
+  { code: 'hu', flag: '🇭🇺', name: 'Magyar' }
+];
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -68,8 +74,15 @@ const Navbar = () => {
     { name: 'contact', href: "#contact" }
   ];
 
+  // Get current language object
+  const getCurrentLanguage = () => {
+    return languageOptions.find(lang => lang.code === language) || languageOptions[0];
+  };
+
   // Prevent scroll position change when toggling language
   const toggleLanguage = (newLang: 'en' | 'hu') => {
+    if (language === newLang) return; // Don't do anything if language is the same
+    
     // Store current scroll position
     const currentScrollPos = window.scrollY;
     
@@ -81,6 +94,8 @@ const Navbar = () => {
       window.scrollTo(0, currentScrollPos);
     }, 0);
   };
+
+  const currentLang = getCurrentLanguage();
 
   return (
     <header 
@@ -110,27 +125,37 @@ const Navbar = () => {
             </a>
           ))}
           
-          {/* Language Selector */}
+          {/* Enhanced Language Selector with flags */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
                 size="sm"
-                className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2 min-w-[60px]"
+                className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2 min-w-[64px] h-10"
               >
-                <Globe className="h-4 w-4" />
-                <span>{language === 'en' ? '🇬🇧 EN' : '🇭🇺 HU'}</span>
+                <span className="flex items-center gap-1">
+                  <span className="text-lg">{currentLang.flag}</span>
+                  <span className="text-sm">{currentLang.code.toUpperCase()}</span>
+                </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white">
-              <DropdownMenuItem onClick={() => toggleLanguage('en')}>
-                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>🇬🇧 EN</span>
-                <span className="text-xs text-muted-foreground">English</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLanguage('hu')}>
-                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>🇭🇺 HU</span>
-                <span className="text-xs text-muted-foreground">Magyar</span>
-              </DropdownMenuItem>
+            <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg min-w-[120px]">
+              {languageOptions.map((option) => (
+                <DropdownMenuItem 
+                  key={option.code}
+                  onClick={() => toggleLanguage(option.code as 'en' | 'hu')}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 cursor-pointer transition-colors",
+                    language === option.code ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
+                  )}
+                >
+                  <span className="text-lg">{option.flag}</span>
+                  <span>{option.name}</span>
+                  {language === option.code && (
+                    <span className="ml-auto h-2 w-2 rounded-full bg-theme-accent"></span>
+                  )}
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
           
@@ -148,27 +173,34 @@ const Navbar = () => {
 
         {/* Mobile Menu - Using Drawer component with improved animations */}
         <div className="md:hidden flex items-center space-x-2">
-          {/* Mobile Language Selector */}
+          {/* Mobile Language Selector with flag */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
                 size="sm"
-                className="flex items-center gap-1 text-theme-dark hover:text-theme-accent min-w-[52px]"
+                className="flex items-center gap-1 text-theme-dark hover:text-theme-accent min-w-[40px] h-10"
               >
-                <Globe className="h-4 w-4" />
-                <span>{language === 'en' ? '🇬🇧' : '🇭🇺'}</span>
+                <span className="text-lg">{currentLang.flag}</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white">
-              <DropdownMenuItem onClick={() => toggleLanguage('en')}>
-                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>🇬🇧 EN</span>
-                <span className="text-xs text-muted-foreground">English</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLanguage('hu')}>
-                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>🇭🇺 HU</span>
-                <span className="text-xs text-muted-foreground">Magyar</span>
-              </DropdownMenuItem>
+            <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg min-w-[120px]">
+              {languageOptions.map((option) => (
+                <DropdownMenuItem 
+                  key={option.code}
+                  onClick={() => toggleLanguage(option.code as 'en' | 'hu')}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 cursor-pointer transition-colors",
+                    language === option.code ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
+                  )}
+                >
+                  <span className="text-lg">{option.flag}</span>
+                  <span>{option.name}</span>
+                  {language === option.code && (
+                    <span className="ml-auto h-2 w-2 rounded-full bg-theme-accent"></span>
+                  )}
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
           

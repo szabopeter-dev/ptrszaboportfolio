@@ -202,7 +202,7 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <div 
               key={index} 
-              className={`skill-card perspective-1000 h-[460px] transition-all duration-500 cursor-pointer hover:shadow-xl ${flippedCards.includes(index) ? 'flipped' : ''}`}
+              className={`skill-card perspective-1000 h-[460px] transition-all duration-500 cursor-pointer hover:shadow-xl hover:scale-105 ${flippedCards.includes(index) ? 'flipped' : ''}`}
               onClick={() => handleCardFlip(index)}
             >
               <div className="flip-card-inner relative w-full h-full transition-all duration-700" style={{ 
