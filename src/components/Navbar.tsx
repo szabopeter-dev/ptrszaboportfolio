@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Drawer,
@@ -125,39 +125,43 @@ const Navbar = () => {
             </a>
           ))}
           
-          {/* Enhanced Language Selector with flags */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2 min-w-[64px] h-10"
-              >
-                <span className="flex items-center gap-1">
-                  <span className="text-lg">{currentLang.flag}</span>
-                  <span className="text-sm">{currentLang.code.toUpperCase()}</span>
-                </span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg min-w-[120px]">
-              {languageOptions.map((option) => (
-                <DropdownMenuItem 
-                  key={option.code}
-                  onClick={() => toggleLanguage(option.code as 'en' | 'hu')}
-                  className={cn(
-                    "flex items-center gap-2 px-4 py-2 cursor-pointer transition-colors",
-                    language === option.code ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
-                  )}
+          {/* Enhanced Language Selector with flags - Fixed version */}
+          <div className="relative inline-block">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className="flex items-center gap-1.5 text-theme-dark hover:text-theme-accent px-2 h-10 min-w-0"
                 >
-                  <span className="text-lg">{option.flag}</span>
-                  <span>{option.name}</span>
-                  {language === option.code && (
-                    <span className="ml-auto h-2 w-2 rounded-full bg-theme-accent"></span>
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                  <span className="text-lg">{currentLang.flag}</span>
+                  <span className="text-sm font-medium">{currentLang.code.toUpperCase()}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                className="bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg w-24"
+                sideOffset={8}
+              >
+                {languageOptions.map((option) => (
+                  <DropdownMenuItem 
+                    key={option.code}
+                    onClick={() => toggleLanguage(option.code as 'en' | 'hu')}
+                    className={cn(
+                      "flex items-center gap-2 px-4 py-2 cursor-pointer transition-colors",
+                      language === option.code ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
+                    )}
+                  >
+                    <span className="text-lg mr-1">{option.flag}</span>
+                    <span>{option.code.toUpperCase()}</span>
+                    {language === option.code && (
+                      <span className="ml-auto h-2 w-2 rounded-full bg-theme-accent"></span>
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           
           <a 
             href="https://www.linkedin.com/in/ptrszabo7/" 
@@ -173,36 +177,43 @@ const Navbar = () => {
 
         {/* Mobile Menu - Using Drawer component with improved animations */}
         <div className="md:hidden flex items-center space-x-2">
-          {/* Mobile Language Selector with flag */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="flex items-center gap-1 text-theme-dark hover:text-theme-accent min-w-[40px] h-10"
-              >
-                <span className="text-lg">{currentLang.flag}</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg min-w-[120px]">
-              {languageOptions.map((option) => (
-                <DropdownMenuItem 
-                  key={option.code}
-                  onClick={() => toggleLanguage(option.code as 'en' | 'hu')}
-                  className={cn(
-                    "flex items-center gap-2 px-4 py-2 cursor-pointer transition-colors",
-                    language === option.code ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
-                  )}
+          {/* Mobile Language Selector with flag - Fixed version */}
+          <div className="relative inline-block">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className="flex items-center gap-1 text-theme-dark hover:text-theme-accent h-10 px-1.5 min-w-0"
                 >
-                  <span className="text-lg">{option.flag}</span>
-                  <span>{option.name}</span>
-                  {language === option.code && (
-                    <span className="ml-auto h-2 w-2 rounded-full bg-theme-accent"></span>
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                  <span className="text-lg">{currentLang.flag}</span>
+                  <span className="text-xs font-medium">{currentLang.code.toUpperCase()}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                className="bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg w-24"
+                sideOffset={8}
+              >
+                {languageOptions.map((option) => (
+                  <DropdownMenuItem 
+                    key={option.code}
+                    onClick={() => toggleLanguage(option.code as 'en' | 'hu')}
+                    className={cn(
+                      "flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors",
+                      language === option.code ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
+                    )}
+                  >
+                    <span className="text-lg mr-1">{option.flag}</span>
+                    <span>{option.code.toUpperCase()}</span>
+                    {language === option.code && (
+                      <span className="ml-auto h-2 w-2 rounded-full bg-theme-accent"></span>
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           
           <Drawer>
             <DrawerTrigger asChild>
