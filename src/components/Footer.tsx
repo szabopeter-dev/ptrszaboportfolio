@@ -1,9 +1,11 @@
 
 import React from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
   
   return (
     <footer className="py-12 bg-navy border-t border-white/5">
@@ -46,7 +48,7 @@ const Footer = () => {
           </div>
           
           <div className="text-white/50 text-sm text-center">
-            <p className="mb-2">© {currentYear} Péter Szabó. All rights reserved.</p>
+            <p className="mb-2">© {currentYear} Péter Szabó. {t('footer_rights')}</p>
           </div>
         </div>
       </div>

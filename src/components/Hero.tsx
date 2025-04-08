@@ -3,24 +3,26 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDownCircle, Github, Mail, Smartphone, Linkedin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
   
   return (
     <section className="min-h-screen flex items-center pt-20 px-4 md:px-8 bg-gradient-to-b from-theme-lightest to-theme-light overflow-hidden">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <p className="text-theme-accent font-medium mb-4 animate-fade-in">Hi there, I'm</p>
+            <p className="text-theme-accent font-medium mb-4 animate-fade-in">{t('hero_greeting')}</p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in animate-delay-100 text-gradient">
               Péter Szabó
             </h1>
             <h2 className="text-3xl md:text-4xl font-display text-theme-dark/80 mb-6 animate-fade-in animate-delay-200">
-              I build modern software solutions
+              {t('hero_title')}
             </h2>
             <p className="text-theme-dark/70 text-lg mb-8 max-w-xl animate-fade-in animate-delay-300">
-              Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.
+              {t('hero_description')}
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 animate-fade-in animate-delay-400">
@@ -29,14 +31,14 @@ const Hero = () => {
                 className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition transform hover:scale-105 backdrop-blur-sm"
               >
                 <Smartphone size={18} className="text-theme-accent flex-shrink-0" /> 
-                <span className="text-theme-dark text-sm truncate">{isMobile ? "Phone" : "+36 30 664 1452"}</span>
+                <span className="text-theme-dark text-sm truncate">{isMobile ? t('hero_phone') : "+36 30 664 1452"}</span>
               </a>
               <a 
                 href="mailto:szabo.ptr7@gmail.com" 
                 className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition transform hover:scale-105 backdrop-blur-sm"
               >
                 <Mail size={18} className="text-theme-accent flex-shrink-0" /> 
-                <span className="text-theme-dark text-sm truncate">{isMobile ? "Email" : "szabo.ptr7@gmail.com"}</span>
+                <span className="text-theme-dark text-sm truncate">{isMobile ? t('hero_email') : "szabo.ptr7@gmail.com"}</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/ptrszabo7/" 
@@ -61,12 +63,12 @@ const Hero = () => {
             <div className="flex flex-wrap gap-6 animate-fade-in animate-delay-500">
               <a href="#contact">
                 <Button className="btn-primary">
-                  Get in touch
+                  {t('hero_get_in_touch')}
                 </Button>
               </a>
               <a href="#about">
                 <Button variant="ghost" className="flex items-center gap-2 text-theme hover:text-theme-accent font-medium">
-                  Learn more <ArrowDownCircle size={18} className="animate-bounce" />
+                  {t('hero_learn_more')} <ArrowDownCircle size={18} className="animate-bounce" />
                 </Button>
               </a>
             </div>

@@ -2,18 +2,20 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin, Github, Smartphone } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="contact" className="py-24 bg-gradient-to-b from-theme-dark to-navy dark:from-navy dark:to-black/80">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-theme-accent font-medium mb-4">Get In Touch</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">Let's Connect</h2>
+          <p className="text-theme-accent font-medium mb-4">{t('contact_title_small')}</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">{t('contact_title')}</h2>
           
           <p className="text-white/80 text-lg mb-12 max-w-2xl mx-auto">
-            I'm currently focusing on my Software Engineering studies while working as a Junior Software Developer. 
-            Feel free to reach out and I'll get back to you soon!
+            {t('contact_message')}
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
@@ -22,7 +24,7 @@ const Contact = () => {
                 <div className="p-4 rounded-full bg-theme-accent/20 mb-4">
                   <Mail className="h-6 w-6 text-theme-accent" />
                 </div>
-                <h3 className="font-medium text-white text-lg mb-2">Email</h3>
+                <h3 className="font-medium text-white text-lg mb-2">{t('contact_email')}</h3>
                 <p className="text-theme-accent/90">szabo.ptr7@gmail.com</p>
               </div>
             </a>
@@ -32,7 +34,7 @@ const Contact = () => {
                 <div className="p-4 rounded-full bg-theme-accent/20 mb-4">
                   <Smartphone className="h-6 w-6 text-theme-accent" />
                 </div>
-                <h3 className="font-medium text-white text-lg mb-2">Phone</h3>
+                <h3 className="font-medium text-white text-lg mb-2">{t('contact_phone')}</h3>
                 <p className="text-theme-accent/90">06 30 664 1452</p>
               </div>
             </a>
@@ -61,12 +63,12 @@ const Contact = () => {
           <div className="flex justify-center gap-4 flex-wrap">
             <a href="mailto:szabo.ptr7@gmail.com">
               <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-8 py-6 text-lg rounded-lg shadow-lg transition-all duration-300">
-                Say Hello
+                {t('contact_say_hello')}
               </Button>
             </a>
             <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf" className="inline-block">
               <Button className="bg-theme hover:bg-theme/80 text-white px-8 py-6 text-lg rounded-lg shadow-lg transition-all duration-300">
-                Download CV
+                {t('contact_download_cv')}
               </Button>
             </a>
           </div>

@@ -202,7 +202,7 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <div 
               key={index} 
-              className={`skill-card perspective-1000 h-[360px] transition-all duration-500 cursor-pointer ${flippedCards.includes(index) ? 'flipped' : ''}`}
+              className={`skill-card perspective-1000 h-[360px] transition-all duration-500 cursor-pointer hover:shadow-xl ${flippedCards.includes(index) ? 'flipped' : ''}`}
               onClick={() => handleCardFlip(index)}
             >
               <div className="flip-card-inner relative w-full h-full transition-all duration-700" style={{ 
@@ -210,7 +210,7 @@ const Skills = () => {
                 transformStyle: 'preserve-3d'
               }}>
                 {/* Front of Card */}
-                <Card className="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden">
+                <Card className="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden group">
                   <div className="h-2 bg-theme-accent rounded-t-xl"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
@@ -220,7 +220,7 @@ const Skills = () => {
                       <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
                     </div>
                     
-                    <p className="text-theme-dark/80 mb-4 text-sm">{t(skill.descriptionKey)}</p>
+                    <p className="text-theme-dark/80 mb-4 text-sm line-clamp-2">{t(skill.descriptionKey)}</p>
                     
                     <ul className="space-y-2 mb-4">
                       {skill.items.map((item, idx) => (
@@ -231,11 +231,16 @@ const Skills = () => {
                       ))}
                     </ul>
                     
-                    <div className="mt-auto pt-4 flex items-center justify-center">
-                      <button className="flex items-center justify-center gap-1 py-2 px-4 rounded-lg bg-theme-light/70 text-theme-dark/70 hover:bg-theme-light text-sm transition-all">
+                    <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center">
+                      <div className="flex items-center gap-1 py-2 px-4 rounded-lg bg-theme/10 text-theme-dark/70 text-sm transition-all group-hover:bg-theme/20 group-hover:shadow-md">
                         <span>{t('click_for_details')}</span>
-                        <ArrowUpRight className="h-4 w-4" />
-                      </button>
+                        <ArrowUpRight className="h-4 w-4 animate-bounce" />
+                      </div>
+                    </div>
+                    
+                    {/* Card flip indicator */}
+                    <div className="absolute top-2 right-2 rounded-full h-8 w-8 bg-theme-light/80 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
+                      <div className="rotate-y-180 text-theme-accent/70">⟳</div>
                     </div>
                   </CardContent>
                 </Card>
@@ -246,7 +251,7 @@ const Skills = () => {
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
-                      <div className="p-2 rounded-full bg-theme-light/80 cursor-pointer hover:bg-theme-light">
+                      <div className="p-2 rounded-full bg-theme-light/80 cursor-pointer hover:bg-theme-light flex items-center justify-center animate-pulse">
                         <RotateCcw className="h-4 w-4 text-theme" />
                       </div>
                     </div>
@@ -273,6 +278,14 @@ const Skills = () => {
         .backface-hidden {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
+        }
+        @keyframes rotateY180 {
+          from { transform: rotateY(0deg); }
+          to { transform: rotateY(180deg); }
+        }
+        .rotate-y-180 {
+          display: inline-block;
+          animation: rotateY180 1.5s ease-in-out infinite alternate;
         }
       `}</style>
     </section>

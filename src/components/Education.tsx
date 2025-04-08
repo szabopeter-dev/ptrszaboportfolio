@@ -2,10 +2,12 @@
 import React, { useEffect, useRef } from "react";
 import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Education = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const educationCardsRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   // Enhanced animations with optimized observer logic
   useEffect(() => {
@@ -80,7 +82,7 @@ const Education = () => {
           ref={sectionRef}
           className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-12 md:mb-16 opacity-0 transition-all duration-700"
         >
-          Education
+          {t('education_title')}
         </h2>
         
         <div ref={educationCardsRef} className="max-w-4xl mx-auto space-y-8">
@@ -115,7 +117,7 @@ const Education = () => {
                     <div className="bg-theme-lightest rounded-lg p-4 mb-4 group-hover:bg-theme-light/30 transition-colors duration-300">
                       <div className="flex items-center mb-2">
                         <BookOpen className="h-4 w-4 text-theme-accent mr-2 group-hover:rotate-6 transition-transform duration-300" />
-                        <h4 className="font-medium text-theme-dark text-sm">Relevant Coursework</h4>
+                        <h4 className="font-medium text-theme-dark text-sm">{t('education_coursework')}</h4>
                       </div>
                       <p className="text-sm text-theme-dark/80">
                         {education.coursework}

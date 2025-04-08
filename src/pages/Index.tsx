@@ -48,6 +48,34 @@ const Index = () => {
       meta.content = description;
       document.head.appendChild(meta);
     }
+    
+    // Add canonical URL
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    const url = window.location.origin;
+    
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', url);
+    } else {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = url;
+      document.head.appendChild(link);
+    }
+    
+    // Add language meta tag
+    const metaLanguage = document.querySelector('meta[http-equiv="Content-Language"]');
+    if (metaLanguage) {
+      metaLanguage.setAttribute('content', language);
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('http-equiv', 'Content-Language');
+      meta.content = language;
+      document.head.appendChild(meta);
+    }
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = language;
+    
   }, [language]);
 
   // Optimized smooth scrolling for anchor links with improved performance

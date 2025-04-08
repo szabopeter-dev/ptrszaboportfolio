@@ -119,16 +119,16 @@ const Navbar = () => {
                 className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2 min-w-[60px]"
               >
                 <Globe className="h-4 w-4" />
-                <span>{language.toUpperCase()}</span>
+                <span>{language === 'en' ? '🇬🇧 EN' : '🇭🇺 HU'}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white">
               <DropdownMenuItem onClick={() => toggleLanguage('en')}>
-                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>EN</span>
+                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>🇬🇧 EN</span>
                 <span className="text-xs text-muted-foreground">English</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => toggleLanguage('hu')}>
-                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>HU</span>
+                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>🇭🇺 HU</span>
                 <span className="text-xs text-muted-foreground">Magyar</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -157,16 +157,16 @@ const Navbar = () => {
                 className="flex items-center gap-1 text-theme-dark hover:text-theme-accent min-w-[52px]"
               >
                 <Globe className="h-4 w-4" />
-                <span>{language.toUpperCase()}</span>
+                <span>{language === 'en' ? '🇬🇧' : '🇭🇺'}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white">
               <DropdownMenuItem onClick={() => toggleLanguage('en')}>
-                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>EN</span>
+                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>🇬🇧 EN</span>
                 <span className="text-xs text-muted-foreground">English</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => toggleLanguage('hu')}>
-                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>HU</span>
+                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>🇭🇺 HU</span>
                 <span className="text-xs text-muted-foreground">Magyar</span>
               </DropdownMenuItem>
             </DropdownMenuContent>

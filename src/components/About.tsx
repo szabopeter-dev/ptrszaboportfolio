@@ -2,9 +2,11 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, CheckCircle2, Code2, GraduationCap } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
   const aboutContentRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -43,7 +45,7 @@ const About = () => {
     <section id="about" className="py-20 bg-gradient-to-b from-navy to-theme-dark">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-12 text-center">About Me</h2>
+          <h2 className="text-4xl font-bold text-white mb-12 text-center">{t('about_title')}</h2>
           
           <div 
             ref={aboutContentRef}
@@ -59,10 +61,9 @@ const About = () => {
               </div>
               
               <div>
-                <p className="text-xl font-medium text-theme-accent mb-2">Software Engineer</p>
+                <p className="text-xl font-medium text-theme-accent mb-2">{t('about_profession')}</p>
                 <p className="text-white/80 mb-4 text-lg">
-                  B.S. in Software Engineering at the University of Óbuda, 
-                  focused on building solutions that solve real-world problems.
+                  {t('about_education')}
                 </p>
               </div>
             </div>
@@ -71,18 +72,14 @@ const About = () => {
               <div className="flex items-start">
                 <Code2 className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                 <p className="text-lg leading-relaxed text-white/80">
-                  Working at ReComp Informatikai Zrt. on modernizing legacy systems 
-                  with React, Next.js and Tailwind. Passionate about creating clean,
-                  maintainable code that delivers exceptional user experiences.
+                  {t('about_work')}
                 </p>
               </div>
               
               <div className="flex items-start">
                 <GraduationCap className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                 <p className="text-lg leading-relaxed text-white/80">
-                  Currently focused on ML-based ATM cash level prediction for my thesis,
-                  exploring the intersection of financial technology and machine learning
-                  to optimize cash management systems.
+                  {t('about_thesis')}
                 </p>
               </div>
             </div>
@@ -90,7 +87,7 @@ const About = () => {
             <div className="mt-8 animate-item">
               <h3 className="text-xl font-medium text-white mb-4 flex items-center">
                 <CheckCircle2 className="text-theme-accent mr-2 h-5 w-5" />
-                Technologies I've been working with recently:
+                {t('about_technologies')}
               </h3>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-4">
@@ -112,7 +109,7 @@ const About = () => {
                 <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-6 py-6 text-lg rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2 relative overflow-hidden group">
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
                   <Download size={20} />
-                  Download CV
+                  {t('about_download_cv')}
                 </Button>
               </a>
             </div>

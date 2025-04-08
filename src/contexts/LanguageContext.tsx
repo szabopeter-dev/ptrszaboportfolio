@@ -65,6 +65,49 @@ const translations: Record<Language, Record<string, string>> = {
     'systems_detail_2': 'Gained practical knowledge of low-level programming through x86 Assembly.',
     'systems_detail_3': 'Although initially challenging, I grew to appreciate the power and elegance of low-level systems.',
     'systems_detail_4': 'Enjoy diving deep into system-level concepts to understand how things work under the hood.',
+    
+    // Hero section
+    'hero_greeting': 'Hi there, I\'m',
+    'hero_title': 'I build modern software solutions',
+    'hero_description': 'Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.',
+    'hero_get_in_touch': 'Get in touch',
+    'hero_learn_more': 'Learn more',
+    'hero_phone': 'Phone',
+    'hero_email': 'Email',
+    
+    // About section
+    'about_title': 'About Me',
+    'about_profession': 'Software Engineer',
+    'about_education': 'B.S. in Software Engineering at the University of Óbuda, focused on building solutions that solve real-world problems.',
+    'about_work': 'Working at ReComp Informatikai Zrt. on modernizing legacy systems with React, Next.js and Tailwind. Passionate about creating clean, maintainable code that delivers exceptional user experiences.',
+    'about_thesis': 'Currently focused on ML-based ATM cash level prediction for my thesis, exploring the intersection of financial technology and machine learning to optimize cash management systems.',
+    'about_technologies': 'Technologies I\'ve been working with recently:',
+    'about_download_cv': 'Download CV',
+    
+    // Education section
+    'education_title': 'Education',
+    'education_coursework': 'Relevant Coursework',
+    
+    // Contact section
+    'contact_title_small': 'Get In Touch',
+    'contact_title': 'Let\'s Connect',
+    'contact_message': 'I\'m currently focusing on my Software Engineering studies while working as a Junior Software Developer. Feel free to reach out and I\'ll get back to you soon!',
+    'contact_email': 'Email',
+    'contact_phone': 'Phone',
+    'contact_say_hello': 'Say Hello',
+    'contact_download_cv': 'Download CV',
+    
+    // Footer
+    'footer_rights': 'All rights reserved.',
+    
+    // Experience section
+    'experience_title': 'Experience',
+    'experience_present': 'Present',
+    'experience_company': 'Company',
+    'experience_position': 'Position',
+    'experience_duration': 'Duration',
+    'experience_description': 'Description',
+    'experience_tech_stack': 'Tech Stack',
   },
   hu: {
     // Navigation
@@ -120,6 +163,49 @@ const translations: Record<Language, Record<string, string>> = {
     'systems_detail_2': 'Gyakorlati ismereteket szereztem az alacsony szintű programozásban x86 Assembly-n keresztül.',
     'systems_detail_3': 'Bár kezdetben kihívást jelentett, megtanultam értékelni az alacsony szintű rendszerek erejét és eleganciáját.',
     'systems_detail_4': 'Szívesen mélyedek el rendszerszintű koncepciókban, hogy megértsem, hogyan működnek a dolgok a motorháztető alatt.',
+    
+    // Hero section
+    'hero_greeting': 'Szia, én vagyok',
+    'hero_title': 'Modern szoftvermegoldásokat fejlesztek',
+    'hero_description': 'Szoftverfejlesztő React, Next.js, .NET és gépi tanulási technológiákra specializálódva.',
+    'hero_get_in_touch': 'Kapcsolatfelvétel',
+    'hero_learn_more': 'Tudj meg többet',
+    'hero_phone': 'Telefon',
+    'hero_email': 'Email',
+    
+    // About section
+    'about_title': 'Rólam',
+    'about_profession': 'Szoftverfejlesztő',
+    'about_education': 'Szoftverfejlesztő BSc, Óbudai Egyetem, valós problémákat megoldó megoldások fejlesztésére összpontosítva.',
+    'about_work': 'A ReComp Informatikai Zrt-nél dolgozom, régebbi rendszerek modernizálásán React, Next.js és Tailwind technológiákkal. Szenvedélyem a tiszta, karbantartható kód írása, amely kivételes felhasználói élményt nyújt.',
+    'about_thesis': 'Jelenleg az ATM készpénzszint gépi tanuláson alapuló előrejelzésére összpontosítok a szakdolgozatomban, a pénzügyi technológia és a gépi tanulás találkozópontját kutatva a készpénzkezelési rendszerek optimalizálása érdekében.',
+    'about_technologies': 'Technológiák, amelyekkel nemrég dolgoztam:',
+    'about_download_cv': 'Önéletrajz letöltése',
+    
+    // Education section
+    'education_title': 'Tanulmányok',
+    'education_coursework': 'Tantárgyak',
+    
+    // Contact section
+    'contact_title_small': 'Vedd fel a kapcsolatot',
+    'contact_title': 'Lépjünk kapcsolatba',
+    'contact_message': 'Jelenleg a szoftverfejlesztői tanulmányaimra összpontosítok, miközben junior szoftverfejlesztőként dolgozom. Nyugodtan keress meg, és hamarosan válaszolok!',
+    'contact_email': 'Email',
+    'contact_phone': 'Telefon',
+    'contact_say_hello': 'Írj nekem',
+    'contact_download_cv': 'Önéletrajz letöltése',
+    
+    // Footer
+    'footer_rights': 'Minden jog fenntartva.',
+    
+    // Experience section
+    'experience_title': 'Tapasztalat',
+    'experience_present': 'Jelenleg',
+    'experience_company': 'Cég',
+    'experience_position': 'Pozíció',
+    'experience_duration': 'Időtartam',
+    'experience_description': 'Leírás',
+    'experience_tech_stack': 'Technológiai Stack',
   }
 };
 
