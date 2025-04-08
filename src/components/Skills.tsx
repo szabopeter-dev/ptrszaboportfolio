@@ -8,32 +8,28 @@ import {
   TerminalSquare, 
   BrainCircuit,
   ArrowUpRight,
-  RotateCcw,
-  Lightbulb,
-  CodeSquare,
-  Shield,
-  BookOpen,
-  Binary,
-  Cloud
+  RotateCcw
 } from "lucide-react";
 import {
   Card,
   CardContent
 } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type Skill = {
   category: string;
+  translationKey: string;
+  descriptionKey: string;
   icon: React.ReactNode;
   items: string[];
-  description: string;
-  detailedDescription: string[];
-  additionalIcons?: React.ReactNode[];
+  detailedDescriptionKeys: string[];
 };
 
 const Skills = () => {
   // Create ref container for each skill card to handle animations
   const skillsRef = useRef<HTMLDivElement>(null);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const { t } = useLanguage();
 
   // Enhanced animation with sequential card reveals
   useEffect(() => {
@@ -78,8 +74,9 @@ const Skills = () => {
   const skills: Skill[] = [
     {
       category: "Frontend Development",
+      translationKey: "frontend_development",
+      descriptionKey: "frontend_desc",
       icon: <Code className="h-6 w-6 text-theme-accent" />,
-      description: "Building modern, responsive web interfaces with the latest frontend technologies",
       items: [
         "JavaScript / TypeScript",
         "React.js / Next.js",
@@ -88,20 +85,17 @@ const Skills = () => {
         "Tailwind CSS / SASS",
         "Jest"
       ],
-      detailedDescription: [
-        "Developed strong frontend skills through both self-learning and university coursework.",
-        "Currently applying frontend knowledge in a professional setting.",
-        "Familiar with modern frameworks and libraries, emphasizing clean UI/UX."
-      ],
-      additionalIcons: [
-        <CodeSquare key="code-square" className="h-5 w-5 text-blue-500" />,
-        <Lightbulb key="lightbulb" className="h-5 w-5 text-yellow-500" />
+      detailedDescriptionKeys: [
+        "frontend_detail_1",
+        "frontend_detail_2",
+        "frontend_detail_3"
       ]
     },
     {
       category: "Backend Development",
+      translationKey: "backend_development",
+      descriptionKey: "backend_desc",
       icon: <Server className="h-6 w-6 text-theme-accent" />,
-      description: "Creating robust server-side applications and APIs with industry standard technologies",
       items: [
         "C# / .NET Core",
         "Entity Framework Core",
@@ -110,21 +104,18 @@ const Skills = () => {
         "JWT Authentication",
         "Microservices"
       ],
-      detailedDescription: [
-        "Started backend development during high school at BMSZC and have been building ever since.",
-        "Created full-stack applications using ASP.NET Core, Entity Framework Core, and Web APIs.",
-        "Developed a layered Harry Potter-themed application with integration and unit testing using NUnit and Moq.",
-        "Projects available on GitHub demonstrating clean architecture and robust test coverage."
-      ],
-      additionalIcons: [
-        <Shield key="shield" className="h-5 w-5 text-green-500" />,
-        <Cloud key="cloud" className="h-5 w-5 text-sky-500" />
+      detailedDescriptionKeys: [
+        "backend_detail_1",
+        "backend_detail_2",
+        "backend_detail_3",
+        "backend_detail_4"
       ]
     },
     {
       category: "Machine Learning",
+      translationKey: "machine_learning",
+      descriptionKey: "machine_learning_desc",
       icon: <BrainCircuit className="h-6 w-6 text-theme-accent" />,
-      description: "Developing intelligent systems using various machine learning techniques and frameworks",
       items: [
         "Python",
         "Scikit-learn",
@@ -133,21 +124,18 @@ const Skills = () => {
         "Neural Networks",
         "LSTM / GRU"
       ],
-      detailedDescription: [
-        "Gained hands-on experience with ML during my 2-year-long thesis project: a machine learning-based ATM cash-out prediction system.",
-        "Focused on time series forecasting using GRU and LSTM models.",
-        "Implemented preprocessing, feature engineering, and model evaluation using Python and TensorFlow.",
-        "The project involved large-scale financial datasets and real-world application scenarios."
-      ],
-      additionalIcons: [
-        <Binary key="binary" className="h-5 w-5 text-purple-500" />,
-        <BookOpen key="book-open" className="h-5 w-5 text-indigo-500" />
+      detailedDescriptionKeys: [
+        "ml_detail_1",
+        "ml_detail_2",
+        "ml_detail_3",
+        "ml_detail_4"
       ]
     },
     {
       category: "Database & Data",
+      translationKey: "database_data",
+      descriptionKey: "database_data_desc",
       icon: <Database className="h-6 w-6 text-theme-accent" />,
-      description: "Working with various database technologies and data processing techniques",
       items: [
         "SQL",
         "PL/SQL",
@@ -156,21 +144,18 @@ const Skills = () => {
         "Data Science",
         "Data Analytics"
       ],
-      detailedDescription: [
-        "Introduced to databases during high school and deepened my knowledge at university.",
-        "Experienced in SQL and PL/SQL for data manipulation and querying.",
-        "Passionate about database design, optimization, and Big Data concepts.",
-        "Comfortable working with relational data and large datasets."
-      ],
-      additionalIcons: [
-        <Database key="database-small" className="h-5 w-5 text-teal-500" />,
-        <Layers key="layers-small" className="h-5 w-5 text-amber-500" />
+      detailedDescriptionKeys: [
+        "database_detail_1",
+        "database_detail_2",
+        "database_detail_3",
+        "database_detail_4"
       ]
     },
     {
       category: "DevOps & Tooling",
+      translationKey: "devops_tooling",
+      descriptionKey: "devops_tooling_desc",
       icon: <TerminalSquare className="h-6 w-6 text-theme-accent" />,
-      description: "Implementing CI/CD pipelines and modern development workflows",
       items: [
         "Git",
         "GitHub Actions",
@@ -179,21 +164,18 @@ const Skills = () => {
         "Testing",
         "Version Control"
       ],
-      detailedDescription: [
-        "Actively use GitLab and GitHub for version control and CI/CD pipelines.",
-        "Familiar with setting up automated testing and deployment processes.",
-        "Experience working in collaborative environments with branch-based workflows.",
-        "Committed to writing maintainable, production-ready code integrated with CI systems."
-      ],
-      additionalIcons: [
-        <TerminalSquare key="terminal-small" className="h-5 w-5 text-pink-500" />,
-        <RotateCcw key="rotate-ccw" className="h-5 w-5 text-cyan-500" />
+      detailedDescriptionKeys: [
+        "devops_detail_1",
+        "devops_detail_2",
+        "devops_detail_3",
+        "devops_detail_4"
       ]
     },
     {
       category: "Systems & Theory",
+      translationKey: "systems_theory",
+      descriptionKey: "systems_theory_desc",
       icon: <Layers className="h-6 w-6 text-theme-accent" />,
-      description: "Understanding fundamental computer science concepts and systems programming",
       items: [
         "Operating Systems",
         "Assembly",
@@ -202,15 +184,11 @@ const Skills = () => {
         "Statistics",
         "Parallel Programming"
       ],
-      detailedDescription: [
-        "Studied and worked with various operating systems including Windows and Linux.",
-        "Gained practical knowledge of low-level programming through x86 Assembly.",
-        "Although initially challenging, I grew to appreciate the power and elegance of low-level systems.",
-        "Enjoy diving deep into system-level concepts to understand how things work under the hood."
-      ],
-      additionalIcons: [
-        <Code key="code-small" className="h-5 w-5 text-rose-500" />,
-        <Server key="server-small" className="h-5 w-5 text-orange-500" />
+      detailedDescriptionKeys: [
+        "systems_detail_1",
+        "systems_detail_2",
+        "systems_detail_3",
+        "systems_detail_4"
       ]
     }
   ];
@@ -218,7 +196,7 @@ const Skills = () => {
   return (
     <section id="skills" className="section bg-theme-lightest">
       <div className="container mx-auto">
-        <h2 className="section-heading text-center">Skills & Technologies</h2>
+        <h2 className="section-heading text-center">{t('skills_title')}</h2>
         
         <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
           {skills.map((skill, index) => (
@@ -239,8 +217,10 @@ const Skills = () => {
                       <div className="p-3 bg-theme-light rounded-lg mr-3 transition-colors duration-300">
                         {skill.icon}
                       </div>
-                      <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+                      <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
                     </div>
+                    
+                    <p className="text-theme-dark/80 mb-4 text-sm">{t(skill.descriptionKey)}</p>
                     
                     <ul className="space-y-2 mb-4">
                       {skill.items.map((item, idx) => (
@@ -253,7 +233,7 @@ const Skills = () => {
                     
                     <div className="mt-auto pt-4 flex items-center justify-center">
                       <button className="flex items-center justify-center gap-1 py-2 px-4 rounded-lg bg-theme-light/70 text-theme-dark/70 hover:bg-theme-light text-sm transition-all">
-                        <span>Click for details</span>
+                        <span>{t('click_for_details')}</span>
                         <ArrowUpRight className="h-4 w-4" />
                       </button>
                     </div>
@@ -265,26 +245,17 @@ const Skills = () => {
                   <div className="h-2 bg-theme rounded-t-xl"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-theme-dark">{skill.category}</h3>
+                      <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
                       <div className="p-2 rounded-full bg-theme-light/80 cursor-pointer hover:bg-theme-light">
                         <RotateCcw className="h-4 w-4 text-theme" />
                       </div>
                     </div>
                     
-                    <div className="space-y-3 bg-theme-light/20 p-4 rounded-lg border border-theme-light/40 mb-4">
-                      {skill.detailedDescription.map((para, idx) => (
+                    <div className="space-y-3 bg-theme-light/20 p-4 rounded-lg border border-theme-light/40 mb-4 overflow-y-auto max-h-[220px]">
+                      {skill.detailedDescriptionKeys.map((key, idx) => (
                         <p key={idx} className="text-theme-dark/80 leading-relaxed text-sm">
-                          {para}
+                          {t(key)}
                         </p>
-                      ))}
-                    </div>
-                    
-                    <div className="flex justify-center space-x-4 mt-4">
-                      {skill.icon}
-                      {skill.additionalIcons?.map((icon, idx) => (
-                        <div key={idx} className="transition-transform hover:scale-110">
-                          {icon}
-                        </div>
                       ))}
                     </div>
                   </CardContent>

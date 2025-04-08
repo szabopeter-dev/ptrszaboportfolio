@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -7,11 +8,47 @@ import Education from "@/components/Education";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
+  const { language } = useLanguage();
+  
   useEffect(() => {
-    document.title = "Péter Szabó | Software Engineer";
-  }, []);
+    // Dynamic document title based on language
+    document.title = language === 'en' 
+      ? "Péter Szabó | Software Engineer" 
+      : "Szabó Péter | Szoftverfejlesztő";
+      
+    // Add meta keywords for better SEO
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    const keywords = language === 'en' 
+      ? "software engineer, frontend developer, backend developer, full stack, react, angular, .net, machine learning, portfolio, developer, programmer, Péter Szabó"
+      : "szoftverfejlesztő, frontend fejlesztő, backend fejlesztő, full stack, react, angular, .net, gépi tanulás, portfólió, fejlesztő, programozó, Szabó Péter";
+    
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', keywords);
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      meta.content = keywords;
+      document.head.appendChild(meta);
+    }
+    
+    // Add meta description for better SEO
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const description = language === 'en'
+      ? "Portfolio of Péter Szabó, a software engineer specializing in frontend, backend development and machine learning."
+      : "Szabó Péter szoftverfejlesztő portfóliója, aki frontend, backend fejlesztésre és gépi tanulásra specializálódott.";
+    
+    if (metaDescription) {
+      metaDescription.setAttribute('content', description);
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = description;
+      document.head.appendChild(meta);
+    }
+  }, [language]);
 
   // Optimized smooth scrolling for anchor links with improved performance
   useEffect(() => {
@@ -50,6 +87,9 @@ const Index = () => {
           } else {
             offset = navbarHeight;
           }
+          
+          // Store current scroll position to prevent navbar jumping
+          const currentScrollY = window.scrollY;
           
           // Use requestAnimationFrame for smoother scrolling
           requestAnimationFrame(() => {

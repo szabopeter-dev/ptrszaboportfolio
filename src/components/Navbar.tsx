@@ -68,8 +68,18 @@ const Navbar = () => {
     { name: 'contact', href: "#contact" }
   ];
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'hu' : 'en');
+  // Prevent scroll position change when toggling language
+  const toggleLanguage = (newLang: 'en' | 'hu') => {
+    // Store current scroll position
+    const currentScrollPos = window.scrollY;
+    
+    // Change language
+    setLanguage(newLang);
+    
+    // Use setTimeout to ensure DOM has updated before restoring scroll
+    setTimeout(() => {
+      window.scrollTo(0, currentScrollPos);
+    }, 0);
   };
 
   return (
@@ -106,18 +116,18 @@ const Navbar = () => {
               <Button 
                 variant="ghost" 
                 size="sm"
-                className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2"
+                className="flex items-center gap-2 text-theme-dark hover:text-theme-accent px-2 min-w-[60px]"
               >
                 <Globe className="h-4 w-4" />
                 <span>{language.toUpperCase()}</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setLanguage('en')}>
+            <DropdownMenuContent align="end" className="bg-white">
+              <DropdownMenuItem onClick={() => toggleLanguage('en')}>
                 <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>EN</span>
                 <span className="text-xs text-muted-foreground">English</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setLanguage('hu')}>
+              <DropdownMenuItem onClick={() => toggleLanguage('hu')}>
                 <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>HU</span>
                 <span className="text-xs text-muted-foreground">Magyar</span>
               </DropdownMenuItem>
@@ -139,15 +149,28 @@ const Navbar = () => {
         {/* Mobile Menu - Using Drawer component with improved animations */}
         <div className="md:hidden flex items-center space-x-2">
           {/* Mobile Language Selector */}
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={toggleLanguage}
-            className="flex items-center gap-1 text-theme-dark hover:text-theme-accent"
-          >
-            <Globe className="h-4 w-4" />
-            <span>{language.toUpperCase()}</span>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="flex items-center gap-1 text-theme-dark hover:text-theme-accent min-w-[52px]"
+              >
+                <Globe className="h-4 w-4" />
+                <span>{language.toUpperCase()}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white">
+              <DropdownMenuItem onClick={() => toggleLanguage('en')}>
+                <span className={`mr-2 ${language === 'en' ? 'font-bold' : ''}`}>EN</span>
+                <span className="text-xs text-muted-foreground">English</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => toggleLanguage('hu')}>
+                <span className={`mr-2 ${language === 'hu' ? 'font-bold' : ''}`}>HU</span>
+                <span className="text-xs text-muted-foreground">Magyar</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           
           <Drawer>
             <DrawerTrigger asChild>
