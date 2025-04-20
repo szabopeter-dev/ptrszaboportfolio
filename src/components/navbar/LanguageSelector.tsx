@@ -9,16 +9,33 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
+import { memo } from "react";
 
-export const LanguageSelector = () => {
+export const LanguageSelector = memo(() => {
   const { language, setLanguage } = useLanguage();
   
-  // Prevent scroll position change when toggling language
+  // Enhanced method to prevent layout shifts when changing language
   const toggleLanguage = (newLang: 'en' | 'hu') => {
     if (language === newLang) return;
-    const currentScrollPos = window.scrollY;
+    
+    // Save scroll position and document height before language change
+    const scrollPosition = window.scrollY;
+    const documentHeight = document.body.scrollHeight;
+    
+    // Apply language change
     setLanguage(newLang);
-    setTimeout(() => window.scrollTo(0, currentScrollPos), 0);
+    
+    // Maintain scroll position after render
+    window.requestAnimationFrame(() => {
+      // Check if document height changed and adjust scroll position proportionally
+      const newDocumentHeight = document.body.scrollHeight;
+      if (documentHeight !== newDocumentHeight && documentHeight > 0) {
+        const scrollRatio = scrollPosition / documentHeight;
+        window.scrollTo(0, scrollRatio * newDocumentHeight);
+      } else {
+        window.scrollTo(0, scrollPosition);
+      }
+    });
   };
 
   return (
@@ -28,7 +45,8 @@ export const LanguageSelector = () => {
           <Button 
             variant="ghost" 
             size="sm"
-            className="flex items-center text-theme-dark hover:text-theme-accent p-1.5 h-9 min-w-0 rounded-full hover:bg-theme-light/10 transition-colors"
+            className="flex items-center text-theme-dark hover:text-theme-accent p-1.5 h-9 min-w-9 w-9 rounded-full hover:bg-theme-light/10 transition-colors"
+            aria-label="Change Language"
           >
             <Globe className="h-5 w-5 text-theme" />
           </Button>
@@ -38,6 +56,8 @@ export const LanguageSelector = () => {
           className="min-w-[120px] bg-white/95 backdrop-blur-md border border-gray-200 shadow-lg rounded-lg"
           avoidCollisions={true}
           collisionPadding={16}
+          sideOffset={8}
+          forceMount
         >
           {['en', 'hu'].map((option) => (
             <DropdownMenuItem 
@@ -58,4 +78,6 @@ export const LanguageSelector = () => {
       </DropdownMenu>
     </div>
   );
-};
+});
+
+LanguageSelector.displayName = "LanguageSelector";

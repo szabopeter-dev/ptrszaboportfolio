@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, memo } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSelector } from "./navbar/LanguageSelector";
@@ -14,6 +14,20 @@ const navLinks = [
   { name: 'skills', href: "#skills" },
   { name: 'contact', href: "#contact" }
 ];
+
+// Extract NavLink component for better organization
+const NavLink = memo(({ name, href, t }: { name: string; href: string; t: (key: string) => string }) => (
+  <a 
+    key={name}
+    href={href}
+    className="text-theme-dark hover:text-theme-accent transition-colors duration-300 font-medium relative group"
+  >
+    <span className="relative z-10">{t(name)}</span>
+    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-theme-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+  </a>
+));
+
+NavLink.displayName = "NavLink";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -49,45 +63,45 @@ const Navbar = () => {
     };
   }, [handleScroll]);
 
+  // Use memo for rendering the desktop navigation to avoid re-renders
+  const desktopNavigation = React.useMemo(() => (
+    <nav className="hidden md:flex items-center space-x-8">
+      {navLinks.map((link) => (
+        <NavLink key={link.name} name={link.name} href={link.href} t={t} />
+      ))}
+      
+      <LanguageSelector />
+      
+      <a 
+        href="https://www.linkedin.com/in/ptrszabo7/" 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex"
+      >
+        <Button className="bg-theme hover:bg-theme-accent text-white px-5 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1">
+          {t('linkedin')}
+        </Button>
+      </a>
+    </nav>
+  ), [t]);
+
   return (
     <header 
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-500 py-4",
+        "fixed top-0 z-50 w-full transition-all duration-300 py-4 will-change-transform",
         scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent",
         !visible && "transform -translate-y-full"
       )}
+      style={{ height: isMobile ? '70px' : '80px' }}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-full">
         <a href="#" className="text-2xl font-display font-bold group relative z-50 transition-all duration-300 hover:scale-110">
           <span className="text-theme-accent group-hover:text-theme transition-colors duration-300">P</span>
           <span className="text-theme group-hover:text-theme-accent transition-colors duration-300">S</span>
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name}
-              href={link.href}
-              className="text-theme-dark hover:text-theme-accent transition-colors duration-300 font-medium relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:-bottom-1 after:left-0 after:bg-theme-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
-            >
-              {t(link.name)}
-            </a>
-          ))}
-          
-          <LanguageSelector />
-          
-          <a 
-            href="https://www.linkedin.com/in/ptrszabo7/" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex"
-          >
-            <Button className="bg-theme hover:bg-theme-accent text-white px-5 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1">
-              {t('linkedin')}
-            </Button>
-          </a>
-        </nav>
+        {desktopNavigation}
 
         {/* Mobile Menu */}
         <div className="md:hidden flex items-center space-x-2">
@@ -99,4 +113,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

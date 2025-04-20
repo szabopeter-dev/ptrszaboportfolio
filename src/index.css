@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -62,6 +63,26 @@
   a {
     @apply text-theme hover:text-theme-accent transition-colors duration-300;
   }
+  
+  /* Scroll bars styling for better UX */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(241, 242, 243, 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(139, 92, 246, 0.3);
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(139, 92, 246, 0.5);
+  }
 }
 
 @layer components {
@@ -94,7 +115,7 @@
   
   .card {
     @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300
-    border border-gray-100 overflow-hidden;
+    border border-gray-100 overflow-hidden hover:-translate-y-1;
   }
   
   .tag {
@@ -105,7 +126,7 @@
     animation: fadeIn 0.6s ease-out forwards;
   }
   
-  /* New pulse animation for timeline dots */
+  /* Improved pulse animation for timeline dots */
   .pulse-dot::after {
     content: '';
     position: absolute;
@@ -121,12 +142,14 @@
   .timeline-line {
     background: linear-gradient(to bottom, transparent, var(--theme-color, #8B5CF6), transparent);
     animation: flowLine 2s ease-in-out infinite;
+    will-change: background-position;
   }
   
-  /* Card flip styles */
+  /* Card flip styles with hardware acceleration */
   .flip-card-inner {
     transition: transform 0.8s;
     transform-style: preserve-3d;
+    will-change: transform;
   }
   
   .flipped .flip-card-inner {
@@ -136,10 +159,26 @@
   .flip-card-front, .flip-card-back {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    will-change: transform;
   }
   
   .flip-card-back {
     transform: rotateY(180deg);
+  }
+  
+  /* Glass morphism effect for special elements */
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  
+  /* Fun hover effect for cards */
+  .tilt-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .tilt-card:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -178,6 +217,19 @@
   }
 }
 
+/* New floating animation for special elements */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 @layer utilities {
   .animate-delay-100 {
     animation-delay: 100ms;
@@ -205,5 +257,16 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-main;
+  }
+  
+  /* New floating animation utility */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Hardware accelerated animations */
+  .hardware-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
   }
 }
