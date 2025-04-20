@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -8,178 +8,98 @@ import Education from "@/components/Education";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
   const { language } = useLanguage();
   
-  useEffect(() => {
-    // Dynamic document title based on language
-    document.title = language === 'en' 
-      ? "Péter Szabó | Software Engineer" 
-      : "Szabó Péter | Szoftverfejlesztő";
+  // Memoized scroll handler for better performance
+  const handleAnchorClick = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const anchor = target.closest('a');
+    
+    if (anchor?.hash && anchor.hash.length > 1 && anchor.href.includes('#')) {
+      e.preventDefault();
+      const element = document.getElementById(anchor.hash.substring(1));
       
-    // Add meta keywords for better SEO
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    const keywords = language === 'en' 
-      ? "software engineer, frontend developer, backend developer, full stack, react, angular, .net, machine learning, portfolio, developer, programmer, Péter Szabó"
-      : "szoftverfejlesztő, frontend fejlesztő, backend fejlesztő, full stack, react, angular, .net, gépi tanulás, portfólió, fejlesztő, programozó, Szabó Péter";
-    
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', keywords);
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'keywords';
-      meta.content = keywords;
-      document.head.appendChild(meta);
-    }
-    
-    // Add meta description for better SEO
-    const metaDescription = document.querySelector('meta[name="description"]');
-    const description = language === 'en'
-      ? "Portfolio of Péter Szabó, a software engineer specializing in frontend, backend development and machine learning."
-      : "Szabó Péter szoftverfejlesztő portfóliója, aki frontend, backend fejlesztésre és gépi tanulásra specializálódott.";
-    
-    if (metaDescription) {
-      metaDescription.setAttribute('content', description);
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = description;
-      document.head.appendChild(meta);
-    }
-    
-    // Add canonical URL
-    const canonicalLink = document.querySelector('link[rel="canonical"]');
-    const url = window.location.origin;
-    
-    if (canonicalLink) {
-      canonicalLink.setAttribute('href', url);
-    } else {
-      const link = document.createElement('link');
-      link.rel = 'canonical';
-      link.href = url;
-      document.head.appendChild(link);
-    }
-    
-    // Add language meta tag
-    const metaLanguage = document.querySelector('meta[http-equiv="Content-Language"]');
-    if (metaLanguage) {
-      metaLanguage.setAttribute('content', language);
-    } else {
-      const meta = document.createElement('meta');
-      meta.setAttribute('http-equiv', 'Content-Language');
-      meta.content = language;
-      document.head.appendChild(meta);
-    }
-    
-    // Update HTML lang attribute
-    document.documentElement.lang = language;
-    
-  }, [language]);
-
-  // Optimized smooth scrolling for anchor links with improved performance
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      
-      // Find the closest anchor element (handles clicking on child elements of anchors)
-      const anchor = target.closest('a');
-      
-      if (anchor && anchor.hash && anchor.hash.length > 1 && anchor.href.includes('#')) {
-        e.preventDefault();
-        const id = anchor.hash.substring(1);
-        const element = document.getElementById(id);
-        
-        if (element) {
-          // Close any open drawers before scrolling
-          const drawerContent = document.querySelector('[data-state="open"]');
-          if (drawerContent) {
-            const closeButton = drawerContent.querySelector('button[aria-label="Close"]');
-            if (closeButton) {
-              (closeButton as HTMLButtonElement).click();
-            }
+      if (element) {
+        const drawerContent = document.querySelector('[data-state="open"]');
+        if (drawerContent) {
+          const closeButton = drawerContent.querySelector('button[aria-label="Close"]');
+          if (closeButton) {
+            (closeButton as HTMLButtonElement).click();
           }
-          
-          // Calculate optimal offset based on viewport height and width for better spacing
-          const navbarHeight = 100;
-          const isMobile = window.innerWidth < 768;
-          const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-          
-          // Adjust offset based on device type for better positioning
-          let offset;
-          if (isMobile) {
-            offset = navbarHeight - 20;
-          } else if (isTablet) {
-            offset = navbarHeight - 10;
-          } else {
-            offset = navbarHeight;
-          }
-          
-          // Store current scroll position to prevent navbar jumping
-          const currentScrollY = window.scrollY;
-          
-          // Use requestAnimationFrame for smoother scrolling
-          requestAnimationFrame(() => {
-            window.scrollTo({
-              top: element.offsetTop - offset,
-              behavior: 'smooth',
-            });
-          });
         }
+        
+        // Optimized scroll calculation
+        const navbarHeight = 100;
+        const isMobile = window.innerWidth < 768;
+        const offset = isMobile ? navbarHeight - 20 : navbarHeight;
+        
+        window.scrollTo({
+          top: element.offsetTop - offset,
+          behavior: 'smooth',
+        });
       }
-    };
+    }
+  }, []);
 
-    // Timeline animation effect on scroll
-    const setupTimelineAnimation = () => {
-      const timeline = document.querySelector('.timeline-line');
-      if (timeline) {
-        const handleScroll = () => {
-          const timelineSection = document.getElementById('experience');
-          if (!timelineSection) return;
-          
-          const rect = timelineSection.getBoundingClientRect();
-          const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-          
-          // Check if timeline is in view
-          if (!(rect.bottom< 0 || rect.top - viewHeight >= 0)) {
-            // Calculate how much of the section is visible
-            const sectionVisibility = (viewHeight - Math.max(0, rect.top)) / viewHeight;
-            
-            // Apply animation based on scroll position
-            if (sectionVisibility > 0.1) {
+  // Optimized timeline animation with IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const timeline = entry.target.querySelector('.timeline-line');
+            if (timeline) {
               timeline.classList.add('timeline-animate');
             }
+            observer.unobserve(entry.target);
           }
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        });
+      },
+      {
+        threshold: 0.1,
       }
-      
-      // Skills animation on hover
-      const skillCards = document.querySelectorAll('.skill-card');
-      skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.classList.add('scale-105');
-        });
-        card.addEventListener('mouseleave', () => {
-          card.classList.remove('scale-105');
-        });
-      });
-    };
+    );
 
+    const timelineSection = document.getElementById('experience');
+    if (timelineSection) {
+      observer.observe(timelineSection);
+    }
+
+    // Optimized skill cards animation
+    const skillCards = document.querySelectorAll('.skill-card');
+    const skillCardsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('scale-105');
+            skillCardsObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    skillCards.forEach((card) => skillCardsObserver.observe(card));
+
+    // Event listener cleanup
     document.addEventListener('click', handleAnchorClick);
-    const cleanup = setupTimelineAnimation();
     
     return () => {
       document.removeEventListener('click', handleAnchorClick);
-      if (cleanup) cleanup();
+      observer.disconnect();
+      skillCardsObserver.disconnect();
     };
-  }, []);
+  }, [handleAnchorClick]);
 
   return (
     <div className="min-h-screen bg-theme-lightest text-theme-dark transition-colors duration-300">
+      <SEO />
       <Navbar />
       <Hero />
       <About />
@@ -203,36 +123,6 @@ const Index = () => {
               height: 100%;
               background: linear-gradient(to bottom, transparent, var(--theme-color, #3F72AF), transparent);
             }
-          }
-          
-          @keyframes collapsible-down {
-            from {
-              height: 0;
-              opacity: 0;
-            }
-            to {
-              height: var(--radix-collapsible-content-height);
-              opacity: 1;
-            }
-          }
-          
-          @keyframes collapsible-up {
-            from {
-              height: var(--radix-collapsible-content-height);
-              opacity: 1;
-            }
-            to {
-              height: 0;
-              opacity: 0;
-            }
-          }
-          
-          .animate-collapsible-down {
-            animation: collapsible-down 0.3s ease-out;
-          }
-          
-          .animate-collapsible-up {
-            animation: collapsible-up 0.3s ease-out;
           }
         `}
       </style>
