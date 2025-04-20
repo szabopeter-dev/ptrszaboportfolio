@@ -1,5 +1,5 @@
 
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -45,57 +45,69 @@ const Index = () => {
     }
   }, []);
 
-  // Optimized timeline animation with IntersectionObserver
+  // Setup IntersectionObserver for animations with optimization and efficiency
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    // Use a single observer for all animations with different thresholds
+    const animationObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const timeline = entry.target.querySelector('.timeline-line');
-            if (timeline) {
-              timeline.classList.add('timeline-animate');
+            // Determine what to animate based on data attributes
+            if (entry.target.classList.contains('timeline-section')) {
+              const timeline = entry.target.querySelector('.timeline-line');
+              if (timeline) {
+                timeline.classList.add('timeline-animate');
+              }
+            } else if (entry.target.classList.contains('skill-card')) {
+              entry.target.classList.add('scale-105');
             }
-            observer.unobserve(entry.target);
+            
+            // Only observe each element once
+            animationObserver.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.1,
+        threshold: 0.2,
+        rootMargin: '0px 0px -10% 0px'
       }
     );
 
+    // Target elements for animation
     const timelineSection = document.getElementById('experience');
     if (timelineSection) {
-      observer.observe(timelineSection);
+      timelineSection.classList.add('timeline-section');
+      animationObserver.observe(timelineSection);
     }
 
-    // Optimized skill cards animation
     const skillCards = document.querySelectorAll('.skill-card');
-    const skillCardsObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('scale-105');
-            skillCardsObserver.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.5,
-      }
-    );
+    skillCards.forEach((card) => animationObserver.observe(card));
 
-    skillCards.forEach((card) => skillCardsObserver.observe(card));
-
-    // Event listener cleanup
+    // Event listener for smooth scrolling
     document.addEventListener('click', handleAnchorClick);
     
     return () => {
       document.removeEventListener('click', handleAnchorClick);
-      observer.disconnect();
-      skillCardsObserver.disconnect();
+      animationObserver.disconnect();
     };
-  }, [handleAnchorClick]);
+  }, [handleAnchorClick, language]);
+
+  // Memoize the styles to prevent re-renders
+  const animationStyles = useMemo(() => `
+    .timeline-animate {
+      animation: timelineFill 1.5s ease-out forwards;
+    }
+    
+    @keyframes timelineFill {
+      from {
+        height: 0%;
+      }
+      to {
+        height: 100%;
+        background: linear-gradient(to bottom, transparent, var(--theme-color, #3F72AF), transparent);
+      }
+    }
+  `, []);
 
   return (
     <div className="min-h-screen bg-theme-lightest text-theme-dark transition-colors duration-300">
@@ -109,23 +121,7 @@ const Index = () => {
       <Contact />
       <Footer />
       
-      <style>
-        {`
-          .timeline-animate {
-            animation: timelineFill 1.5s ease-out forwards;
-          }
-          
-          @keyframes timelineFill {
-            from {
-              height: 0%;
-            }
-            to {
-              height: 100%;
-              background: linear-gradient(to bottom, transparent, var(--theme-color, #3F72AF), transparent);
-            }
-          }
-        `}
-      </style>
+      <style>{animationStyles}</style>
     </div>
   );
 };

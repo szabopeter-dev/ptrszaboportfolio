@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import { memo } from "react";
+import { memo, useRef } from "react";
 
 export const LanguageSelector = memo(() => {
   const { language, setLanguage } = useLanguage();
+  const triggerRef = useRef<HTMLButtonElement>(null);
   
   // Enhanced method to prevent layout shifts when changing language
   const toggleLanguage = (newLang: 'en' | 'hu') => {
@@ -39,13 +40,14 @@ export const LanguageSelector = memo(() => {
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block w-9">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button 
+            ref={triggerRef}
             variant="ghost" 
             size="sm"
-            className="flex items-center text-theme-dark hover:text-theme-accent p-1.5 h-9 min-w-9 w-9 rounded-full hover:bg-theme-light/10 transition-colors"
+            className="fixed-width-button flex items-center text-theme-dark hover:text-theme-accent p-1.5 h-9 min-w-9 w-9 rounded-full hover:bg-theme-light/10 transition-colors"
             aria-label="Change Language"
           >
             <Globe className="h-5 w-5 text-theme" />
@@ -76,6 +78,17 @@ export const LanguageSelector = memo(() => {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {/* Add styles to prevent layout shift */}
+      <style jsx>{`
+        .fixed-width-button {
+          position: relative;
+          width: 36px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      `}</style>
     </div>
   );
 });

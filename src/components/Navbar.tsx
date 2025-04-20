@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useEffect, memo } from "react";
+import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSelector } from "./navbar/LanguageSelector";
@@ -28,6 +28,12 @@ const NavLink = memo(({ name, href, t }: { name: string; href: string; t: (key: 
 ));
 
 NavLink.displayName = "NavLink";
+
+// Fixed height values for navbar to prevent layout shifts
+const NAVBAR_HEIGHT = {
+  mobile: '70px',
+  desktop: '80px'
+};
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -64,13 +70,15 @@ const Navbar = () => {
   }, [handleScroll]);
 
   // Use memo for rendering the desktop navigation to avoid re-renders
-  const desktopNavigation = React.useMemo(() => (
+  const desktopNavigation = useMemo(() => (
     <nav className="hidden md:flex items-center space-x-8">
       {navLinks.map((link) => (
         <NavLink key={link.name} name={link.name} href={link.href} t={t} />
       ))}
       
-      <LanguageSelector />
+      <div className="w-9 flex justify-center">
+        <LanguageSelector />
+      </div>
       
       <a 
         href="https://www.linkedin.com/in/ptrszabo7/" 
@@ -85,6 +93,8 @@ const Navbar = () => {
     </nav>
   ), [t]);
 
+  const navbarHeight = isMobile ? NAVBAR_HEIGHT.mobile : NAVBAR_HEIGHT.desktop;
+
   return (
     <header 
       className={cn(
@@ -92,7 +102,7 @@ const Navbar = () => {
         scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent",
         !visible && "transform -translate-y-full"
       )}
-      style={{ height: isMobile ? '70px' : '80px' }}
+      style={{ height: navbarHeight }}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-full">
         <a href="#" className="text-2xl font-display font-bold group relative z-50 transition-all duration-300 hover:scale-110">
@@ -104,8 +114,10 @@ const Navbar = () => {
         {desktopNavigation}
 
         {/* Mobile Menu */}
-        <div className="md:hidden flex items-center space-x-2">
-          <LanguageSelector />
+        <div className="md:hidden flex items-center space-x-4">
+          <div className="w-9 flex justify-center">
+            <LanguageSelector />
+          </div>
           <MobileMenu />
         </div>
       </div>
