@@ -17,7 +17,7 @@ const Experience = () => {
   const jobs: Job[] = [
     {
       company: "ReComp Informatikai Zrt.",
-      title: "Junior Software Developer",
+      title: "Software Developer Junior",
       period: "September 2024 - Present",
       description: [
         "Modernizing legacy attorney management platform with React, Next.js and Tailwind",
