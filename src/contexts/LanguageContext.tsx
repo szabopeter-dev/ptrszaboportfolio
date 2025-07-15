@@ -15,6 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Navigation
     'about': 'About',
     'experience': 'Experience',
+    'projects': 'Projects',
     'education': 'Education',
     'skills': 'Skills',
     'contact': 'Contact',
@@ -37,27 +38,27 @@ const translations: Record<Language, Record<string, string>> = {
     'click_for_details': 'Click for details',
     
     // Skill details
-    'frontend_detail_1': 'Developed strong frontend skills through both self-learning and university coursework.',
-    'frontend_detail_2': 'Currently applying frontend knowledge in a professional setting.',
-    'frontend_detail_3': 'Familiar with modern frameworks and libraries, emphasizing clean UI/UX.',
+    'frontend_detail_1': 'Rebuilding legacy attorney management systems using React, Next.js, and Tailwind CSS with modern testing practices.',
+    'frontend_detail_2': 'Currently applying frontend knowledge in a professional setting at Recomp Informatikai Zrt.',
+    'frontend_detail_3': 'Familiar with modern frameworks and libraries, emphasizing clean UI/UX and responsive design.',
     
     'backend_detail_1': 'Started backend development during high school at BMSZC and have been building ever since.',
     'backend_detail_2': 'Created full-stack applications using ASP.NET Core, Entity Framework Core, and Web APIs.',
     'backend_detail_3': 'Developed a layered Harry Potter-themed application with integration and unit testing using NUnit and Moq.',
-    'backend_detail_4': 'Projects available on GitHub demonstrating clean architecture and robust test coverage.',
+    'backend_detail_4': 'Currently working on modernizing legacy Delphi systems and implementing CI/CD pipelines through GitLab.',
     
-    'ml_detail_1': 'Gained hands-on experience with ML during my 2-year-long thesis project: a machine learning-based ATM cash-out prediction system.',
-    'ml_detail_2': 'Focused on time series forecasting using GRU and LSTM models.',
+    'ml_detail_1': 'Gained hands-on experience with ML during my 4-semester thesis project: a machine learning-based ATM cash forecasting system.',
+    'ml_detail_2': 'Focused on time series forecasting using GRU and LSTM models, achieving up to 34% MAE reduction.',
     'ml_detail_3': 'Implemented preprocessing, feature engineering, and model evaluation using Python and TensorFlow.',
-    'ml_detail_4': 'The project involved large-scale financial datasets and real-world application scenarios.',
+    'ml_detail_4': 'Developed LightGBM-based classifier for risk analysis achieving 91% recall on real-world health data.',
     
     'database_detail_1': 'Introduced to databases during high school and deepened my knowledge at university.',
     'database_detail_2': 'Experienced in SQL and PL/SQL for data manipulation and querying.',
     'database_detail_3': 'Passionate about database design, optimization, and Big Data concepts.',
-    'database_detail_4': 'Comfortable working with relational data and large datasets.',
+    'database_detail_4': 'Comfortable working with relational data and large datasets for ML applications.',
     
-    'devops_detail_1': 'Actively use GitLab and GitHub for version control and CI/CD pipelines.',
-    'devops_detail_2': 'Familiar with setting up automated testing and deployment processes.',
+    'devops_detail_1': 'Actively use GitLab and GitHub for version control and CI/CD pipelines in professional environment.',
+    'devops_detail_2': 'Familiar with setting up automated testing and deployment processes using Jest and GitLab CI.',
     'devops_detail_3': 'Experience working in collaborative environments with branch-based workflows.',
     'devops_detail_4': 'Committed to writing maintainable, production-ready code integrated with CI systems.',
     
@@ -79,8 +80,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about_title': 'About Me',
     'about_profession': 'Software Engineer',
     'about_education': 'B.S. in Software Engineering at the University of Óbuda, focused on building solutions that solve real-world problems.',
-    'about_work': 'Working at ReComp Informatikai Zrt. on modernizing legacy systems with React, Next.js and Tailwind. Passionate about creating clean, maintainable code that delivers exceptional user experiences.',
-    'about_thesis': 'Currently focused on ML-based ATM cash level prediction for my thesis, exploring the intersection of financial technology and machine learning to optimize cash management systems.',
+    'about_work': 'Working at Recomp Informatikai Zrt. on modernizing legacy attorney management systems with React, Next.js and developing AI-based chatbots. Passionate about creating clean, maintainable code that delivers exceptional user experiences.',
+    'about_thesis': 'Currently working on my 4-semester BSc thesis focusing on ML-based ATM cash level forecasting, exploring the intersection of financial technology and machine learning to optimize cash management systems.',
     'about_technologies': 'Technologies I\'ve been working with recently:',
     'about_download_cv': 'Download CV',
     
@@ -91,7 +92,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Contact section
     'contact_title_small': 'Get In Touch',
     'contact_title': 'Let\'s Connect',
-    'contact_message': 'I\'m currently focusing on my Software Engineering studies while working as a Junior Software Developer. Feel free to reach out and I\'ll get back to you soon!',
+    'contact_message': 'I\'m currently focusing on my Software Engineering studies while working as a Software Developer Intern. Based in San Sebastián, Spain and Budapest, Hungary. Feel free to reach out and I\'ll get back to you soon!',
     'contact_email': 'Email',
     'contact_phone': 'Phone',
     'contact_say_hello': 'Say Hello',
@@ -113,6 +114,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Navigation
     'about': 'Rólam',
     'experience': 'Tapasztalat',
+    'projects': 'Projektek',
     'education': 'Tanulmányok',
     'skills': 'Készségek',
     'contact': 'Kapcsolat',
@@ -135,27 +137,27 @@ const translations: Record<Language, Record<string, string>> = {
     'click_for_details': 'Kattints a részletekért',
     
     // Skill details
-    'frontend_detail_1': 'Erős frontend készségeket fejlesztettem ki önképzés és egyetemi tanulmányok során.',
-    'frontend_detail_2': 'Jelenleg professzionális környezetben alkalmazom frontend tudásomat.',
-    'frontend_detail_3': 'Ismerem a modern keretrendszereket és könyvtárakat, hangsúlyt fektetve a tiszta UI/UX-re.',
+    'frontend_detail_1': 'Régebbi ügyvédi rendszerek újjáépítése React, Next.js és Tailwind CSS használatával modern tesztelési gyakorlatokkal.',
+    'frontend_detail_2': 'Jelenleg professzionális környezetben alkalmazom frontend tudásomat a Recomp Informatikai Zrt-nél.',
+    'frontend_detail_3': 'Ismerem a modern keretrendszereket és könyvtárakat, hangsúlyt fektetve a tiszta UI/UX-re és reszponzív tervezésre.',
     
     'backend_detail_1': 'A backend fejlesztést a BMSZC-ben kezdtem a középiskolában, és azóta is folyamatosan építem tudásom.',
     'backend_detail_2': 'Full-stack alkalmazásokat készítettem ASP.NET Core, Entity Framework Core és Web API-k használatával.',
     'backend_detail_3': 'Fejlesztettem egy réteges Harry Potter témájú alkalmazást integrációs és egységtesztekkel NUnit és Moq használatával.',
-    'backend_detail_4': 'A GitHubon elérhetők a projektjeim, amelyek tiszta architektúrát és robusztus tesztlefedettséget mutatnak.',
+    'backend_detail_4': 'Jelenleg régebbi Delphi rendszerek modernizálásán dolgozom és CI/CD folyamatokat implementálok GitLab segítségével.',
     
-    'ml_detail_1': 'Gyakorlati tapasztalatot szereztem a gépi tanulásban a 2 éves szakdolgozati projektem során: egy gépi tanuláson alapuló ATM készpénzkivételi előrejelző rendszer.',
-    'ml_detail_2': 'Idősoros előrejelzésre fókuszáltam GRU és LSTM modellek használatával.',
+    'ml_detail_1': 'Gyakorlati tapasztalatot szereztem a gépi tanulásban a 4 féléves szakdolgozati projektem során: egy gépi tanuláson alapuló ATM készpénz-előrejelző rendszer.',
+    'ml_detail_2': 'Idősoros előrejelzésre fókuszáltam GRU és LSTM modellek használatával, 34%-os MAE csökkentést elérve.',
     'ml_detail_3': 'Előfeldolgozást, jellemző mérnöki munkát és modellértékelést valósítottam meg Python és TensorFlow segítségével.',
-    'ml_detail_4': 'A projekt nagyszabású pénzügyi adatkészleteket és valós alkalmazási forgatókönyveket tartalmazott.',
+    'ml_detail_4': 'LightGBM-alapú osztályozót fejlesztettem kockázatelemzéshez, 91%-os visszahívást elérve valós egészségügyi adatokon.',
     
     'database_detail_1': 'Az adatbázisokkal középiskolában ismerkedtem meg, és az egyetemen mélyítettem el tudásomat.',
     'database_detail_2': 'Tapasztalt vagyok SQL és PL/SQL használatában adatmanipulációhoz és lekérdezéshez.',
     'database_detail_3': 'Szenvedélyes vagyok az adatbázistervezés, optimalizálás és Big Data koncepciók iránt.',
-    'database_detail_4': 'Jól dolgozom relációs adatokkal és nagy adatkészletekkel.',
+    'database_detail_4': 'Jól dolgozom relációs adatokkal és nagy adatkészletekkel ML alkalmazásokhoz.',
     
-    'devops_detail_1': 'Aktívan használom a GitLabot és GitHubot verziókezeléshez és CI/CD folyamatokhoz.',
-    'devops_detail_2': 'Ismerem az automatizált tesztelési és telepítési folyamatok beállítását.',
+    'devops_detail_1': 'Aktívan használom a GitLabot és GitHubot verziókezeléshez és CI/CD folyamatokhoz professzionális környezetben.',
+    'devops_detail_2': 'Ismerem az automatizált tesztelési és telepítési folyamatok beállítását Jest és GitLab CI használatával.',
     'devops_detail_3': 'Tapasztalattal rendelkezem kollaboratív környezetekben ág-alapú munkafolyamatokkal.',
     'devops_detail_4': 'Elkötelezett vagyok a karbantartható, éles rendszerekbe integrált kód írása mellett.',
     
@@ -177,8 +179,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about_title': 'Rólam',
     'about_profession': 'Szoftverfejlesztő',
     'about_education': 'Szoftverfejlesztő BSc, Óbudai Egyetem, valós problémákat megoldó megoldások fejlesztésére összpontosítva.',
-    'about_work': 'A ReComp Informatikai Zrt-nél dolgozom, régebbi rendszerek modernizálásán React, Next.js és Tailwind technológiákkal. Szenvedélyem a tiszta, karbantartható kód írása, amely kivételes felhasználói élményt nyújt.',
-    'about_thesis': 'Jelenleg az ATM készpénzszint gépi tanuláson alapuló előrejelzésére összpontosítok a szakdolgozatomban, a pénzügyi technológia és a gépi tanulás találkozópontját kutatva a készpénzkezelési rendszerek optimalizálása érdekében.',
+    'about_work': 'A Recomp Informatikai Zrt-nél dolgozom régebbi ügyvédi rendszerek modernizálásán React, Next.js technológiákkal és AI-alapú chatbotok fejlesztésén. Szenvedélyem a tiszta, karbantartható kód írása, amely kivételes felhasználói élményt nyújt.',
+    'about_thesis': 'Jelenleg a 4 féléves BSc szakdolgozatomon dolgozom, amely ML-alapú ATM készpénzszint előrejelzésre összpontosít, a pénzügyi technológia és a gépi tanulás találkozópontját kutatva.',
     'about_technologies': 'Technológiák, amelyekkel nemrég dolgoztam:',
     'about_download_cv': 'Önéletrajz letöltése',
     
@@ -189,7 +191,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Contact section
     'contact_title_small': 'Vedd fel a kapcsolatot',
     'contact_title': 'Lépjünk kapcsolatba',
-    'contact_message': 'Jelenleg a szoftverfejlesztői tanulmányaimra összpontosítok, miközben junior szoftverfejlesztőként dolgozom. Nyugodtan keress meg, és hamarosan válaszolok!',
+    'contact_message': 'Jelenleg a szoftverfejlesztői tanulmányaimra összpontosítok, miközben szoftverfejlesztő gyakornokként dolgozom. San Sebastiánban, Spanyolországban és Budapesten, Magyarországon élek. Nyugodtan keress meg, és hamarosan válaszolok!',
     'contact_email': 'Email',
     'contact_phone': 'Telefon',
     'contact_say_hello': 'Írj nekem',
