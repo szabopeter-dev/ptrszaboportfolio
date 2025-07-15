@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, TrendingUp, Wand2, Github, ExternalLink, Zap, Target, Code2, Award } from "lucide-react";
+import { Brain, TrendingUp, Wand2, Github, ExternalLink, Target, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type Project = {
@@ -28,7 +28,6 @@ const ProjectsSection = () => {
             setTimeout(() => {
               card.classList.add('animate-fade-in');
               
-              // Animate tech tags with additional delay
               const techTags = card.querySelectorAll('.tech-tag');
               techTags.forEach((tag, tagIndex) => {
                 setTimeout(() => {
@@ -36,7 +35,6 @@ const ProjectsSection = () => {
                 }, 100 + (tagIndex * 50));
               });
 
-              // Animate metrics with staggered delay
               const metrics = card.querySelectorAll('.metric-item');
               metrics.forEach((metric, metricIndex) => {
                 setTimeout(() => {
@@ -74,26 +72,24 @@ const ProjectsSection = () => {
   const projects: Project[] = [
     {
       title: "ATM Cash Forecasting System (BSc Thesis)",
-      description: "Production-ready ML pipeline for financial forecasting using advanced deep learning architectures and feature engineering",
+      description: "Production-ready ML pipeline for financial forecasting using advanced deep learning architectures and comprehensive feature engineering",
       highlights: [
         "Achieved 34% MAE reduction and 0.95 R² through systematic hyperparameter optimization",
-        "Implemented robust time series preprocessing with seasonality decomposition",
-        "Deployed scalable pipeline supporting real-time cash management decisions"
+        "Implemented robust time series preprocessing with seasonality decomposition and lag structures"
       ],
       metrics: ["34% MAE Reduction", "0.95 R² Score", "4-Semester Pipeline"],
-      technologies: ["Python", "TensorFlow", "GRU/LSTM", "Time Series Analysis", "Feature Engineering", "MLOps"],
+      technologies: ["Python", "TensorFlow", "GRU/LSTM", "Time Series", "Feature Engineering", "MLOps"],
       icon: <Brain className="w-6 h-6 text-theme-accent" />,
       type: "Deep Learning"
     },
     {
       title: "Healthcare Risk Prediction System",
-      description: "High-performance binary classifier for early detection of alcohol consumption risk patterns in healthcare data",
+      description: "High-performance binary classifier for early detection of alcohol consumption risk patterns in healthcare survey data",
       highlights: [
-        "Achieved 91% recall on severely imbalanced dataset (1:9 ratio)",
-        "Implemented advanced preprocessing for missing data and categorical encoding",
-        "Deployed gradient boosting with SHAP explainability for clinical insights"
+        "Achieved 91% recall on severely imbalanced dataset (1:9 ratio) using advanced preprocessing",
+        "Deployed gradient boosting with SHAP explainability for clinical decision support insights"
       ],
-      metrics: ["91% Recall", "Imbalanced Data", "Clinical Application"],
+      metrics: ["91% Recall", "Imbalanced Data", "Clinical Grade"],
       technologies: ["Python", "LightGBM", "SHAP", "Pandas", "Scikit-learn", "Data Mining"],
       icon: <TrendingUp className="w-6 h-6 text-theme-accent" />,
       type: "Machine Learning",
@@ -101,14 +97,13 @@ const ProjectsSection = () => {
     },
     {
       title: "Enterprise Management Platform",
-      description: "Full-stack enterprise application with microservices architecture, real-time communication, and comprehensive testing",
+      description: "Full-stack enterprise application with microservices architecture, real-time communication, and comprehensive testing suite",
       highlights: [
-        "Architected scalable backend with SOLID principles and dependency injection",
-        "Implemented real-time bi-directional communication using SignalR WebSockets",
-        "Achieved 90%+ test coverage with comprehensive unit and integration testing"
+        "Architected scalable backend with SOLID principles and dependency injection patterns",
+        "Implemented real-time bi-directional communication using SignalR WebSockets technology"
       ],
       metrics: ["90%+ Test Coverage", "Real-time Updates", "Enterprise Scale"],
-      technologies: ["C#", ".NET Core", "Angular", "Entity Framework", "SignalR", "NUnit", "Moq"],
+      technologies: ["C#", ".NET Core", "Angular", "Entity Framework", "SignalR", "NUnit"],
       icon: <Wand2 className="w-6 h-6 text-theme-accent" />,
       type: "Full-Stack",
       githubUrl: "https://github.com/szabopeter-dev/Harry-Potter-Project"
@@ -116,12 +111,12 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section id="projects" className="section bg-white py-16 md:py-24">
+    <section id="projects" className="section bg-white py-20 md:py-28">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="section-heading text-center text-3xl md:text-4xl font-bold text-theme-dark mb-4">
           Featured Projects
         </h2>
-        <p className="text-center text-theme-dark/70 mb-12 md:mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-theme-dark/70 mb-16 max-w-2xl mx-auto text-lg">
           Production-ready solutions demonstrating expertise in machine learning, full-stack development, and scalable system design
         </p>
         
@@ -130,11 +125,11 @@ const ProjectsSection = () => {
             {projects.map((project, index) => (
               <Card 
                 key={index}
-                className="project-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-2 overflow-hidden bg-gradient-to-b from-white to-theme-lightest/30"
+                className="project-card opacity-0 transition-all duration-500 hover:shadow-2xl group rounded-2xl border-theme-light/50 transform hover:-translate-y-2 overflow-hidden bg-gradient-to-b from-white to-theme-lightest/30 h-full flex flex-col"
               >
                 <CardContent className="p-6 h-full flex flex-col">
-                  {/* Header with icon and type */}
-                  <div className="flex items-center justify-between mb-4">
+                  {/* Header with icon and type - Fixed height */}
+                  <div className="flex items-center justify-between mb-6 h-12">
                     <div className="p-3 rounded-full bg-theme/10 group-hover:bg-theme/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 transform">
                       {project.icon}
                     </div>
@@ -143,74 +138,73 @@ const ProjectsSection = () => {
                     </span>
                   </div>
 
-                  {/* Title and description */}
-                  <h3 className="text-lg font-bold text-theme-dark mb-3 group-hover:text-theme transition-colors duration-300 leading-tight">
-                    {project.title}
-                  </h3>
-                  <p className="text-theme-dark/80 text-sm leading-relaxed mb-4 flex-grow">
-                    {project.description}
-                  </p>
+                  {/* Title and description - Fixed height */}
+                  <div className="mb-6 h-32">
+                    <h3 className="text-lg font-bold text-theme-dark mb-3 group-hover:text-theme transition-colors duration-300 leading-tight h-12 flex items-center">
+                      {project.title}
+                    </h3>
+                    <p className="text-theme-dark/80 text-sm leading-relaxed line-clamp-4">
+                      {project.description}
+                    </p>
+                  </div>
 
-                  {/* Metrics */}
-                  {project.metrics && (
-                    <div className="grid grid-cols-3 gap-2 mb-4">
-                      {project.metrics.map((metric, idx) => (
-                        <div key={idx} className="metric-item opacity-0 translate-y-4 transition-all duration-500 text-center p-2 rounded-lg bg-theme-accent/5 border border-theme-accent/10">
-                          <div className="text-xs font-bold text-theme-accent">{metric.split(' ')[0]}</div>
-                          <div className="text-xs text-theme-dark/60">{metric.split(' ').slice(1).join(' ')}</div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {/* Metrics - Fixed height */}
+                  <div className="grid grid-cols-3 gap-2 mb-6 h-16">
+                    {project.metrics?.map((metric, idx) => (
+                      <div key={idx} className="metric-item opacity-0 translate-y-4 transition-all duration-500 text-center p-2 rounded-lg bg-theme-accent/5 border border-theme-accent/10 flex flex-col justify-center">
+                        <div className="text-xs font-bold text-theme-accent leading-tight">{metric.split(' ')[0]}</div>
+                        <div className="text-xs text-theme-dark/60 leading-tight">{metric.split(' ').slice(1).join(' ')}</div>
+                      </div>
+                    ))}
+                  </div>
 
-                  {/* Key achievements */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-theme-dark mb-2 flex items-center">
+                  {/* Key achievements - Fixed height */}
+                  <div className="mb-6 h-24">
+                    <h4 className="text-sm font-semibold text-theme-dark mb-3 flex items-center">
                       <Target className="w-4 h-4 mr-2 text-theme-accent" />
                       Impact & Results
                     </h4>
-                    <ul className="space-y-1">
+                    <ul className="space-y-2">
                       {project.highlights.slice(0, 2).map((highlight, idx) => (
                         <li key={idx} className="text-xs text-theme-dark/70 flex items-start">
                           <Award className="w-3 h-3 text-theme-accent mt-0.5 mr-2 flex-shrink-0" />
-                          {highlight}
+                          <span className="line-clamp-2">{highlight}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.technologies.slice(0, 4).map((tech, idx) => (
+                  {/* Technologies - Fixed height */}
+                  <div className="flex flex-wrap gap-1.5 mb-6 h-16 overflow-hidden">
+                    {project.technologies.slice(0, 6).map((tech, idx) => (
                       <span 
                         key={idx} 
-                        className="tech-tag opacity-0 scale-0 transition-all duration-300 text-xs px-2 py-1 rounded-md bg-theme-light/50 text-theme-dark hover:bg-theme-light hover:scale-105 border border-theme-light"
+                        className="tech-tag opacity-0 scale-0 transition-all duration-300 text-xs px-2 py-1 rounded-md bg-theme-light/50 text-theme-dark hover:bg-theme-light hover:scale-105 border border-theme-light h-fit"
                       >
                         {tech}
                       </span>
                     ))}
-                    {project.technologies.length > 4 && (
-                      <span className="tech-tag opacity-0 scale-0 transition-all duration-300 text-xs px-2 py-1 rounded-md bg-theme/10 text-theme font-medium">
-                        +{project.technologies.length - 4}
-                      </span>
-                    )}
                   </div>
 
-                  {/* GitHub link */}
-                  {project.githubUrl && (
-                    <div className="mt-auto pt-4 border-t border-theme-light/30">
+                  {/* GitHub link - Fixed at bottom */}
+                  <div className="mt-auto">
+                    {project.githubUrl ? (
                       <a 
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-theme/10 text-theme hover:bg-theme/20 transition-all duration-300 text-sm font-medium group/btn justify-center w-full"
+                        className="flex items-center gap-2 px-4 py-3 rounded-lg bg-theme/10 text-theme hover:bg-theme/20 transition-all duration-300 text-sm font-medium group/btn justify-center w-full"
                       >
                         <Github className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
                         View Source Code
                         <ExternalLink className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
                       </a>
-                    </div>
-                  )}
+                    ) : (
+                      <div className="h-12 flex items-center justify-center text-theme-dark/50 text-sm italic border border-theme-light/50 rounded-lg bg-theme-light/20">
+                        Proprietary Project
+                      </div>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -226,6 +220,20 @@ const ProjectsSection = () => {
         
         .animate-slide-up {
           animation: slideUp 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        
+        .line-clamp-2 {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        
+        .line-clamp-4 {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 4;
         }
         
         @keyframes scaleIn {

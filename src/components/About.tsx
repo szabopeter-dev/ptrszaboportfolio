@@ -15,7 +15,6 @@ const About = () => {
           entry.target.classList.add('animate-fade-in');
           entry.target.classList.remove('opacity-0');
           
-          // Animate children elements sequentially
           const elementsToAnimate = entry.target.querySelectorAll('.animate-item');
           elementsToAnimate.forEach((el, index) => {
             setTimeout(() => {
@@ -31,7 +30,6 @@ const About = () => {
       observer.observe(aboutContentRef.current);
       aboutContentRef.current.classList.add('opacity-0');
       
-      // Set initial state for animated items
       const elementsToAnimate = aboutContentRef.current.querySelectorAll('.animate-item');
       elementsToAnimate.forEach(el => el.classList.add('opacity-0'));
     }
@@ -42,17 +40,18 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-navy to-theme-dark">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-12 text-center">{t('about_title')}</h2>
+    <section id="about" className="py-20 md:py-28 bg-gradient-to-b from-navy to-theme-dark">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">About Me</h2>
           
           <div 
             ref={aboutContentRef}
-            className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 shadow-xl transition-all duration-700"
+            className="bg-white/5 backdrop-blur-sm p-8 md:p-10 rounded-2xl border border-white/10 shadow-2xl transition-all duration-700"
           >
-            <div className="flex flex-col md:flex-row gap-8 items-center mb-8 animate-item">
-              <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-theme-accent/60 flex-shrink-0 shadow-[0_0_15px_rgba(0,173,181,0.5)] hover:shadow-[0_0_20px_rgba(0,173,181,0.7)] transition-shadow duration-300">
+            {/* Profile section with consistent height */}
+            <div className="flex flex-col md:flex-row gap-8 items-center mb-10 animate-item">
+              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-theme-accent/60 flex-shrink-0 shadow-[0_0_20px_rgba(0,173,181,0.5)] hover:shadow-[0_0_30px_rgba(0,173,181,0.7)] transition-shadow duration-300">
                 <img 
                   src="9d80321a-c5f8-4a89-8497-679c687229f3.png" 
                   alt="Péter Szabó" 
@@ -60,56 +59,76 @@ const About = () => {
                 />
               </div>
               
-              <div>
-                <p className="text-xl font-medium text-theme-accent mb-2">{t('about_profession')}</p>
-                <p className="text-white/80 mb-4 text-lg">
-                  {t('about_education')}
+              <div className="flex-1 text-center md:text-left">
+                <p className="text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
+                <p className="text-white/90 text-lg leading-relaxed mb-4">
+                  Final-year Software Engineering student at University of Óbuda with 8.2/10 GPA, 
+                  specializing in machine learning and full-stack development.
+                </p>
+                <p className="text-white/80 text-base">
+                  Currently based between San Sebastián, Spain and Budapest, Hungary
                 </p>
               </div>
             </div>
             
-            <div className="space-y-6 animate-item">
-              <div className="flex items-start">
-                <Code2 className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
-                <p className="text-lg leading-relaxed text-white/80">
-                  {t('about_work')}
-                </p>
+            {/* Experience highlights with consistent structure */}
+            <div className="grid md:grid-cols-2 gap-8 mb-10">
+              <div className="animate-item">
+                <div className="flex items-start mb-4">
+                  <Code2 className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Professional Experience</h3>
+                    <p className="text-white/80 leading-relaxed">
+                      Currently working as a Software Developer Intern at Recomp Informatikai Zrt., 
+                      rebuilding legacy systems with React, Next.js, and developing AI-powered chatbots 
+                      with real-time capabilities.
+                    </p>
+                  </div>
+                </div>
               </div>
               
-              <div className="flex items-start">
-                <GraduationCap className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
-                <p className="text-lg leading-relaxed text-white/80">
-                  {t('about_thesis')}
-                </p>
+              <div className="animate-item">
+                <div className="flex items-start mb-4">
+                  <GraduationCap className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Academic Excellence</h3>
+                    <p className="text-white/80 leading-relaxed">
+                      Developing ML-based ATM cash forecasting system for BSc thesis, achieving 34% MAE 
+                      reduction. Planning to present at national conferences and publish in IEEE venues.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             
-            <div className="mt-8 animate-item">
-              <h3 className="text-xl font-medium text-white mb-4 flex items-center">
-                <CheckCircle2 className="text-theme-accent mr-2 h-5 w-5" />
-                {t('about_technologies')}
+            {/* Technologies grid with consistent layout */}
+            <div className="animate-item mb-10">
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <CheckCircle2 className="text-theme-accent mr-3 h-6 w-6" />
+                Technical Expertise
               </h3>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[
                   "React.js", "Next.js", "TypeScript", "Tailwind CSS", 
-                  "C# / .NET Core", "Entity Framework", "Jest", 
-                  "Git / GitLab CI", "Machine Learning"
+                  "C# / .NET Core", "Entity Framework", "Python", "TensorFlow",
+                  "Machine Learning", "Git / GitLab CI", "Jest Testing", "SQL"
                 ].map((tech, index) => (
-                  <div key={index} className="flex items-center group">
-                    <div className="w-2 h-2 rounded-full bg-theme-accent mr-2 group-hover:scale-125 transition-transform duration-300"></div>
-                    <span className="text-white/90 group-hover:text-theme-accent transition-colors duration-300">{tech}</span>
+                  <div key={index} className="flex items-center group p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300">
+                    <div className="w-2 h-2 rounded-full bg-theme-accent mr-3 group-hover:scale-125 transition-transform duration-300"></div>
+                    <span className="text-white/90 group-hover:text-theme-accent transition-colors duration-300 font-medium">{tech}</span>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="mt-8 flex justify-center animate-item">
+            {/* CTA section with consistent styling */}
+            <div className="text-center animate-item">
               <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf">
-                <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-6 py-6 text-lg rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2 relative overflow-hidden group">
+                <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-8 py-4 text-lg rounded-xl shadow-lg transition-all duration-300 flex items-center gap-3 relative overflow-hidden group mx-auto">
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
                   <Download size={20} />
-                  {t('about_download_cv')}
+                  Download CV
                 </Button>
               </a>
             </div>
