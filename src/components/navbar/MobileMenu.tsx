@@ -82,7 +82,7 @@ export const MobileMenu = memo(() => {
         </div>
       </DrawerContent>
       
-      <style jsx>{`
+      <style>{`
         .fixed-width-trigger {
           width: 40px;
           height: 40px;

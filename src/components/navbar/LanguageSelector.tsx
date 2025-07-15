@@ -80,7 +80,7 @@ export const LanguageSelector = memo(() => {
       </DropdownMenu>
 
       {/* Add styles to prevent layout shift */}
-      <style jsx>{`
+      <style>{`
         .fixed-width-button {
           position: relative;
           width: 36px;
