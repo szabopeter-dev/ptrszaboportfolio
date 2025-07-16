@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'hu';
 
@@ -9,264 +9,201 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-// Comprehensive translations for all site content
-const translations: Record<Language, Record<string, string>> = {
+const translations = {
   en: {
     // Navigation
-    'about': 'About',
-    'experience': 'Experience',
-    'projects': 'Projects',
-    'education': 'Education',
-    'skills': 'Skills',
-    'contact': 'Contact',
-    'linkedin': 'LinkedIn',
+    'nav.about': 'About',
+    'nav.experience': 'Experience', 
+    'nav.projects': 'Projects',
+    'nav.education': 'Education',
+    'nav.skills': 'Skills',
+    'nav.contact': 'Contact',
     
-    // Skills section
-    'skills_title': 'Skills & Technologies',
-    'frontend_development': 'Frontend Development',
-    'frontend_desc': 'Building modern, responsive web interfaces with the latest frontend technologies',
-    'backend_development': 'Backend Development',
-    'backend_desc': 'Creating robust server-side applications and APIs with industry standard technologies',
-    'machine_learning': 'Machine Learning',
-    'machine_learning_desc': 'Developing intelligent systems using various machine learning techniques and frameworks',
-    'database_data': 'Database & Data',
-    'database_data_desc': 'Working with various database technologies and data processing techniques',
-    'devops_tooling': 'DevOps & Tooling',
-    'devops_tooling_desc': 'Implementing CI/CD pipelines and modern development workflows',
-    'systems_theory': 'Systems & Theory',
-    'systems_theory_desc': 'Understanding fundamental computer science concepts and systems programming',
-    'click_for_details': 'Click for details',
+    // Hero
+    'hero.greeting': 'Hi, I\'m',
+    'hero.role': 'Software Engineer & ML Specialist',
+    'hero.description': 'Final-year Software Engineering student passionate about machine learning and full-stack development. Currently seeking internship opportunities at big tech companies.',
+    'hero.downloadCV': 'Download CV',
+    'hero.viewProjects': 'View My Projects',
     
-    // Skill details
-    'frontend_detail_1': 'Rebuilding legacy attorney management systems using React, Next.js, and Tailwind CSS with modern testing practices.',
-    'frontend_detail_2': 'Currently applying frontend knowledge in a professional setting at Recomp Informatikai Zrt.',
-    'frontend_detail_3': 'Familiar with modern frameworks and libraries, emphasizing clean UI/UX and responsive design.',
+    // About
+    'about.title': 'About Me',
+    'about.role': 'Software Engineer & ML Specialist',
+    'about.description': 'Final-year Software Engineering student at University of Óbuda with 8.2/10 GPA, specializing in machine learning and full-stack development.',
+    'about.location': 'Currently based between Budapest, Hungary and learning new technologies',
+    'about.experience.title': 'Professional Experience',
+    'about.experience.description': 'Currently working as a Software Developer Intern at Recomp Informatikai Zrt., rebuilding legacy systems with React, Next.js, and developing AI-powered chatbots with real-time capabilities.',
+    'about.academic.title': 'Academic Excellence',
+    'about.academic.description': 'Developing ML-based ATM cash forecasting system for BSc thesis, achieving 34% MAE reduction. Planning to present at national conferences and publish in IEEE venues.',
+    'about.interests.title': 'Special Interests',
+    'about.interests.design.title': 'UI/UX Design',
+    'about.interests.design.description': 'Passionate about creating intuitive user experiences',
+    'about.interests.fitness.title': 'Fitness & Gym',
+    'about.interests.fitness.description': 'Maintaining physical and mental well-being',
+    'about.interests.handball.title': 'Handball',
+    'about.interests.handball.description': 'Team sport enthusiast and strategic thinking',
+    'about.expertise.title': 'Technical Expertise',
+    'about.downloadCV': 'Download CV',
     
-    'backend_detail_1': 'Started backend development during high school at BMSZC and have been building ever since.',
-    'backend_detail_2': 'Created full-stack applications using ASP.NET Core, Entity Framework Core, and Web APIs.',
-    'backend_detail_3': 'Developed a layered Harry Potter-themed application with integration and unit testing using NUnit and Moq.',
-    'backend_detail_4': 'Currently working on modernizing legacy Delphi systems and implementing CI/CD pipelines through GitLab.',
+    // Experience
+    'experience.title': 'Experience',
+    'experience.current': 'Current',
+    'experience.present': 'Present',
     
-    'ml_detail_1': 'Gained hands-on experience with ML during my 4-semester thesis project: a machine learning-based ATM cash forecasting system.',
-    'ml_detail_2': 'Focused on time series forecasting using GRU and LSTM models, achieving up to 34% MAE reduction.',
-    'ml_detail_3': 'Implemented preprocessing, feature engineering, and model evaluation using Python and TensorFlow.',
-    'ml_detail_4': 'Developed LightGBM-based classifier for risk analysis achieving 91% recall on real-world health data.',
+    // Projects
+    'projects.title': 'Featured Projects',
+    'projects.viewAll': 'View All Projects',
+    'projects.github': 'GitHub',
+    'projects.live': 'Live Demo',
     
-    'database_detail_1': 'Introduced to databases during high school and deepened my knowledge at university.',
-    'database_detail_2': 'Experienced in SQL and PL/SQL for data manipulation and querying.',
-    'database_detail_3': 'Passionate about database design, optimization, and Big Data concepts.',
-    'database_detail_4': 'Comfortable working with relational data and large datasets for ML applications.',
+    // Education
+    'education.title': 'Education',
+    'education.gpa': 'GPA',
+    'education.current': 'Current',
+    'education.present': 'Present',
     
-    'devops_detail_1': 'Actively use GitLab and GitHub for version control and CI/CD pipelines in professional environment.',
-    'devops_detail_2': 'Familiar with setting up automated testing and deployment processes using Jest and GitLab CI.',
-    'devops_detail_3': 'Experience working in collaborative environments with branch-based workflows.',
-    'devops_detail_4': 'Committed to writing maintainable, production-ready code integrated with CI systems.',
+    // Skills
+    'skills.title': 'Skills & Technologies',
+    'skills.frontend': 'Frontend Development',
+    'skills.backend': 'Backend Development',
+    'skills.ml': 'Machine Learning',
+    'skills.tools': 'Tools & Others',
+    'skills.clickToFlip': 'Click to flip',
+    'skills.proficiency': 'Proficiency',
+    'skills.experience': 'Experience',
     
-    'systems_detail_1': 'Studied and worked with various operating systems including Windows and Linux.',
-    'systems_detail_2': 'Gained practical knowledge of low-level programming through x86 Assembly.',
-    'systems_detail_3': 'Although initially challenging, I grew to appreciate the power and elegance of low-level systems.',
-    'systems_detail_4': 'Enjoy diving deep into system-level concepts to understand how things work under the hood.',
-    
-    // Hero section
-    'hero_greeting': 'Hi there, I\'m',
-    'hero_title': 'I build modern software solutions',
-    'hero_description': 'Software Engineer specializing in React, Next.js, .NET, and machine learning technologies.',
-    'hero_get_in_touch': 'Get in touch',
-    'hero_learn_more': 'Learn more',
-    'hero_phone': 'Phone',
-    'hero_email': 'Email',
-    
-    // About section
-    'about_title': 'About Me',
-    'about_profession': 'Software Engineer',
-    'about_education': 'B.S. in Software Engineering at the University of Óbuda, focused on building solutions that solve real-world problems.',
-    'about_work': 'Working at Recomp Informatikai Zrt. on modernizing legacy attorney management systems with React, Next.js and developing AI-based chatbots. Passionate about creating clean, maintainable code that delivers exceptional user experiences.',
-    'about_thesis': 'Currently working on my 4-semester BSc thesis focusing on ML-based ATM cash level forecasting, exploring the intersection of financial technology and machine learning to optimize cash management systems.',
-    'about_technologies': 'Technologies I\'ve been working with recently:',
-    'about_download_cv': 'Download CV',
-    
-    // Education section
-    'education_title': 'Education',
-    'education_coursework': 'Relevant Coursework',
-    'education_degree': 'Bachelor of Science in Software Engineering',
-    'education_university': 'University of Óbuda (Óbudai Egyetem)',
-    'education_period': '2021 - Present',
-    'education_description': 'Comprehensive program focusing on modern software development, computer science fundamentals, and practical application of technologies in real-world scenarios.',
-    'education_gpa': 'GPA: 4.2/5.0',
-    'education_thesis': 'Thesis: Machine Learning-Based ATM Cash Forecasting System',
-    'education_courses': 'Data Structures & Algorithms, Software Architecture, Database Systems, Machine Learning, Web Development, Software Testing, Project Management',
-    'education_achievements': 'Key Achievements',
-    'education_achievement_1': 'Developed ML-based ATM cash forecasting system with 34% MAE reduction',
-    'education_achievement_2': 'Completed advanced coursework in software architecture and design patterns',
-    'education_achievement_3': 'Participated in collaborative software development projects',
-    'education_achievement_4': 'Focused on practical application of theoretical concepts',
-    
-    // Contact section
-    'contact_title_small': 'Get In Touch',
-    'contact_title': 'Let\'s Connect',
-    'contact_message': 'I\'m currently focusing on my Software Engineering studies while working as a Software Developer Intern. Based in San Sebastián, Spain and Budapest, Hungary. Feel free to reach out and I\'ll get back to you soon!',
-    'contact_email': 'Email',
-    'contact_phone': 'Phone',
-    'contact_say_hello': 'Say Hello',
-    'contact_download_cv': 'Download CV',
-    'contact_location': 'Location',
-    'contact_location_value': 'San Sebastián, Spain & Budapest, Hungary',
-    'contact_response_time': 'Response Time',
-    'contact_response_time_value': 'Within 24 hours',
-    'contact_availability': 'Availability',
-    'contact_availability_value': 'Open to opportunities',
+    // Contact
+    'contact.title': 'Get In Touch',
+    'contact.subtitle': 'Ready to collaborate on innovative projects',
+    'contact.description': 'I\'m currently seeking internship opportunities at big tech companies. Let\'s connect and discuss how I can contribute to your team.',
+    'contact.email': 'Email',
+    'contact.location': 'Location',
+    'contact.availability': 'Availability',
+    'contact.response': 'Response Time',
+    'contact.sendMessage': 'Send Message',
+    'contact.connect': 'Let\'s Connect',
     
     // Footer
-    'footer_rights': 'All rights reserved.',
-    
-    // Experience section
-    'experience_title': 'Experience',
-    'experience_present': 'Present',
-    'experience_company': 'Company',
-    'experience_position': 'Position',
-    'experience_duration': 'Duration',
-    'experience_description': 'Description',
-    'experience_tech_stack': 'Tech Stack',
+    'footer.rights': 'All rights reserved.',
+    'footer.built': 'Built with React & TypeScript',
   },
   hu: {
     // Navigation
-    'about': 'Rólam',
-    'experience': 'Tapasztalat',
-    'projects': 'Projektek',
-    'education': 'Tanulmányok',
-    'skills': 'Készségek',
-    'contact': 'Kapcsolat',
-    'linkedin': 'LinkedIn',
+    'nav.about': 'Rólam',
+    'nav.experience': 'Tapasztalat',
+    'nav.projects': 'Projektek',
+    'nav.education': 'Tanulmányok',
+    'nav.skills': 'Készségek',
+    'nav.contact': 'Kapcsolat',
     
-    // Skills section
-    'skills_title': 'Készségek és Technológiák',
-    'frontend_development': 'Frontend Fejlesztés',
-    'frontend_desc': 'Modern, reszponzív webes felületek építése a legújabb frontend technológiákkal',
-    'backend_development': 'Backend Fejlesztés',
-    'backend_desc': 'Robusztus szerveroldali alkalmazások és API-k létrehozása iparági szabványos technológiákkal',
-    'machine_learning': 'Gépi Tanulás',
-    'machine_learning_desc': 'Intelligens rendszerek fejlesztése különböző gépi tanulási technikák és keretrendszerek használatával',
-    'database_data': 'Adatbázis és Adatok',
-    'database_data_desc': 'Különböző adatbázis-technológiák és adatfeldolgozási technikák alkalmazása',
-    'devops_tooling': 'DevOps és Eszközök',
-    'devops_tooling_desc': 'CI/CD folyamatok és modern fejlesztési munkafolyamatok implementálása',
-    'systems_theory': 'Rendszerek és Elmélet',
-    'systems_theory_desc': 'Alapvető számítástudományi koncepciók és rendszerprogramozás megértése',
-    'click_for_details': 'Kattints a részletekért',
+    // Hero
+    'hero.greeting': 'Szia, én vagyok',
+    'hero.role': 'Szoftvermérnök & ML Szakértő',
+    'hero.description': 'Végzős szoftvermérnök hallgató, aki szenvedélyes a gépi tanulás és a full-stack fejlesztés iránt. Jelenleg nagytech cégeknél keresek gyakornoki lehetőségeket.',
+    'hero.downloadCV': 'Önéletrajz letöltése',
+    'hero.viewProjects': 'Projektek megtekintése',
     
-    // Skill details
-    'frontend_detail_1': 'Régebbi ügyvédi rendszerek újjáépítése React, Next.js és Tailwind CSS használatával modern tesztelési gyakorlatokkal.',
-    'frontend_detail_2': 'Jelenleg professzionális környezetben alkalmazom frontend tudásomat a Recomp Informatikai Zrt-nél.',
-    'frontend_detail_3': 'Ismerem a modern keretrendszereket és könyvtárakat, hangsúlyt fektetve a tiszta UI/UX-re és reszponzív tervezésre.',
+    // About
+    'about.title': 'Rólam',
+    'about.role': 'Szoftvermérnök & ML Szakértő',
+    'about.description': 'Végzős szoftvermérnök hallgató az Óbudai Egyetemen 8.2/10 GPA-val, gépi tanulásra és full-stack fejlesztésre specializálódva.',
+    'about.location': 'Jelenleg Budapest, Magyarország központtal és új technológiák tanulásával',
+    'about.experience.title': 'Szakmai tapasztalat',
+    'about.experience.description': 'Jelenleg szoftverfejlesztő gyakornokként dolgozom a Recomp Informatikai Zrt.-nél, legacy rendszerek újraépítésén React, Next.js segítségével, és AI-alapú chatbotok fejlesztésén valós idejű képességekkel.',
+    'about.academic.title': 'Akadémiai kiválóság',
+    'about.academic.description': 'ML-alapú ATM készpénz előrejelzési rendszer fejlesztése BSc szakdolgozathoz, 34%-os MAE csökkentés elérése. Tervben van nemzeti konferenciákon való előadás és IEEE publikálás.',
+    'about.interests.title': 'Különleges érdeklődési körök',
+    'about.interests.design.title': 'UI/UX Design',
+    'about.interests.design.description': 'Intuitív felhasználói élmények létrehozása iránti szenvedély',
+    'about.interests.fitness.title': 'Fitness & Edzőterem',
+    'about.interests.fitness.description': 'Fizikai és mentális jólét fenntartása',
+    'about.interests.handball.title': 'Kézilabda',
+    'about.interests.handball.description': 'Csapatsport rajongó és stratégiai gondolkodás',
+    'about.expertise.title': 'Technikai szakértelem',
+    'about.downloadCV': 'Önéletrajz letöltése',
     
-    'backend_detail_1': 'A backend fejlesztést a BMSZC-ben kezdtem a középiskolában, és azóta is folyamatosan építem tudásom.',
-    'backend_detail_2': 'Full-stack alkalmazásokat készítettem ASP.NET Core, Entity Framework Core és Web API-k használatával.',
-    'backend_detail_3': 'Fejlesztettem egy réteges Harry Potter témájú alkalmazást integrációs és egységtesztekkel NUnit és Moq használatával.',
-    'backend_detail_4': 'Jelenleg régebbi Delphi rendszerek modernizálásán dolgozom és CI/CD folyamatokat implementálok GitLab segítségével.',
+    // Experience
+    'experience.title': 'Tapasztalat',
+    'experience.current': 'Jelenlegi',
+    'experience.present': 'Jelenleg',
     
-    'ml_detail_1': 'Gyakorlati tapasztalatot szereztem a gépi tanulásban a 4 féléves szakdolgozati projektem során: egy gépi tanuláson alapuló ATM készpénz-előrejelző rendszer.',
-    'ml_detail_2': 'Idősoros előrejelzésre fókuszáltam GRU és LSTM modellek használatával, 34%-os MAE csökkentést elérve.',
-    'ml_detail_3': 'Előfeldolgozást, jellemző mérnöki munkát és modellértékelést valósítottam meg Python és TensorFlow segítségével.',
-    'ml_detail_4': 'LightGBM-alapú osztályozót fejlesztettem kockázatelemzéshez, 91%-os visszahívást elérve valós egészségügyi adatokon.',
+    // Projects
+    'projects.title': 'Kiemelt projektek',
+    'projects.viewAll': 'Összes projekt megtekintése',
+    'projects.github': 'GitHub',
+    'projects.live': 'Élő demó',
     
-    'database_detail_1': 'Az adatbázisokkal középiskolában ismerkedtem meg, és az egyetemen mélyítettem el tudásomat.',
-    'database_detail_2': 'Tapasztalt vagyok SQL és PL/SQL használatában adatmanipulációhoz és lekérdezéshez.',
-    'database_detail_3': 'Szenvedélyes vagyok az adatbázistervezés, optimalizálás és Big Data koncepciók iránt.',
-    'database_detail_4': 'Jól dolgozom relációs adatokkal és nagy adatkészletekkel ML alkalmazásokhoz.',
+    // Education
+    'education.title': 'Tanulmányok',
+    'education.gpa': 'GPA',
+    'education.current': 'Jelenlegi',
+    'education.present': 'Jelenleg',
     
-    'devops_detail_1': 'Aktívan használom a GitLabot és GitHubot verziókezeléshez és CI/CD folyamatokhoz professzionális környezetben.',
-    'devops_detail_2': 'Ismerem az automatizált tesztelési és telepítési folyamatok beállítását Jest és GitLab CI használatával.',
-    'devops_detail_3': 'Tapasztalattal rendelkezem kollaboratív környezetekben ág-alapú munkafolyamatokkal.',
-    'devops_detail_4': 'Elkötelezett vagyok a karbantartható, éles rendszerekbe integrált kód írása mellett.',
+    // Skills
+    'skills.title': 'Készségek és technológiák',
+    'skills.frontend': 'Frontend fejlesztés',
+    'skills.backend': 'Backend fejlesztés',
+    'skills.ml': 'Gépi tanulás',
+    'skills.tools': 'Eszközök és egyéb',
+    'skills.clickToFlip': 'Kattints a megfordításhoz',
+    'skills.proficiency': 'Jártasság',
+    'skills.experience': 'Tapasztalat',
     
-    'systems_detail_1': 'Tanulmányoztam és dolgoztam különböző operációs rendszerekkel, beleértve a Windows és Linux rendszereket.',
-    'systems_detail_2': 'Gyakorlati ismereteket szereztem az alacsony szintű programozásban x86 Assembly-n keresztül.',
-    'systems_detail_3': 'Bár kezdetben kihívást jelentett, megtanultam értékelni az alacsony szintű rendszerek erejét és eleganciáját.',
-    'systems_detail_4': 'Szívesen mélyedek el rendszerszintű koncepciókban, hogy megértsem, hogyan működnek a dolgok a motorháztető alatt.',
-    
-    // Hero section
-    'hero_greeting': 'Szia, én vagyok',
-    'hero_title': 'Modern szoftvermegoldásokat fejlesztek',
-    'hero_description': 'Szoftverfejlesztő, React, Next.js, .NET és gépi tanulási technológiákra specializálódva.',
-    'hero_get_in_touch': 'Kapcsolatfelvétel',
-    'hero_learn_more': 'Tudj meg többet',
-    'hero_phone': 'Telefon',
-    'hero_email': 'Email',
-    
-    // About section
-    'about_title': 'Rólam',
-    'about_profession': 'Szoftverfejlesztő',
-    'about_education': 'Szoftverfejlesztő BSc, Óbudai Egyetem, valós problémákat megoldó megoldások fejlesztésére összpontosítva.',
-    'about_work': 'A Recomp Informatikai Zrt-nél dolgozom régebbi ügyvédi rendszerek modernizálásán React, Next.js technológiákkal és AI-alapú chatbotok fejlesztésén. Szenvedélyem a tiszta, karbantartható kód írása, amely kivételes felhasználói élményt nyújt.',
-    'about_thesis': 'Jelenleg a 4 féléves BSc szakdolgozatomon dolgozom, amely ML-alapú ATM készpénzszint előrejelzésre összpontosít, a pénzügyi technológia és a gépi tanulás találkozópontját kutatva.',
-    'about_technologies': 'Technológiák, amelyekkel nemrég dolgoztam:',
-    'about_download_cv': 'Önéletrajz letöltése',
-    
-    // Education section
-    'education_title': 'Tanulmányok',
-    'education_coursework': 'Releváns Tantárgyak',
-    'education_degree': 'Szoftverfejlesztő BSc',
-    'education_university': 'Óbudai Egyetem',
-    'education_period': '2021 - Jelenleg',
-    'education_description': 'Átfogó program, amely a modern szoftverfejlesztésre, a számítástudományi alapokra és a technológiák gyakorlati alkalmazására összpontosít valós forgatókönyvekben.',
-    'education_gpa': 'Átlag: 4.2/5.0',
-    'education_thesis': 'Szakdolgozat: Gépi Tanuláson Alapuló ATM Készpénz-előrejelző Rendszer',
-    'education_courses': 'Adatstruktúrák és Algoritmusok, Szoftverarchitektúra, Adatbázisrendszerek, Gépi Tanulás, Webfejlesztés, Szoftvertesztelés, Projektmenedzsment',
-    'education_achievements': 'Főbb Eredmények',
-    'education_achievement_1': 'ML-alapú ATM készpénz-előrejelző rendszer fejlesztése 34%-os MAE csökkentéssel',
-    'education_achievement_2': 'Haladó tanulmányok elvégzése szoftverarchitektúra és tervezési minták területén',
-    'education_achievement_3': 'Részvétel kollaboratív szoftverfejlesztési projektekben',
-    'education_achievement_4': 'Hangsúly az elméleti koncepciók gyakorlati alkalmazásán',
-    
-    // Contact section
-    'contact_title_small': 'Vedd fel a kapcsolatot',
-    'contact_title': 'Lépjünk kapcsolatba',
-    'contact_message': 'Jelenleg a szoftverfejlesztői tanulmányaimra összpontosítok, miközben szoftverfejlesztő gyakornokként dolgozom. San Sebastiánban, Spanyolországban és Budapesten, Magyarországon élek. Nyugodtan keress meg, és hamarosan válaszolok!',
-    'contact_email': 'Email',
-    'contact_phone': 'Telefon',
-    'contact_say_hello': 'Írj nekem',
-    'contact_download_cv': 'Önéletrajz letöltése',
-    'contact_location': 'Helyszín',
-    'contact_location_value': 'San Sebastián, Spanyolország és Budapest, Magyarország',
-    'contact_response_time': 'Válaszidő',
-    'contact_response_time_value': '24 órán belül',
-    'contact_availability': 'Elérhetőség',
-    'contact_availability_value': 'Nyitott lehetőségekre',
+    // Contact
+    'contact.title': 'Vedd fel velem a kapcsolatot',
+    'contact.subtitle': 'Készen állok innovatív projekteken való együttműködésre',
+    'contact.description': 'Jelenleg nagytech cégeknél keresek gyakornoki lehetőségeket. Lépjünk kapcsolatba és beszéljük meg, hogyan járulhatok hozzá a csapatodhoz.',
+    'contact.email': 'Email',
+    'contact.location': 'Helyszín',
+    'contact.availability': 'Elérhetőség',
+    'contact.response': 'Válaszidő',
+    'contact.sendMessage': 'Üzenet küldése',
+    'contact.connect': 'Lépjünk kapcsolatba',
     
     // Footer
-    'footer_rights': 'Minden jog fenntartva.',
-    
-    // Experience section
-    'experience_title': 'Tapasztalat',
-    'experience_present': 'Jelenleg',
-    'experience_company': 'Cég',
-    'experience_position': 'Pozíció',
-    'experience_duration': 'Időtartam',
-    'experience_description': 'Leírás',
-    'experience_tech_stack': 'Technológiai Stack',
-  }
+    'footer.rights': 'Minden jog fenntartva.',
+    'footer.built': 'React & TypeScript segítségével készült',
+  },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('en');
 
-  // Simple translation function
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') as Language;
+    if (savedLanguage && ['en', 'hu'].includes(savedLanguage)) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem('language', lang);
+  };
+
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    const keys = key.split('.');
+    let value: any = translations[language];
+    
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    
+    return value || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
-export const useLanguage = (): LanguageContextType => {
+export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;

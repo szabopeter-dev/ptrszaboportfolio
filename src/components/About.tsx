@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Download, CheckCircle2, Code2, GraduationCap } from "lucide-react";
+import { Download, CheckCircle2, Code2, GraduationCap, Dumbbell, Palette, Trophy } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
@@ -43,7 +43,7 @@ const About = () => {
     <section id="about" className="py-20 md:py-28 bg-gradient-to-b from-navy to-theme-dark">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">About Me</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">{t('about.title')}</h2>
           
           <div 
             ref={aboutContentRef}
@@ -60,13 +60,12 @@ const About = () => {
               </div>
               
               <div className="flex-1 text-center md:text-left">
-                <p className="text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
+                <p className="text-2xl font-semibold text-theme-accent mb-3">{t('about.role')}</p>
                 <p className="text-white/90 text-lg leading-relaxed mb-4">
-                  Final-year Software Engineering student at University of Óbuda with 8.2/10 GPA, 
-                  specializing in machine learning and full-stack development.
+                  {t('about.description')}
                 </p>
                 <p className="text-white/80 text-base">
-                  Currently based between San Sebastián, Spain and Budapest, Hungary
+                  {t('about.location')}
                 </p>
               </div>
             </div>
@@ -77,11 +76,9 @@ const About = () => {
                 <div className="flex items-start mb-4">
                   <Code2 className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Professional Experience</h3>
+                    <h3 className="text-lg font-semibold text-white mb-2">{t('about.experience.title')}</h3>
                     <p className="text-white/80 leading-relaxed">
-                      Currently working as a Software Developer Intern at Recomp Informatikai Zrt., 
-                      rebuilding legacy systems with React, Next.js, and developing AI-powered chatbots 
-                      with real-time capabilities.
+                      {t('about.experience.description')}
                     </p>
                   </div>
                 </div>
@@ -91,11 +88,50 @@ const About = () => {
                 <div className="flex items-start mb-4">
                   <GraduationCap className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Academic Excellence</h3>
+                    <h3 className="text-lg font-semibold text-white mb-2">{t('about.academic.title')}</h3>
                     <p className="text-white/80 leading-relaxed">
-                      Developing ML-based ATM cash forecasting system for BSc thesis, achieving 34% MAE 
-                      reduction. Planning to present at national conferences and publish in IEEE venues.
+                      {t('about.academic.description')}
                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Special Interests Section */}
+            <div className="animate-item mb-10">
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <Trophy className="text-theme-accent mr-3 h-6 w-6" />
+                {t('about.interests.title')}
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex items-center group p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300">
+                  <Palette className="text-theme-accent mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                  <div>
+                    <h4 className="text-white font-medium group-hover:text-theme-accent transition-colors duration-300">
+                      {t('about.interests.design.title')}
+                    </h4>
+                    <p className="text-white/70 text-sm">{t('about.interests.design.description')}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center group p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300">
+                  <Dumbbell className="text-theme-accent mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                  <div>
+                    <h4 className="text-white font-medium group-hover:text-theme-accent transition-colors duration-300">
+                      {t('about.interests.fitness.title')}
+                    </h4>
+                    <p className="text-white/70 text-sm">{t('about.interests.fitness.description')}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center group p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300">
+                  <Trophy className="text-theme-accent mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                  <div>
+                    <h4 className="text-white font-medium group-hover:text-theme-accent transition-colors duration-300">
+                      {t('about.interests.handball.title')}
+                    </h4>
+                    <p className="text-white/70 text-sm">{t('about.interests.handball.description')}</p>
                   </div>
                 </div>
               </div>
@@ -105,7 +141,7 @@ const About = () => {
             <div className="animate-item mb-10">
               <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
                 <CheckCircle2 className="text-theme-accent mr-3 h-6 w-6" />
-                Technical Expertise
+                {t('about.expertise.title')}
               </h3>
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -128,7 +164,7 @@ const About = () => {
                 <Button className="bg-theme-accent hover:bg-theme-accent/80 text-white px-8 py-4 text-lg rounded-xl shadow-lg transition-all duration-300 flex items-center gap-3 relative overflow-hidden group mx-auto">
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
                   <Download size={20} />
-                  Download CV
+                  {t('about.downloadCV')}
                 </Button>
               </a>
             </div>
