@@ -8,7 +8,9 @@ import {
   TerminalSquare, 
   BrainCircuit,
   ArrowUpRight,
-  RotateCcw
+  RotateCcw,
+  Sparkles,
+  TrendingUp
 } from "lucide-react";
 import {
   Card,
@@ -23,15 +25,16 @@ type Skill = {
   icon: React.ReactNode;
   items: string[];
   detailedDescriptionKeys: string[];
+  gradient: string;
+  iconColor: string;
 };
 
 const Skills = () => {
-  // Create ref container for each skill card to handle animations
   const skillsRef = useRef<HTMLDivElement>(null);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const { t } = useLanguage();
 
-  // Enhanced animation with sequential card reveals
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -39,8 +42,9 @@ const Skills = () => {
           const skillCards = entry.target.querySelectorAll('.skill-card');
           skillCards.forEach((card, index) => {
             setTimeout(() => {
-              card.classList.add('animate-fade-in');
-            }, 150 * index); // Staggered animation timing
+              card.classList.add('animate-fade-in', 'animate-scale-in');
+              setVisibleCards(prev => [...prev, index]);
+            }, 150 * index);
           });
         }
       });
@@ -50,10 +54,9 @@ const Skills = () => {
     if (skillsContainer) {
       observer.observe(skillsContainer);
       
-      // Set initial state for skill cards
       const skillCards = skillsContainer.querySelectorAll('.skill-card');
       skillCards.forEach(card => {
-        card.classList.add('opacity-0');
+        card.classList.add('opacity-0', 'translate-y-8');
       });
     }
 
@@ -62,7 +65,6 @@ const Skills = () => {
     };
   }, []);
 
-  // Handle card flip
   const handleCardFlip = (index: number) => {
     if (flippedCards.includes(index)) {
       setFlippedCards(flippedCards.filter(cardIndex => cardIndex !== index));
@@ -76,7 +78,9 @@ const Skills = () => {
       category: "Frontend Development",
       translationKey: "frontend_development",
       descriptionKey: "frontend_desc",
-      icon: <Code className="h-6 w-6 text-theme-accent" />,
+      icon: <Code className="h-6 w-6" />,
+      gradient: "from-blue-500 to-purple-600",
+      iconColor: "text-blue-500",
       items: [
         "JavaScript / TypeScript",
         "React.js / Next.js",
@@ -95,7 +99,9 @@ const Skills = () => {
       category: "Backend Development",
       translationKey: "backend_development",
       descriptionKey: "backend_desc",
-      icon: <Server className="h-6 w-6 text-theme-accent" />,
+      icon: <Server className="h-6 w-6" />,
+      gradient: "from-green-500 to-emerald-600",
+      iconColor: "text-green-500",
       items: [
         "C# / .NET Core",
         "Entity Framework Core",
@@ -115,7 +121,9 @@ const Skills = () => {
       category: "Machine Learning",
       translationKey: "machine_learning",
       descriptionKey: "machine_learning_desc",
-      icon: <BrainCircuit className="h-6 w-6 text-theme-accent" />,
+      icon: <BrainCircuit className="h-6 w-6" />,
+      gradient: "from-pink-500 to-rose-600",
+      iconColor: "text-pink-500",
       items: [
         "Python",
         "Scikit-learn",
@@ -135,7 +143,9 @@ const Skills = () => {
       category: "Database & Data",
       translationKey: "database_data",
       descriptionKey: "database_data_desc",
-      icon: <Database className="h-6 w-6 text-theme-accent" />,
+      icon: <Database className="h-6 w-6" />,
+      gradient: "from-orange-500 to-amber-600",
+      iconColor: "text-orange-500",
       items: [
         "SQL",
         "PL/SQL",
@@ -155,7 +165,9 @@ const Skills = () => {
       category: "DevOps & Tooling",
       translationKey: "devops_tooling",
       descriptionKey: "devops_tooling_desc",
-      icon: <TerminalSquare className="h-6 w-6 text-theme-accent" />,
+      icon: <TerminalSquare className="h-6 w-6" />,
+      gradient: "from-teal-500 to-cyan-600",
+      iconColor: "text-teal-500",
       items: [
         "Git",
         "GitHub Actions",
@@ -175,7 +187,9 @@ const Skills = () => {
       category: "Systems & Theory",
       translationKey: "systems_theory",
       descriptionKey: "systems_theory_desc",
-      icon: <Layers className="h-6 w-6 text-theme-accent" />,
+      icon: <Layers className="h-6 w-6" />,
+      gradient: "from-indigo-500 to-purple-600",
+      iconColor: "text-indigo-500",
       items: [
         "Operating Systems",
         "Assembly",
@@ -194,15 +208,26 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section bg-theme-lightest">
+    <section id="skills" className="section bg-gradient-to-b from-theme-lightest to-white">
       <div className="container mx-auto">
-        <h2 className="section-heading text-center">{t('skills_title')}</h2>
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center mb-4">
+            <Sparkles className="w-6 h-6 text-theme-accent mr-2 animate-pulse" />
+            <span className="text-theme-accent font-semibold text-lg">Technical Expertise</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-theme-dark mb-6">{t('skills_title')}</h2>
+          <p className="text-theme-dark/70 text-lg max-w-2xl mx-auto">
+            A comprehensive overview of my technical skills and expertise areas, from frontend development to machine learning.
+          </p>
+        </div>
         
-        <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+        <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((skill, index) => (
             <div 
               key={index} 
-              className={`skill-card perspective-1000 h-[460px] transition-all duration-500 cursor-pointer hover:shadow-xl hover:scale-105 ${flippedCards.includes(index) ? 'flipped' : ''}`}
+              className={`skill-card perspective-1000 h-[500px] transition-all duration-500 cursor-pointer ${
+                visibleCards.includes(index) ? 'hover:shadow-2xl hover:scale-105' : ''
+              } ${flippedCards.includes(index) ? 'flipped' : ''}`}
               onClick={() => handleCardFlip(index)}
             >
               <div className="flip-card-inner relative w-full h-full transition-all duration-700" style={{ 
@@ -210,57 +235,71 @@ const Skills = () => {
                 transformStyle: 'preserve-3d'
               }}>
                 {/* Front of Card */}
-                <Card className="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden group">
-                  <div className="h-2 bg-theme-accent rounded-t-xl"></div>
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="flex items-center mb-4">
-                      <div className="p-3 bg-theme-light rounded-lg mr-3 transition-colors duration-300">
-                        {skill.icon}
+                <Card className="flip-card-front absolute w-full h-full backface-hidden rounded-2xl overflow-hidden group border-0 shadow-lg">
+                  <div className={`h-3 bg-gradient-to-r ${skill.gradient} rounded-t-2xl`}></div>
+                  <CardContent className="p-8 flex flex-col h-full relative">
+                    <div className="flex items-center mb-6">
+                      <div className={`p-4 rounded-2xl bg-gradient-to-r ${skill.gradient} mr-4 shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                        <div className="text-white">
+                          {skill.icon}
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
+                      <div>
+                        <h3 className="text-xl font-bold text-theme-dark mb-1">{t(skill.translationKey)}</h3>
+                        <TrendingUp className="w-4 h-4 text-theme-accent" />
+                      </div>
                     </div>
                     
-                    <p className="text-theme-dark/80 mb-4 text-sm line-clamp-2 flex-grow">{t(skill.descriptionKey)}</p>
+                    <p className="text-theme-dark/70 mb-6 text-sm leading-relaxed flex-grow">{t(skill.descriptionKey)}</p>
                     
-                    <ul className="space-y-2 mb-4 flex-grow">
+                    <div className="space-y-3 mb-6 flex-grow">
                       {skill.items.map((item, idx) => (
-                        <li key={idx} className="flex items-center text-theme-dark/80 transition-transform duration-300 hover:translate-x-1">
-                          <div className="w-2 h-2 rounded-full bg-theme mr-3"></div>
-                          <span>{item}</span>
-                        </li>
+                        <div key={idx} className="flex items-center text-theme-dark/80 transition-all duration-300 hover:translate-x-2 hover:text-theme-dark group/item">
+                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.gradient} mr-3 group-hover/item:scale-125 transition-transform duration-300`}></div>
+                          <span className="font-medium">{item}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                     
-                    <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center mt-auto">
-                      <div className="flex items-center gap-1 py-2 px-4 rounded-lg bg-theme/10 text-theme-dark/70 text-sm transition-all group-hover:bg-theme/20 group-hover:shadow-md">
-                        <span>{t('click_for_details')}</span>
-                        <ArrowUpRight className="h-4 w-4 animate-bounce" />
+                    <div className="mt-auto">
+                      <div className="flex items-center justify-center py-3 px-4 rounded-xl bg-gradient-to-r from-theme-light/50 to-theme-accent/10 text-theme-dark/70 text-sm transition-all group-hover:from-theme-accent/20 group-hover:to-theme-light/50 group-hover:shadow-md">
+                        <span className="font-medium">Click for details</span>
+                        <ArrowUpRight className="h-4 w-4 ml-2 animate-bounce" />
                       </div>
                     </div>
                     
-                    {/* Card flip indicator */}
-                    <div className="absolute top-2 right-2 rounded-full h-8 w-8 bg-theme-light/80 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
-                      <div className="rotate-y-180 text-theme-accent/70">⟳</div>
+                    <div className="absolute top-4 right-4 rounded-full h-10 w-10 bg-white/80 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-all duration-300 shadow-lg">
+                      <div className="rotate-y-180 text-theme-accent animate-spin-slow">⟳</div>
                     </div>
                   </CardContent>
                 </Card>
                 
                 {/* Back of Card */}
-                <Card className="flip-card-back absolute w-full h-full backface-hidden rounded-xl overflow-hidden" style={{ transform: 'rotateY(180deg)' }}>
-                  <div className="h-2 bg-theme rounded-t-xl"></div>
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
-                      <div className="p-2 rounded-full bg-theme-light/80 cursor-pointer hover:bg-theme-light flex items-center justify-center animate-pulse">
-                        <RotateCcw className="h-4 w-4 text-theme" />
+                <Card className="flip-card-back absolute w-full h-full backface-hidden rounded-2xl overflow-hidden border-0 shadow-lg" style={{ transform: 'rotateY(180deg)' }}>
+                  <div className={`h-3 bg-gradient-to-r ${skill.gradient} rounded-t-2xl`}></div>
+                  <CardContent className="p-8 flex flex-col h-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center">
+                        <div className={`p-3 rounded-xl bg-gradient-to-r ${skill.gradient} mr-3 shadow-lg`}>
+                          <div className="text-white">
+                            {skill.icon}
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-theme-dark">{t(skill.translationKey)}</h3>
+                      </div>
+                      <div className="p-3 rounded-full bg-theme-light/50 cursor-pointer hover:bg-theme-light transition-colors duration-300 shadow-md">
+                        <RotateCcw className="h-4 w-4 text-theme animate-pulse" />
                       </div>
                     </div>
                     
-                    <div className="space-y-3 bg-theme-light/20 p-4 rounded-lg border border-theme-light/40 mb-4 overflow-y-auto max-h-[280px] flex-grow">
+                    <div className="space-y-4 bg-gradient-to-br from-theme-light/20 to-white/50 p-6 rounded-xl border border-theme-light/40 overflow-y-auto max-h-[320px] flex-grow shadow-inner">
                       {skill.detailedDescriptionKeys.map((key, idx) => (
-                        <p key={idx} className="text-theme-dark/80 leading-relaxed text-sm">
-                          {t(key)}
-                        </p>
+                        <div key={idx} className="flex items-start space-x-3">
+                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.gradient} mt-2 flex-shrink-0`}></div>
+                          <p className="text-theme-dark/80 leading-relaxed text-sm">
+                            {t(key)}
+                          </p>
+                        </div>
                       ))}
                     </div>
                   </CardContent>
@@ -279,13 +318,23 @@ const Skills = () => {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
         }
+        .animate-spin-slow {
+          animation: spin 3s linear infinite;
+        }
         @keyframes rotateY180 {
           from { transform: rotateY(0deg); }
           to { transform: rotateY(180deg); }
         }
         .rotate-y-180 {
           display: inline-block;
-          animation: rotateY180 1.5s ease-in-out infinite alternate;
+          animation: rotateY180 2s ease-in-out infinite alternate;
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
         }
       `}</style>
     </section>

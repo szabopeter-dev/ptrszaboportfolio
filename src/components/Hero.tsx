@@ -79,7 +79,7 @@ const Hero = () => {
                   <Mail className="w-4 h-4 ml-2 group-hover:animate-bounce" />
                 </Button>
               </a>
-              <a href="/szabo_peter_cv_en.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf">
                 <Button variant="outline" className="flex items-center gap-2 text-theme hover:text-theme-accent font-medium border-theme/20 hover:border-theme-accent/50 group">
                   <Download size={18} className="group-hover:animate-bounce" />
                   Download CV
