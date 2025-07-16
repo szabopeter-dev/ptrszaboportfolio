@@ -88,6 +88,18 @@ const translations: Record<Language, Record<string, string>> = {
     // Education section
     'education_title': 'Education',
     'education_coursework': 'Relevant Coursework',
+    'education_degree': 'Bachelor of Science in Software Engineering',
+    'education_university': 'University of Óbuda (Óbudai Egyetem)',
+    'education_period': '2021 - Present',
+    'education_description': 'Comprehensive program focusing on modern software development, computer science fundamentals, and practical application of technologies in real-world scenarios.',
+    'education_gpa': 'GPA: 4.2/5.0',
+    'education_thesis': 'Thesis: Machine Learning-Based ATM Cash Forecasting System',
+    'education_courses': 'Data Structures & Algorithms, Software Architecture, Database Systems, Machine Learning, Web Development, Software Testing, Project Management',
+    'education_achievements': 'Key Achievements',
+    'education_achievement_1': 'Developed ML-based ATM cash forecasting system with 34% MAE reduction',
+    'education_achievement_2': 'Completed advanced coursework in software architecture and design patterns',
+    'education_achievement_3': 'Participated in collaborative software development projects',
+    'education_achievement_4': 'Focused on practical application of theoretical concepts',
     
     // Contact section
     'contact_title_small': 'Get In Touch',
@@ -97,6 +109,12 @@ const translations: Record<Language, Record<string, string>> = {
     'contact_phone': 'Phone',
     'contact_say_hello': 'Say Hello',
     'contact_download_cv': 'Download CV',
+    'contact_location': 'Location',
+    'contact_location_value': 'San Sebastián, Spain & Budapest, Hungary',
+    'contact_response_time': 'Response Time',
+    'contact_response_time_value': 'Within 24 hours',
+    'contact_availability': 'Availability',
+    'contact_availability_value': 'Open to opportunities',
     
     // Footer
     'footer_rights': 'All rights reserved.',
@@ -169,7 +187,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero section
     'hero_greeting': 'Szia, én vagyok',
     'hero_title': 'Modern szoftvermegoldásokat fejlesztek',
-    'hero_description': 'Szoftverfejlesztő React, Next.js, .NET és gépi tanulási technológiákra specializálódva.',
+    'hero_description': 'Szoftverfejlesztő, React, Next.js, .NET és gépi tanulási technológiákra specializálódva.',
     'hero_get_in_touch': 'Kapcsolatfelvétel',
     'hero_learn_more': 'Tudj meg többet',
     'hero_phone': 'Telefon',
@@ -186,7 +204,19 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Education section
     'education_title': 'Tanulmányok',
-    'education_coursework': 'Tantárgyak',
+    'education_coursework': 'Releváns Tantárgyak',
+    'education_degree': 'Szoftverfejlesztő BSc',
+    'education_university': 'Óbudai Egyetem',
+    'education_period': '2021 - Jelenleg',
+    'education_description': 'Átfogó program, amely a modern szoftverfejlesztésre, a számítástudományi alapokra és a technológiák gyakorlati alkalmazására összpontosít valós forgatókönyvekben.',
+    'education_gpa': 'Átlag: 4.2/5.0',
+    'education_thesis': 'Szakdolgozat: Gépi Tanuláson Alapuló ATM Készpénz-előrejelző Rendszer',
+    'education_courses': 'Adatstruktúrák és Algoritmusok, Szoftverarchitektúra, Adatbázisrendszerek, Gépi Tanulás, Webfejlesztés, Szoftvertesztelés, Projektmenedzsment',
+    'education_achievements': 'Főbb Eredmények',
+    'education_achievement_1': 'ML-alapú ATM készpénz-előrejelző rendszer fejlesztése 34%-os MAE csökkentéssel',
+    'education_achievement_2': 'Haladó tanulmányok elvégzése szoftverarchitektúra és tervezési minták területén',
+    'education_achievement_3': 'Részvétel kollaboratív szoftverfejlesztési projektekben',
+    'education_achievement_4': 'Hangsúly az elméleti koncepciók gyakorlati alkalmazásán',
     
     // Contact section
     'contact_title_small': 'Vedd fel a kapcsolatot',
@@ -196,6 +226,12 @@ const translations: Record<Language, Record<string, string>> = {
     'contact_phone': 'Telefon',
     'contact_say_hello': 'Írj nekem',
     'contact_download_cv': 'Önéletrajz letöltése',
+    'contact_location': 'Helyszín',
+    'contact_location_value': 'San Sebastián, Spanyolország és Budapest, Magyarország',
+    'contact_response_time': 'Válaszidő',
+    'contact_response_time_value': '24 órán belül',
+    'contact_availability': 'Elérhetőség',
+    'contact_availability_value': 'Nyitott lehetőségekre',
     
     // Footer
     'footer_rights': 'Minden jog fenntartva.',

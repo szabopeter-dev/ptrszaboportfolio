@@ -71,25 +71,27 @@ const Navbar = () => {
 
   // Use memo for rendering the desktop navigation to avoid re-renders
   const desktopNavigation = useMemo(() => (
-    <nav className="hidden md:flex items-center space-x-8">
+    <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
       {navLinks.map((link) => (
         <NavLink key={link.name} name={link.name} href={link.href} t={t} />
       ))}
       
-      <div className="w-9 flex justify-center">
-        <LanguageSelector />
+      <div className="flex items-center space-x-3">
+        <div className="w-9 h-9 flex items-center justify-center">
+          <LanguageSelector />
+        </div>
+        
+        <a 
+          href="https://www.linkedin.com/in/ptrszabo7/" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex"
+        >
+          <Button className="bg-theme hover:bg-theme-accent text-white px-4 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 whitespace-nowrap">
+            {t('linkedin')}
+          </Button>
+        </a>
       </div>
-      
-      <a 
-        href="https://www.linkedin.com/in/ptrszabo7/" 
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex"
-      >
-        <Button className="bg-theme hover:bg-theme-accent text-white px-5 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1">
-          {t('linkedin')}
-        </Button>
-      </a>
     </nav>
   ), [t]);
 
@@ -114,8 +116,8 @@ const Navbar = () => {
         {desktopNavigation}
 
         {/* Mobile Menu */}
-        <div className="md:hidden flex items-center space-x-4">
-          <div className="w-9 flex justify-center">
+        <div className="md:hidden flex items-center space-x-3">
+          <div className="w-9 h-9 flex items-center justify-center">
             <LanguageSelector />
           </div>
           <MobileMenu />

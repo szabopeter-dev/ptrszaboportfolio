@@ -64,13 +64,13 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				theme: {
-					DEFAULT: '#3F72AF',
-					dark: '#112D4E',
-					light: '#DBE2EF',
-					lightest: '#F9F7F7',
-					accent: '#00ADB5'
+					DEFAULT: 'hsl(213, 47%, 47%)',
+					dark: 'hsl(213, 63%, 18%)',
+					light: 'hsl(213, 33%, 87%)',
+					lightest: 'hsl(213, 23%, 97%)',
+					accent: 'hsl(184, 100%, 35%)'
 				},
-				navy: '#0F172A'
+				navy: 'hsl(222, 84%, 5%)'
 			},
 			fontFamily: {
 				sans: ['Poppins', 'system-ui', 'sans-serif'],
@@ -136,10 +136,10 @@ export default {
 				'float': 'float 4s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'gradient-radial': 'radial-gradient(circle, #3F72AF 0%, #112D4E 100%)',
-				'gradient-main': 'linear-gradient(135deg, #112D4E 0%, #3F72AF 100%)',
-				'gradient-card': 'linear-gradient(to right, #DBE2EF 0%, #F9F7F7 100%)',
-				'gradient-accent': 'linear-gradient(60deg, #00ADB5 0%, #089096 100%)',
+				'gradient-radial': 'radial-gradient(circle, hsl(213, 47%, 47%) 0%, hsl(213, 63%, 18%) 100%)',
+				'gradient-main': 'linear-gradient(135deg, hsl(213, 63%, 18%) 0%, hsl(213, 47%, 47%) 100%)',
+				'gradient-card': 'linear-gradient(to right, hsl(213, 33%, 87%) 0%, hsl(213, 23%, 97%) 100%)',
+				'gradient-accent': 'linear-gradient(60deg, hsl(184, 100%, 35%) 0%, hsl(184, 85%, 30%) 100%)',
 			}
 		}
 	},

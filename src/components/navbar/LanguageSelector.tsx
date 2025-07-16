@@ -40,56 +40,43 @@ export const LanguageSelector = memo(() => {
   };
 
   return (
-    <div className="relative inline-block w-9">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button 
-            ref={triggerRef}
-            variant="ghost" 
-            size="sm"
-            className="fixed-width-button flex items-center text-theme-dark hover:text-theme-accent p-1.5 h-9 min-w-9 w-9 rounded-full hover:bg-theme-light/10 transition-colors"
-            aria-label="Change Language"
-          >
-            <Globe className="h-5 w-5 text-theme" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent 
-          align="end"
-          className="min-w-[120px] bg-white/95 backdrop-blur-md border border-gray-200 shadow-lg rounded-lg"
-          avoidCollisions={true}
-          collisionPadding={16}
-          sideOffset={8}
-          forceMount
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button 
+          ref={triggerRef}
+          variant="ghost" 
+          size="sm"
+          className="w-9 h-9 p-0 rounded-full flex items-center justify-center text-theme-dark hover:text-theme-accent hover:bg-theme-light/10 transition-colors duration-300"
+          aria-label="Change Language"
         >
-          {['en', 'hu'].map((option) => (
-            <DropdownMenuItem 
-              key={option}
-              onClick={() => toggleLanguage(option as 'en' | 'hu')}
-              className={cn(
-                "flex items-center justify-between py-2.5 px-4 cursor-pointer transition-colors",
-                language === option ? "bg-theme-light/20 font-medium" : "hover:bg-theme-light/10"
-              )}
-            >
-              <span className="capitalize">{option}</span>
-              {language === option && (
-                <span className="h-2 w-2 rounded-full bg-theme-accent"></span>
-              )}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {/* Add styles to prevent layout shift */}
-      <style>{`
-        .fixed-width-button {
-          position: relative;
-          width: 36px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      `}</style>
-    </div>
+          <Globe className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        align="end"
+        className="min-w-[100px] bg-white/95 backdrop-blur-md border border-gray-200 shadow-lg rounded-lg"
+        avoidCollisions={true}
+        collisionPadding={16}
+        sideOffset={8}
+        forceMount
+      >
+        {['en', 'hu'].map((option) => (
+          <DropdownMenuItem 
+            key={option}
+            onClick={() => toggleLanguage(option as 'en' | 'hu')}
+            className={cn(
+              "flex items-center justify-between py-2 px-3 cursor-pointer transition-colors text-sm",
+              language === option ? "bg-theme-light/20 font-medium text-theme" : "hover:bg-theme-light/10"
+            )}
+          >
+            <span className="capitalize">{option === 'en' ? 'English' : 'Magyar'}</span>
+            {language === option && (
+              <span className="h-2 w-2 rounded-full bg-theme-accent ml-2"></span>
+            )}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 });
 

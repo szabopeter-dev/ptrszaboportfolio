@@ -33,15 +33,15 @@ export const MobileMenu = memo(() => {
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <button 
-          className="text-theme-dark hover:text-theme-accent rounded-full p-2 hover:bg-white/30 transition-all duration-300 backdrop-blur-sm fixed-width-trigger"
+          className="w-9 h-9 rounded-full flex items-center justify-center text-theme-dark hover:text-theme-accent hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
           aria-label="Toggle menu"
         >
-          <Menu size={24} />
+          <Menu size={20} />
         </button>
       </DrawerTrigger>
       <DrawerContent className="p-0 h-[70vh] rounded-t-3xl">
         <VisuallyHidden>
-          <DrawerTitle>Navigation Menu</DrawerTitle>
+          <DrawerTitle>{t('navigation_menu') || 'Navigation Menu'}</DrawerTitle>
         </VisuallyHidden>
         <div className="flex flex-col h-full bg-gradient-to-b from-theme-light to-theme-lightest pt-12 pb-8 px-6 rounded-t-3xl">
           <DrawerClose className="absolute top-4 right-4" onClick={handleClose}>
@@ -81,16 +81,6 @@ export const MobileMenu = memo(() => {
           </nav>
         </div>
       </DrawerContent>
-      
-      <style>{`
-        .fixed-width-trigger {
-          width: 40px;
-          height: 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      `}</style>
     </Drawer>
   );
 });
