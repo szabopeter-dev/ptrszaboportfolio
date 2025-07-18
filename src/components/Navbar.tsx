@@ -31,8 +31,8 @@ NavLink.displayName = "NavLink";
 
 // Fixed height values for navbar to prevent layout shifts
 const NAVBAR_HEIGHT = {
-  mobile: '70px',
-  desktop: '80px'
+  mobile: '60px',
+  desktop: '70px'
 };
 
 const Navbar = () => {
@@ -116,8 +116,8 @@ const Navbar = () => {
         {desktopNavigation}
 
         {/* Mobile Menu */}
-        <div className="md:hidden flex items-center space-x-3">
-          <div className="w-9 h-9 flex items-center justify-center">
+        <div className="md:hidden flex items-center space-x-2">
+          <div className="w-8 h-8 flex items-center justify-center">
             <LanguageSelector />
           </div>
           <MobileMenu />

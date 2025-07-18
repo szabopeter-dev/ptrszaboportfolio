@@ -86,7 +86,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about_download_cv': 'Download CV',
     
     // Education section
-    'education_title': 'Education',
+    'education_title': 'Academic Excellence',
     'education_coursework': 'Relevant Coursework',
     'education_degree': 'Bachelor of Science in Software Engineering',
     'education_university': 'University of Óbuda (Óbudai Egyetem)',
@@ -100,6 +100,17 @@ const translations: Record<Language, Record<string, string>> = {
     'education_achievement_2': 'Completed advanced coursework in software architecture and design patterns',
     'education_achievement_3': 'Participated in collaborative software development projects',
     'education_achievement_4': 'Focused on practical application of theoretical concepts',
+    'technical_focus_areas': 'Technical Focus Areas',
+    'key_achievements_impact': 'Key Achievements & Impact',
+    'academic_performance': 'Academic Performance',
+    'status': 'Status',
+    'final_year': 'Final Year',
+    'graduated_with_honors': 'Graduated with Honors',
+    'university_of_obuda': 'University of Óbuda',
+    'software_specialization': 'Software Design & Development',
+    'it_specialization': 'Software Development & Network Administration',
+    'technical_diploma_it': 'Technical Diploma in Information Technology (5th Year Only)',
+    'bmszc_school': 'BMSZC Bláthy Ottó Titusz IT Technical School',
     
     // Contact section
     'contact_title_small': 'Get In Touch',
@@ -203,7 +214,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about_download_cv': 'Önéletrajz letöltése',
     
     // Education section
-    'education_title': 'Tanulmányok',
+    'education_title': 'Tanulmányi Kiválóság',
     'education_coursework': 'Releváns Tantárgyak',
     'education_degree': 'Szoftverfejlesztő BSc',
     'education_university': 'Óbudai Egyetem',
@@ -217,6 +228,17 @@ const translations: Record<Language, Record<string, string>> = {
     'education_achievement_2': 'Haladó tanulmányok elvégzése szoftverarchitektúra és tervezési minták területén',
     'education_achievement_3': 'Részvétel kollaboratív szoftverfejlesztési projektekben',
     'education_achievement_4': 'Hangsúly az elméleti koncepciók gyakorlati alkalmazásán',
+    'technical_focus_areas': 'Technikai Fókuszterületek',
+    'key_achievements_impact': 'Főbb Eredmények és Hatás',
+    'academic_performance': 'Tanulmányi Teljesítmény',
+    'status': 'Státusz',
+    'final_year': 'Utolsó Év',
+    'graduated_with_honors': 'Kitüntetéssel Végzett',
+    'university_of_obuda': 'Óbudai Egyetem',
+    'software_specialization': 'Szoftvertervezés és Fejlesztés',
+    'it_specialization': 'Szoftverfejlesztés és Hálózatadminisztráció',
+    'technical_diploma_it': 'Informatikai Műszaki Diploma (Csak 5. Évfolyam)',
+    'bmszc_school': 'BMSZC Bláthy Ottó Titusz Informatikai Szakgimnázium',
     
     // Contact section
     'contact_title_small': 'Vedd fel a kapcsolatot',
