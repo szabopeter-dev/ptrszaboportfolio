@@ -92,10 +92,10 @@ const Education = () => {
         "Software Development Lifecycle"
       ],
       achievements: [
-        "Completed 5th year with perfect 5.0/5.0 GPA",
+        "Completed final year (5th grade) with perfect 5.0/5.0 GPA - only enrolled for final year",
         "Cisco CCNA R&S certification (Modules 1-3)",
-        "Specialized in advanced IT technical skills",
-        "Enhanced programming and system administration knowledge"
+        "Specialized in advanced IT technical skills during intensive final year",
+        "Enhanced programming and system administration knowledge to bridge gap before university"
       ],
       type: "highschool",
       techFocus: ["Networking", "System Administration", "Database Design", "Technical Leadership"]

@@ -62,11 +62,11 @@ const About = () => {
               <div className="flex-1 text-center md:text-left">
                 <p className="text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
                 <p className="text-white/90 text-lg leading-relaxed mb-4">
-                  Final-year Software Engineering student at University of Óbuda with 8.2/10 GPA, 
-                  specializing in machine learning and full-stack development.
+                  Final-year Software Engineering student (8.2/10 GPA) targeting elite MSc AI programs 
+                  and internships at leading tech companies like Google, Microsoft, and Meta.
                 </p>
                 <p className="text-white/80 text-base">
-                  Currently based between San Sebastián, Spain and Budapest, Hungary
+                  Based between San Sebastián, Spain and Budapest, Hungary
                 </p>
               </div>
             </div>
@@ -77,11 +77,11 @@ const About = () => {
                 <div className="flex items-start mb-4">
                   <Code2 className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Professional Experience</h3>
+                    <h3 className="text-lg font-semibold text-white mb-2">Big Tech Preparation</h3>
                     <p className="text-white/80 leading-relaxed">
-                      Currently working as a Software Developer Intern at Recomp Informatikai Zrt., 
-                      rebuilding legacy systems with React, Next.js, and developing AI-powered chatbots 
-                      with real-time capabilities.
+                      Building production-grade ML systems and full-stack applications at Recomp Informatikai Zrt. 
+                      Gaining enterprise-level experience with React, Next.js, and AI technologies to prepare 
+                      for software engineering roles at top-tier technology companies.
                     </p>
                   </div>
                 </div>
@@ -91,10 +91,11 @@ const About = () => {
                 <div className="flex items-start mb-4">
                   <GraduationCap className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Academic Excellence</h3>
+                    <h3 className="text-lg font-semibold text-white mb-2">Graduate School Pipeline</h3>
                     <p className="text-white/80 leading-relaxed">
-                      Developing ML-based ATM cash forecasting system for BSc thesis, achieving 34% MAE 
-                      reduction. Planning to present at national conferences and publish in IEEE venues.
+                      Developing award-worthy ML research (34% MAE improvement in financial forecasting). 
+                      Building strong academic portfolio for admission to top MSc AI programs at 
+                      ETH Zurich, TU Munich, and other elite European institutions.
                     </p>
                   </div>
                 </div>
@@ -110,9 +111,9 @@ const About = () => {
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[
-                  "React.js", "Next.js", "TypeScript", "Tailwind CSS", 
-                  "C# / .NET Core", "Entity Framework", "Python", "TensorFlow",
-                  "Machine Learning", "Git / GitLab CI", "Jest Testing", "SQL"
+                  "Python", "TensorFlow", "Machine Learning", "Deep Learning",
+                  "React.js", "Next.js", "TypeScript", "Node.js", 
+                  "C# / .NET Core", "System Design", "Algorithms", "Git"
                 ].map((tech, index) => (
                   <div key={index} className="flex items-center group p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300">
                     <div className="w-2 h-2 rounded-full bg-theme-accent mr-3 group-hover:scale-125 transition-transform duration-300"></div>
