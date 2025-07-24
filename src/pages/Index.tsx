@@ -22,7 +22,8 @@ const Index = () => {
     
     if (anchor?.hash && anchor.hash.length > 1 && anchor.href.includes('#')) {
       e.preventDefault();
-      const element = document.getElementById(anchor.hash.substring(1));
+      const targetId = anchor.hash.substring(1);
+      const element = targetId ? document.getElementById(targetId) : null;
       
       if (element) {
         // Close mobile menu if open

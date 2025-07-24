@@ -93,12 +93,12 @@
 
 @layer components {
   .section-heading {
-    @apply text-3xl sm:text-4xl font-bold text-theme-dark relative
-    mb-12 after:content-[''] after:block after:w-24 after:h-1 after:bg-theme-accent after:mt-4;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-theme-dark relative
+    mb-8 md:mb-12 after:content-[''] after:block after:w-16 md:after:w-24 after:h-1 after:bg-theme-accent after:mt-3 md:after:mt-4;
   }
   
   .section {
-    @apply py-24 px-4;
+    @apply py-12 md:py-20 lg:py-24 px-4 md:px-6;
   }
   
   .btn-primary {

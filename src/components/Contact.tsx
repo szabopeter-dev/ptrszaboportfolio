@@ -101,7 +101,7 @@ const Contact = () => {
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className={`backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6 flex flex-col items-center transition-all duration-500 transform h-full min-h-[200px] justify-center relative overflow-hidden ${
+                <div className={`backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-4 md:p-6 flex flex-col items-center transition-all duration-500 transform h-full min-h-[160px] md:min-h-[200px] justify-center relative overflow-hidden ${
                   hoveredCard === index ? 'hover:-translate-y-3 hover:bg-white/20 hover:shadow-2xl' : ''
                 }`}>
                   {/* Gradient background on hover */}
@@ -111,9 +111,9 @@ const Contact = () => {
                     <method.icon className="h-7 w-7 text-white" />
                   </div>
                   
-                  <h3 className="font-bold text-white text-lg mb-2">{method.title}</h3>
-                  <p className="text-theme-accent font-medium text-sm mb-2 text-center">{method.value}</p>
-                  <p className="text-white/60 text-xs text-center">{method.description}</p>
+                  <h3 className="font-bold text-white text-base md:text-lg mb-2">{method.title}</h3>
+                  <p className="text-theme-accent font-medium text-xs md:text-sm mb-2 text-center">{method.value}</p>
+                  <p className="text-white/60 text-xs text-center leading-tight">{method.description}</p>
                   
                   {/* Hover effect indicator */}
                   <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-theme-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -137,15 +137,15 @@ const Contact = () => {
           </div>
           
           {/* Action buttons */}
-          <div className="flex justify-center gap-6 flex-wrap">
+          <div className="flex justify-center gap-4 md:gap-6 flex-wrap">
             <a href="mailto:szabo.ptr7@gmail.com">
-              <Button className="bg-gradient-to-r from-theme-accent to-theme-accent/80 hover:from-theme-accent/90 hover:to-theme-accent/70 text-white px-10 py-6 text-lg rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-theme-accent/25 border-0">
+              <Button className="bg-gradient-to-r from-theme-accent to-theme-accent/80 hover:from-theme-accent/90 hover:to-theme-accent/70 text-white px-6 md:px-10 py-4 md:py-6 text-base md:text-lg rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-theme-accent/25 border-0">
                 <Send className="w-5 h-5 mr-2" />
                 Say Hello
               </Button>
             </a>
             <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf" className="inline-block">
-              <Button className="bg-gradient-to-r from-theme to-theme/80 hover:from-theme/90 hover:to-theme/70 text-white px-10 py-6 text-lg rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white/20 hover:border-white/40">
+              <Button className="bg-gradient-to-r from-theme to-theme/80 hover:from-theme/90 hover:to-theme/70 text-white px-6 md:px-10 py-4 md:py-6 text-base md:text-lg rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white/20 hover:border-white/40">
                 <Download className="w-5 h-5 mr-2" />
                 Download CV
               </Button>

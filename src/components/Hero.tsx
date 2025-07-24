@@ -37,20 +37,20 @@ const Hero = () => {
               Machine Learning enthusiast and Full-Stack Developer specializing in React, Next.js, .NET, and AI technologies. Currently working on ATM cash forecasting and AI chatbot development.
             </p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 animate-fade-in animate-delay-400">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-10 animate-fade-in animate-delay-400">
               <a 
                 href="tel:+36306641452" 
                 className="contact-card flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm group"
               >
                 <Smartphone size={18} className="text-theme-accent flex-shrink-0 group-hover:animate-pulse" /> 
-                <span className="text-theme-dark text-sm truncate">{isMobile ? "Phone" : "+36 30 664 1452"}</span>
+                <span className="text-theme-dark text-xs sm:text-sm truncate">{isMobile ? "Phone" : "+36 30 664 1452"}</span>
               </a>
               <a 
                 href="mailto:szabo.ptr7@gmail.com" 
                 className="contact-card flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm group"
               >
                 <Mail size={18} className="text-theme-accent flex-shrink-0 group-hover:animate-bounce" /> 
-                <span className="text-theme-dark text-sm truncate">{isMobile ? "Email" : "szabo.ptr7@gmail.com"}</span>
+                <span className="text-theme-dark text-xs sm:text-sm truncate">{isMobile ? "Email" : "szabo.ptr7@gmail.com"}</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/ptrszabo7/" 

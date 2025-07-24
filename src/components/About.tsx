@@ -108,7 +108,7 @@ const About = () => {
                 Technical Expertise
               </h3>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[
                   "React.js", "Next.js", "TypeScript", "Tailwind CSS", 
                   "C# / .NET Core", "Entity Framework", "Python", "TensorFlow",

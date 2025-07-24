@@ -139,7 +139,7 @@ const ProjectsSection = () => {
                   </div>
 
                   {/* Title and description - Fixed height */}
-                  <div className="mb-6 h-32">
+                  <div className="mb-6 h-28 md:h-32">
                     <h3 className="text-lg font-bold text-theme-dark mb-3 group-hover:text-theme transition-colors duration-300 leading-tight h-12 flex items-center">
                       {project.title}
                     </h3>
@@ -159,7 +159,7 @@ const ProjectsSection = () => {
                   </div>
 
                   {/* Key achievements - Fixed height */}
-                  <div className="mb-6 h-24">
+                  <div className="mb-6 h-20 md:h-24">
                     <h4 className="text-sm font-semibold text-theme-dark mb-3 flex items-center">
                       <Target className="w-4 h-4 mr-2 text-theme-accent" />
                       Impact & Results
@@ -175,7 +175,7 @@ const ProjectsSection = () => {
                   </div>
 
                   {/* Technologies - Fixed height */}
-                  <div className="flex flex-wrap gap-1.5 mb-6 h-16 overflow-hidden">
+                  <div className="flex flex-wrap gap-1.5 mb-6 h-14 md:h-16 overflow-hidden">
                     {project.technologies.slice(0, 6).map((tech, idx) => (
                       <span 
                         key={idx} 
