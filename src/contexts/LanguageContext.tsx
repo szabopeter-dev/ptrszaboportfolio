@@ -77,11 +77,11 @@ const translations: Record<Language, Record<string, string>> = {
     'hero_email': 'Email',
     
     // About section
-    'about_title': 'About Me', 
-    'about_profession': 'Software Engineer & ML Specialist',
-    'about_education': 'Final-year Software Engineering student at University of Óbuda (8.2/10 GPA), specializing in machine learning and targeting top tech companies and elite MSc AI programs.',
-    'about_work': 'Software Developer Intern at Recomp Informatikai Zrt., rebuilding legacy systems with React/Next.js and developing AI chatbots. Building production-ready ML systems while preparing for opportunities at leading tech companies.',
-    'about_thesis': 'Developing ML-based ATM cash forecasting system achieving 34% MAE reduction. Planning to present findings at national conferences and pursue publication in IEEE venues to strengthen graduate school applications.',
+    'about_title': 'About Me',
+    'about_profession': 'Software Engineer',
+    'about_education': 'B.S. in Software Engineering at the University of Óbuda, focused on building solutions that solve real-world problems.',
+    'about_work': 'Working at Recomp Informatikai Zrt. on modernizing legacy attorney management systems with React, Next.js and developing AI-based chatbots. Passionate about creating clean, maintainable code that delivers exceptional user experiences.',
+    'about_thesis': 'Currently working on my 4-semester BSc thesis focusing on ML-based ATM cash level forecasting, exploring the intersection of financial technology and machine learning to optimize cash management systems.',
     'about_technologies': 'Technologies I\'ve been working with recently:',
     'about_download_cv': 'Download CV',
     
@@ -197,8 +197,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero section
     'hero_greeting': 'Szia, én vagyok',
-    'hero_title': 'ML mérnök és szoftverfejlesztő',
-    'hero_description': 'Végzős szoftverfejlesztő hallgató (8.2/10 átlag) célozva big tech gyakornokságokat és elit MSc AI programokat. Éles ML rendszerek építése 34%-os teljesítménynöveléssel és modern full-stack alkalmazások.',
+    'hero_title': 'Modern szoftvermegoldásokat fejlesztek',
+    'hero_description': 'Szoftverfejlesztő, React, Next.js, .NET és gépi tanulási technológiákra specializálódva.',
     'hero_get_in_touch': 'Kapcsolatfelvétel',
     'hero_learn_more': 'Tudj meg többet',
     'hero_phone': 'Telefon',
@@ -206,10 +206,10 @@ const translations: Record<Language, Record<string, string>> = {
     
     // About section
     'about_title': 'Rólam',
-    'about_profession': 'Szoftverfejlesztő és ML Specialista',
-    'about_education': 'Végzős szoftverfejlesztő hallgató az Óbudai Egyetemen (8.2/10 átlag), gépi tanulásra specializálódva, célozva a vezető tech cégeket és elit MSc AI programokat.',
-    'about_work': 'Szoftverfejlesztő gyakornok a Recomp Informatikai Zrt-nél, legacy rendszerek újjáépítése React/Next.js-sel és AI chatbotok fejlesztése. Éles ML rendszerek építése miközben felkészülök vezető tech cégeknél való lehetőségekre.',
-    'about_thesis': 'ML-alapú ATM készpénz-előrejelző rendszer fejlesztése 34%-os MAE csökkentéssel. Tervezem az eredmények bemutatását nemzeti konferenciákon és IEEE publikálást a graduate iskola jelentkezések erősítéséhez.',
+    'about_profession': 'Szoftverfejlesztő',
+    'about_education': 'Szoftverfejlesztő BSc, Óbudai Egyetem, valós problémákat megoldó megoldások fejlesztésére összpontosítva.',
+    'about_work': 'A Recomp Informatikai Zrt-nél dolgozom régebbi ügyvédi rendszerek modernizálásán React, Next.js technológiákkal és AI-alapú chatbotok fejlesztésén. Szenvedélyem a tiszta, karbantartható kód írása, amely kivételes felhasználói élményt nyújt.',
+    'about_thesis': 'Jelenleg a 4 féléves BSc szakdolgozatomon dolgozom, amely ML-alapú ATM készpénzszint előrejelzésre összpontosít, a pénzügyi technológia és a gépi tanulás találkozópontját kutatva.',
     'about_technologies': 'Technológiák, amelyekkel nemrég dolgoztam:',
     'about_download_cv': 'Önéletrajz letöltése',
     

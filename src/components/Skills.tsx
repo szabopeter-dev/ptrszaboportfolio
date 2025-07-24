@@ -75,28 +75,6 @@ const Skills = () => {
 
   const skills: Skill[] = [
     {
-      category: "Machine Learning",
-      translationKey: "machine_learning", 
-      descriptionKey: "machine_learning_desc",
-      icon: <BrainCircuit className="h-6 w-6" />,
-      gradient: "from-pink-500 to-rose-600",
-      iconColor: "text-pink-500",
-      items: [
-        "Python",
-        "TensorFlow / Keras",
-        "Scikit-learn",
-        "Time Series Analysis",
-        "Neural Networks",
-        "LSTM / GRU"
-      ],
-      detailedDescriptionKeys: [
-        "ml_detail_1",
-        "ml_detail_2", 
-        "ml_detail_3",
-        "ml_detail_4"
-      ]
-    },
-    {
       category: "Frontend Development",
       translationKey: "frontend_development",
       descriptionKey: "frontend_desc",
@@ -137,6 +115,28 @@ const Skills = () => {
         "backend_detail_2",
         "backend_detail_3",
         "backend_detail_4"
+      ]
+    },
+    {
+      category: "Machine Learning",
+      translationKey: "machine_learning",
+      descriptionKey: "machine_learning_desc",
+      icon: <BrainCircuit className="h-6 w-6" />,
+      gradient: "from-pink-500 to-rose-600",
+      iconColor: "text-pink-500",
+      items: [
+        "Python",
+        "Scikit-learn",
+        "TensorFlow / Keras",
+        "Pandas",
+        "Neural Networks",
+        "LSTM / GRU"
+      ],
+      detailedDescriptionKeys: [
+        "ml_detail_1",
+        "ml_detail_2",
+        "ml_detail_3",
+        "ml_detail_4"
       ]
     },
     {

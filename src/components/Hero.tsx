@@ -22,7 +22,7 @@ const Hero = () => {
               Péter Szabó
             </h1>
             <h2 className="text-3xl md:text-4xl font-display text-theme-dark/80 mb-4 animate-fade-in animate-delay-200">
-              ML Engineer & Software Developer
+              Software Engineer
             </h2>
             
             {/* Location info with animated icon */}
@@ -34,8 +34,7 @@ const Hero = () => {
             </div>
             
             <p className="text-theme-dark/70 text-lg mb-8 max-w-xl animate-fade-in animate-delay-300">
-              Final-year Software Engineering student (8.2/10 GPA) targeting big tech internships and elite MSc AI programs. 
-              Building production ML systems with 34% performance improvements and modern full-stack applications.
+              Machine Learning enthusiast and Full-Stack Developer specializing in React, Next.js, .NET, and AI technologies. Currently working on ATM cash forecasting and AI chatbot development.
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 animate-fade-in animate-delay-400">

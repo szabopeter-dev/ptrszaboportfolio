@@ -117,7 +117,7 @@ const ProjectsSection = () => {
           Featured Projects
         </h2>
         <p className="text-center text-theme-dark/70 mb-16 max-w-2xl mx-auto text-lg">
-          AI/ML research and production systems designed to impress big tech recruiters and graduate school admissions committees
+          Production-ready solutions demonstrating expertise in machine learning, full-stack development, and scalable system design
         </p>
         
         <div ref={sectionRef} className="max-w-6xl mx-auto">
