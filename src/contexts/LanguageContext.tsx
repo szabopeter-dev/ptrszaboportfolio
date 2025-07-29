@@ -14,12 +14,16 @@ const translations: Record<Language, Record<string, string>> = {
   en: {
     // Navigation
     'about': 'About',
-    'experience': 'Experience',
-    'projects': 'Projects',
-    'education': 'Education',
     'skills': 'Skills',
+    'projects': 'Projects',
+    'experience': 'Experience',
+    'education': 'Education',
     'contact': 'Contact',
     'linkedin': 'LinkedIn',
+    
+    // Work Experience
+    'workExperience': 'Work Experience',
+    'workExperienceDesc': 'Professional experience in software development and AI integration.',
     
     // Skills section
     'skills_title': 'Skills & Technologies',
@@ -142,12 +146,16 @@ const translations: Record<Language, Record<string, string>> = {
   hu: {
     // Navigation
     'about': 'Rólam',
-    'experience': 'Tapasztalat',
-    'projects': 'Projektek',
-    'education': 'Tanulmányok',
     'skills': 'Készségek',
+    'projects': 'Projektek',
+    'experience': 'Tapasztalat',
+    'education': 'Tanulmányok',
     'contact': 'Kapcsolat',
     'linkedin': 'LinkedIn',
+    
+    // Work Experience
+    'workExperience': 'Munkatapasztalat',
+    'workExperienceDesc': 'Szakmai tapasztalat szoftverfejlesztés és AI integráció területén.',
     
     // Skills section
     'skills_title': 'Készségek és Technológiák',

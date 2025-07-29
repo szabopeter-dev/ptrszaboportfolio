@@ -9,9 +9,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const navLinks = [
   { name: 'about', href: "#about" },
+  { name: 'skills', href: "#skills" },
+  { name: 'projects', href: "#projects" },
   { name: 'experience', href: "#experience" },
   { name: 'education', href: "#education" },
-  { name: 'skills', href: "#skills" },
   { name: 'contact', href: "#contact" }
 ];
 

@@ -3,10 +3,10 @@ import React, { useEffect, useCallback, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Experience from "@/components/Experience";
-import ProjectsSection from "@/components/ProjectsSection";
-import Education from "@/components/Education";
 import Skills from "@/components/Skills";
+import ProjectsSection from "@/components/ProjectsSection";
+import WorkExperience from "@/components/WorkExperience";
+import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -213,10 +213,10 @@ const Index = () => {
       <Navbar />
       <Hero />
       <About />
-      <Experience />
-      <ProjectsSection />
-      <Education />
       <Skills />
+      <ProjectsSection />
+      <WorkExperience />
+      <Education />
       <Contact />
       <Footer />
       

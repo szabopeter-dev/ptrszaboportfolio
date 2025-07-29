@@ -60,13 +60,13 @@ const About = () => {
               </div>
               
               <div className="flex-1 text-center md:text-left">
-                <p className="text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
-                <p className="text-white/90 text-lg leading-relaxed mb-4">
-                  Final-year Software Engineering student at University of Óbuda with 8.2/10 GPA, 
-                  specializing in machine learning and full-stack development.
+                <p className="text-xl md:text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
+                <p className="text-white/90 text-base md:text-lg leading-relaxed mb-4">
+                  Software Developer Intern at Recomp Informatikai Zrt. and final-year Software Engineering student 
+                  at University of Óbuda with 8.2/10 GPA. Developing ML-based ATM cash forecasting for BSc thesis.
                 </p>
-                <p className="text-white/80 text-base">
-                  Currently based between San Sebastián, Spain and Budapest, Hungary
+                <p className="text-white/80 text-sm md:text-base">
+                  Based between San Sebastián, Spain and Budapest, Hungary. Reading "Introduction to Statistical Learning" for ML theory.
                 </p>
               </div>
             </div>
@@ -77,11 +77,11 @@ const About = () => {
                 <div className="flex items-start mb-4">
                   <Code2 className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Professional Experience</h3>
-                    <p className="text-white/80 leading-relaxed">
-                      Currently working as a Software Developer Intern at Recomp Informatikai Zrt., 
-                      rebuilding legacy systems with React, Next.js, and developing AI-powered chatbots 
-                      with real-time capabilities.
+                    <h3 className="text-base md:text-lg font-semibold text-white mb-2">Professional Experience</h3>
+                    <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                      Software Developer Intern at Recomp Informatikai Zrt. (07/2024 – Present). 
+                      Rebuilding legacy attorney management systems with React/Next.js, developing 
+                      AI chatbots with OpenAI/Eleven Labs, and automating legal document anonymization using NLP.
                     </p>
                   </div>
                 </div>
@@ -91,10 +91,11 @@ const About = () => {
                 <div className="flex items-start mb-4">
                   <GraduationCap className="text-theme-accent h-6 w-6 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Academic Excellence</h3>
-                    <p className="text-white/80 leading-relaxed">
-                      Developing ML-based ATM cash forecasting system for BSc thesis, achieving 34% MAE 
-                      reduction. Planning to present at national conferences and publish in IEEE venues.
+                    <h3 className="text-base md:text-lg font-semibold text-white mb-2">Academic Excellence</h3>
+                    <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                      BSc thesis: 4-semester ML pipeline for ATM cash forecasting achieving 34% MAE reduction. 
+                      Presenting at Hungarian National Student Research Conference (TDK) 2025 and preparing 
+                      IEEE SAMI 2026 submission.
                     </p>
                   </div>
                 </div>

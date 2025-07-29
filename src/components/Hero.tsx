@@ -21,8 +21,8 @@ const Hero = () => {
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in animate-delay-100 text-gradient">
               Péter Szabó
             </h1>
-            <h2 className="text-3xl md:text-4xl font-display text-theme-dark/80 mb-4 animate-fade-in animate-delay-200">
-              Software Engineer
+            <h2 className="text-2xl md:text-4xl font-display text-theme-dark/80 mb-4 animate-fade-in animate-delay-200">
+              Software Engineer & ML Specialist
             </h2>
             
             {/* Location info with animated icon */}
@@ -33,11 +33,11 @@ const Hero = () => {
               </span>
             </div>
             
-            <p className="text-theme-dark/70 text-lg mb-8 max-w-xl animate-fade-in animate-delay-300">
-              Machine Learning enthusiast and Full-Stack Developer specializing in React, Next.js, .NET, and AI technologies. Currently working on ATM cash forecasting and AI chatbot development.
+            <p className="text-base md:text-lg text-theme-dark/70 mb-6 md:mb-8 max-w-xl animate-fade-in animate-delay-300">
+              Software Developer Intern at Recomp Informatikai Zrt. developing AI chatbots and modernizing legacy systems. Pursuing BSc thesis on ML-based ATM cash forecasting. Reading "An Introduction to Statistical Learning" to deepen ML theory understanding.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-10 animate-fade-in animate-delay-400">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-8 md:mb-10 animate-fade-in animate-delay-400">
               <a 
                 href="tel:+36306641452" 
                 className="contact-card flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 shadow-md hover:bg-theme-accent/10 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm group"
@@ -72,7 +72,7 @@ const Hero = () => {
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-6 animate-fade-in animate-delay-500">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 animate-fade-in animate-delay-500">
               <a href="#contact">
                 <Button className="btn-primary group">
                   {t('hero_get_in_touch')}

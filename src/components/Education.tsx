@@ -53,10 +53,10 @@ const Education = () => {
       id: "university",
       institution: "University of Óbuda",
       degree: "Bachelor of Science in Software Engineering",
-      specialization: "Software Design & Development",
+      specialization: "Software Design & Development", 
       period: "September 2022 - February 2026",
       location: "Budapest, Hungary",
-      gpa: "8.2/10",
+      gpa: "8.2/10 (6 completed semesters out of 7)",
       status: "Final Year",
       relevantCoursework: [
         "Data Structures & Algorithms",
@@ -67,22 +67,22 @@ const Education = () => {
         "Database Systems & Design"
       ],
       achievements: [
-        "Developing ML-based ATM cash prediction system for thesis",
-        "Consistently ranked in top 5% of class",
-        "Maintained 8.2+ GPA throughout program",
-        "Active participant in software engineering projects"
+        "Developing 4-semester ML-based ATM cash forecasting system achieving 34% MAE reduction",
+        "Presenting thesis at Hungarian National Student Research Conference (TDK) in late 2025",
+        "Preparing paper for submission to IEEE SAMI 2026 (Slovakia) based on thesis results",
+        "Currently reading 'An Introduction to Statistical Learning' to strengthen ML theory foundation"
       ],
       type: "university",
       techFocus: ["Python", "Machine Learning", "Full-Stack Development", "System Design"]
     },
     {
       id: "highschool",
-      institution: "BMSZC Bláthy Ottó Titusz IT Technical School",
-      degree: "Technical Diploma in Information Technology (5th Year Only)",
-      specialization: "Software Development & Network Administration",
+      institution: "BMSZC Szabó József Szakgimnázium", 
+      degree: "IT Technical High School Diploma (5th Year Only)",
+      specialization: "Information Technology",
       period: "September 2021 - June 2022",
-      location: "Budapest, Hungary",
-      gpa: "5.0/5.0",
+      location: "Budapest, Hungary", 
+      gpa: "5.0/5.0 (5th year only)",
       status: "Graduated with Honors",
       relevantCoursework: [
         "Object-Oriented Programming",
@@ -92,10 +92,10 @@ const Education = () => {
         "Software Development Lifecycle"
       ],
       achievements: [
-        "Completed 5th year with perfect 5.0/5.0 GPA",
-        "Cisco CCNA R&S certification (Modules 1-3)",
-        "Specialized in advanced IT technical skills",
-        "Enhanced programming and system administration knowledge"
+        "Achieved perfect 5.0/5.0 GPA in final year (5th grade only)",
+        "Specialized in software development and IT systems",
+        "Focused on programming fundamentals and system administration",
+        "Built strong foundation for university-level software engineering studies"
       ],
       type: "highschool",
       techFocus: ["Networking", "System Administration", "Database Design", "Technical Leadership"]
