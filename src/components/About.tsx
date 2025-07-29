@@ -62,10 +62,11 @@ const About = () => {
               <div className="flex-1 text-center md:text-left">
                 <p className="text-xl md:text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
                 <p className="text-white/90 text-base md:text-lg leading-relaxed mb-4">
-                  💼 Recomp Informatikai Zrt. • 🎓 University of Óbuda (8.2/10 GPA) • 🤖 ML Research
+                  Software Developer Intern at Recomp Informatikai Zrt. and final-year Software Engineering student 
+                  at University of Óbuda with 8.2/10 GPA. Developing ML-based ATM cash forecasting for BSc thesis.
                 </p>
                 <p className="text-white/80 text-sm md:text-base">
-                  🌍 San Sebastián ↔ Budapest • 📚 Statistical Learning enthusiast
+                  Based between San Sebastián, Spain and Budapest, Hungary. Reading "Introduction to Statistical Learning" for ML theory.
                 </p>
               </div>
             </div>
@@ -78,7 +79,9 @@ const About = () => {
                   <div>
                     <h3 className="text-base md:text-lg font-semibold text-white mb-2">Professional Experience</h3>
                     <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                      🔥 React/Next.js • 🤖 AI Chatbots • 🛡️ NLP Security • ⚡ System Modernization
+                      Software Developer Intern at Recomp Informatikai Zrt. (07/2024 – Present). 
+                      Rebuilding legacy attorney management systems with React/Next.js, developing 
+                      AI chatbots with OpenAI/Eleven Labs, and automating legal document anonymization using NLP.
                     </p>
                   </div>
                 </div>
@@ -90,7 +93,9 @@ const About = () => {
                   <div>
                     <h3 className="text-base md:text-lg font-semibold text-white mb-2">Academic Excellence</h3>
                     <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                      🎯 34% MAE reduction • 🏆 TDK 2025 presenter • 📄 IEEE SAMI 2026 submission
+                      BSc thesis: 4-semester ML pipeline for ATM cash forecasting achieving 34% MAE reduction. 
+                      Presenting at Hungarian National Student Research Conference (TDK) 2025 and preparing 
+                      IEEE SAMI 2026 submission.
                     </p>
                   </div>
                 </div>

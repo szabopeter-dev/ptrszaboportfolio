@@ -34,7 +34,7 @@ const Hero = () => {
             </div>
             
             <p className="text-base md:text-lg text-theme-dark/70 mb-6 md:mb-8 max-w-xl animate-fade-in animate-delay-300">
-              🚀 AI & ML Engineer crafting intelligent solutions
+              Software Developer Intern at Recomp Informatikai Zrt. developing AI chatbots and modernizing legacy systems. Pursuing BSc thesis on ML-based ATM cash forecasting. Reading "An Introduction to Statistical Learning" to deepen ML theory understanding.
             </p>
             
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-8 md:mb-10 animate-fade-in animate-delay-400">
@@ -96,17 +96,15 @@ const Hero = () => {
           
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
             <div className="relative w-64 h-64 md:w-80 md:h-80 animate-float">
-              <div className="absolute inset-0 bg-gradient-radial rounded-full opacity-20 animate-glow"></div>
-              <div className="absolute inset-4 bg-white/90 rounded-full shadow-xl backdrop-blur-sm animate-pulse-glow"></div>
+              <div className="absolute inset-0 bg-gradient-radial rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute inset-4 bg-white/90 rounded-full shadow-xl backdrop-blur-sm"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-8xl md:text-9xl font-bold text-theme animate-bounce-in">P</span>
+                <span className="text-8xl md:text-9xl font-bold text-theme animate-pulse">P</span>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-theme-accent rounded-full opacity-90 animate-pulse-glow"></div>
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-theme rounded-full opacity-80 animate-pulse-glow" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-theme-accent rounded-full opacity-90 animate-subtle-pulse"></div>
+              <div className="absolute -top-4 -left-4 w-16 h-16 bg-theme rounded-full opacity-80 animate-subtle-pulse"></div>
               <div className="absolute top-1/2 -left-8 w-8 h-8 bg-theme-accent/60 rounded-full animate-ping"></div>
               <div className="absolute top-1/4 -right-6 w-6 h-6 bg-theme/60 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute bottom-1/3 right-1/4 w-4 h-4 bg-theme/50 rounded-full animate-ping" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute top-1/3 left-1/4 w-3 h-3 bg-theme-accent/50 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
             </div>
           </div>
         </div>
