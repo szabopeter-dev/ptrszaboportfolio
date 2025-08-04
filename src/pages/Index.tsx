@@ -2,6 +2,7 @@
 import React, { useEffect, useCallback, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import PersonalJourney from "@/components/PersonalJourney";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -208,10 +209,11 @@ const Index = () => {
   `, []);
 
   return (
-    <div className="min-h-screen bg-theme-lightest text-theme-dark transition-colors duration-300">
+    <div className="min-h-screen bg-theme-background text-theme-text-primary transition-colors duration-300">
       <SEO />
       <Navbar />
       <Hero />
+      <PersonalJourney />
       <About />
       <Skills />
       <ProjectsSection />

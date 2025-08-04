@@ -70,18 +70,21 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				theme: {
-					DEFAULT: 'hsl(213, 47%, 47%)',
-					dark: 'hsl(213, 63%, 18%)',
-					light: 'hsl(213, 33%, 87%)',
-					lightest: 'hsl(213, 23%, 97%)',
-					accent: 'hsl(184, 100%, 35%)'
+					primary: 'hsl(31, 88%, 67%)',
+					secondary: 'hsl(45, 100%, 85%)',
+					accent: 'hsl(349, 88%, 70%)',
+					neutral: 'hsl(40, 20%, 50%)',
+					light: 'hsl(45, 100%, 96%)',
+					background: 'hsl(48, 100%, 99%)',
+					'text-primary': 'hsl(25, 25%, 25%)',
+					'text-secondary': 'hsl(40, 15%, 45%)'
 				},
 				navy: 'hsl(222, 84%, 5%)'
 			},
 			fontFamily: {
-				sans: ['Poppins', 'system-ui', 'sans-serif'],
-				mono: ['Space Mono', 'monospace'],
-				display: ['Montserrat', 'sans-serif']
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				serif: ['Crimson Text', 'Georgia', 'serif'],
+				display: ['Playfair Display', 'serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

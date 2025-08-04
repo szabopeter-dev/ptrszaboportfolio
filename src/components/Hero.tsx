@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDownCircle, Github, Mail, Smartphone, Linkedin, MapPin, Download } from "lucide-react";
+import { ArrowDownCircle, Github, Mail, Smartphone, Linkedin, MapPin, Download, Heart } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,31 +10,36 @@ const Hero = () => {
   const { t } = useLanguage();
   
   return (
-    <section className="min-h-screen flex items-center pt-20 px-4 md:px-8 bg-gradient-to-b from-theme-lightest to-theme-light overflow-hidden">
-      <div className="container mx-auto">
+    <section className="min-h-screen flex items-center pt-20 px-4 md:px-8 bg-gradient-to-b from-theme-background to-theme-light overflow-hidden relative">
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-10 w-4 h-4 bg-theme-primary rounded-full animate-bounce opacity-60"></div>
+      <div className="absolute bottom-32 left-10 w-3 h-3 bg-theme-accent rounded-full animate-bounce opacity-60" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-theme-primary rounded-full animate-pulse opacity-40"></div>
+      
+      <div className="container mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <p className="text-theme-accent font-medium mb-4 animate-fade-in flex items-center">
-              <span className="w-2 h-2 rounded-full bg-theme-accent mr-2 animate-pulse"></span>
+              <Heart className="w-4 h-4 mr-2 animate-pulse text-theme-accent" />
               {t('hero_greeting')}
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in animate-delay-100 text-gradient">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-semibold mb-4 animate-fade-in animate-delay-100 text-theme-text-primary">
               Péter Szabó
             </h1>
-            <h2 className="text-2xl md:text-4xl font-display text-theme-dark/80 mb-4 animate-fade-in animate-delay-200">
-              Software Engineer & ML Specialist
+            <h2 className="text-2xl md:text-4xl font-serif italic text-theme-text-secondary mb-4 animate-fade-in animate-delay-200">
+              Crafting stories through code
             </h2>
             
             {/* Location info with animated icon */}
-            <div className="flex items-center mb-4 animate-fade-in animate-delay-250">
+            <div className="flex items-center mb-6 animate-fade-in animate-delay-250">
               <MapPin className="w-4 h-4 text-theme-accent mr-2 animate-bounce" />
-              <span className="text-theme-dark/70 text-sm">
-                Based in San Sebastián, Spain & Budapest, Hungary
+              <span className="text-theme-text-secondary text-sm font-serif">
+                Based between San Sebastián & Budapest
               </span>
             </div>
             
-            <p className="text-base md:text-lg text-theme-dark/70 mb-6 md:mb-8 max-w-xl animate-fade-in animate-delay-300">
-              🚀 AI & ML Engineer crafting intelligent solutions
+            <p className="text-base md:text-lg text-theme-text-secondary mb-6 md:mb-8 max-w-xl animate-fade-in animate-delay-300 font-serif leading-relaxed">
+              "A passionate software engineer who believes every line of code tells a story. I craft digital experiences that bridge the gap between human needs and technological possibilities."
             </p>
             
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-8 md:mb-10 animate-fade-in animate-delay-400">
