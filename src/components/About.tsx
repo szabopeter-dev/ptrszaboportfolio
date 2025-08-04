@@ -40,35 +40,30 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 md:py-28 bg-gradient-to-b from-navy to-theme-dark">
+    <section id="about" className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">About Me</h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12">
+            <p className="section-number font-sans">01.</p>
+            <h2 className="section-heading font-display">Academic Profile</h2>
+          </div>
           
           <div 
             ref={aboutContentRef}
-            className="bg-white/5 backdrop-blur-sm p-8 md:p-10 rounded-2xl border border-white/10 shadow-2xl transition-all duration-700"
+            className="bg-white p-8 md:p-10 rounded-lg border border-gray-200 shadow-sm transition-all duration-700"
           >
-            {/* Profile section with consistent height */}
-            <div className="flex flex-col md:flex-row gap-8 items-center mb-10 animate-item">
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-theme-accent/60 flex-shrink-0 shadow-[0_0_20px_rgba(0,173,181,0.5)] hover:shadow-[0_0_30px_rgba(0,173,181,0.7)] transition-shadow duration-300">
-                <img 
-                  src="9d80321a-c5f8-4a89-8497-679c687229f3.png" 
-                  alt="Péter Szabó" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="prose prose-gray max-w-none">
+              <p className="text-lg font-serif text-gray-700 leading-relaxed mb-6">
+                I am a final-year Software Engineering student at the University of Óbuda, currently maintaining 
+                an 8.2/10 GPA (top 15% of cohort). My academic focus centers on machine learning applications 
+                in financial technology, with particular emphasis on time series forecasting and predictive modeling.
+              </p>
               
-              <div className="flex-1 text-center md:text-left">
-                <p className="text-xl md:text-2xl font-semibold text-theme-accent mb-3">Software Engineer & ML Specialist</p>
-                <p className="text-white/90 text-base md:text-lg leading-relaxed mb-4">
-                  Software Developer Intern at Recomp Informatikai Zrt. and final-year Software Engineering student 
-                  at University of Óbuda with 8.2/10 GPA. Developing ML-based ATM cash forecasting for BSc thesis.
-                </p>
-                <p className="text-white/80 text-sm md:text-base">
-                  Based between San Sebastián, Spain and Budapest, Hungary. Reading "Introduction to Statistical Learning" for ML theory.
-                </p>
-              </div>
+              <p className="text-base font-serif text-gray-600 leading-relaxed mb-8">
+                Currently serving as a Software Developer Intern at Recomp Informatikai Zrt., where I contribute 
+                to modernizing legacy systems and developing AI-powered solutions. My thesis research explores 
+                machine learning-based ATM cash forecasting, achieving significant improvements over traditional methods.
+              </p>
             </div>
             
             {/* Experience highlights with consistent structure */}
