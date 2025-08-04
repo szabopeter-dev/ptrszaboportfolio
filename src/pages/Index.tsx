@@ -3,9 +3,8 @@ import React, { useEffect, useCallback, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Research from "@/components/Research";
-import AcademicProjects from "@/components/AcademicProjects";
-import TechnicalSkills from "@/components/TechnicalSkills";
+import Skills from "@/components/Skills";
+import ProjectsSection from "@/components/ProjectsSection";
 import WorkExperience from "@/components/WorkExperience";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
@@ -209,14 +208,13 @@ const Index = () => {
   `, []);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-theme-lightest text-theme-dark transition-colors duration-300">
       <SEO />
       <Navbar />
       <Hero />
       <About />
-      <Research />
-      <AcademicProjects />
-      <TechnicalSkills />
+      <Skills />
+      <ProjectsSection />
       <WorkExperience />
       <Education />
       <Contact />

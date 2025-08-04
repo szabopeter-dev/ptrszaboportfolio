@@ -217,7 +217,7 @@ const Skills = () => {
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-theme-dark mb-6">{t('skills_title')}</h2>
           <p className="text-theme-dark/70 text-lg max-w-2xl mx-auto">
-            A comprehensive overview of my technical skills and expertise areas, from frontend development to machine learning.
+            🚀 Tech stack mastery across full-stack development & AI/ML
           </p>
         </div>
         

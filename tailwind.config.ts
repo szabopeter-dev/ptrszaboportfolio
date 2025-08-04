@@ -79,10 +79,9 @@ export default {
 				navy: 'hsl(222, 84%, 5%)'
 			},
 			fontFamily: {
-				serif: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
-				sans: ['Inter', 'system-ui', 'sans-serif'],
-				mono: ['JetBrains Mono', 'monospace'],
-				display: ['Playfair Display', 'serif']
+				sans: ['Poppins', 'system-ui', 'sans-serif'],
+				mono: ['Space Mono', 'monospace'],
+				display: ['Montserrat', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

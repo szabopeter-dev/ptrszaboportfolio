@@ -51,11 +51,11 @@ const WorkExperience = () => {
       period: "07/2024 – Present",
       location: "Budapest, Hungary",
       type: "Part-Time",
-      responsibilities: [
-        "Rebuilding a legacy attorney management system using React, Next.js, and Tailwind CSS, with testing implemented in Jest and CI/CD pipelines managed through GitLab",
-        "Developed a real-time AI-based chatbot using Generative AI components, powered by LLM's - OpenAI's real-time API and Eleven Labs, designed for integration with a Unitree Go2 EDU robot for voice-activated interaction",
-        "Automated sensitive data anonymization in legal documents by developing an NLP pipeline using spaCy, HuSpaCy, and regex",
-        "Updated legacy Delphi code to align with modern programming standards, enhancing code maintainability and performance"
+        responsibilities: [
+        "🏗️ Legacy system modernization: React, Next.js, Tailwind CSS + Jest testing",
+        "🤖 AI chatbot development: OpenAI API + Eleven Labs for Unitree Go2 EDU robot",
+        "🛡️ NLP security pipeline: spaCy, HuSpaCy for document anonymization",
+        "⚡ Delphi code modernization for enhanced performance"
       ]
     }
   ];
@@ -67,7 +67,7 @@ const WorkExperience = () => {
           {t('workExperience')}
         </h2>
         <p className="text-center text-theme-dark/70 mb-12 md:mb-16 max-w-2xl mx-auto text-base md:text-lg">
-          {t('workExperienceDesc')}
+          🚀 Building the future with AI & modern tech
         </p>
         
         <div ref={sectionRef} className="max-w-4xl mx-auto">
