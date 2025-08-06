@@ -43,15 +43,12 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Warm storytelling colors */
-    --theme-primary: 31 88% 67%;        /* Warm coral */
-    --theme-secondary: 45 100% 85%;     /* Soft cream */
-    --theme-accent: 349 88% 70%;        /* Gentle rose */
-    --theme-neutral: 40 20% 50%;        /* Warm gray */
-    --theme-light: 45 100% 96%;         /* Warm white */
-    --theme-background: 48 100% 99%;    /* Soft ivory */
-    --theme-text-primary: 25 25% 25%;   /* Warm dark */
-    --theme-text-secondary: 40 15% 45%; /* Soft brown */
+    /* Optimized theme colors */
+    --theme-color: 213 47% 47%;
+    --theme-dark-color: 213 63% 18%;
+    --theme-light-color: 213 33% 87%;
+    --theme-lightest-color: 213 23% 97%;
+    --theme-accent-color: 184 100% 35%;
   }
 }
 
@@ -61,18 +58,16 @@
   }
 
   body {
-    @apply bg-theme-background text-theme-text-primary font-sans;
+    @apply bg-theme-lightest text-theme-dark font-sans;
     scroll-behavior: smooth;
-    line-height: 1.6;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply text-theme-text-primary font-display font-semibold;
-    line-height: 1.2;
+    @apply text-theme-dark font-display font-bold;
   }
 
   a {
-    @apply text-theme-primary hover:text-theme-accent transition-colors duration-300;
+    @apply text-theme hover:text-theme-accent transition-colors duration-300;
   }
   
   /* Scroll bars styling for better UX */
