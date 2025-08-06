@@ -213,10 +213,10 @@ const Index = () => {
       <Navbar />
       <Hero />
       
-      <Skills />
-      <ProjectsSection />
-      <WorkExperience />
       <Education />
+      <WorkExperience />
+      <ProjectsSection />
+      <Skills />
       <Contact />
       <Footer />
       
