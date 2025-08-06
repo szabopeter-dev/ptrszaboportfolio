@@ -74,31 +74,6 @@ const Education = () => {
       ],
       type: "university",
       techFocus: ["Python", "Machine Learning", "Full-Stack Development", "System Design"]
-    },
-    {
-      id: "highschool",
-      institution: "BMSZC Szabó József Szakgimnázium", 
-      degree: "IT Technical High School Diploma (5th Year Only)",
-      specialization: "Information Technology",
-      period: "September 2021 - June 2022",
-      location: "Budapest, Hungary", 
-      gpa: "5.0/5.0 (5th year only)",
-      status: "Graduated with Honors",
-      relevantCoursework: [
-        "Object-Oriented Programming",
-        "Database Management Systems",
-        "Network Security & Administration",
-        "System Administration (Windows/Linux)",
-        "Software Development Lifecycle"
-      ],
-      achievements: [
-        "Achieved perfect 5.0/5.0 GPA in final year (5th grade only)",
-        "Specialized in software development and IT systems",
-        "Focused on programming fundamentals and system administration",
-        "Built strong foundation for university-level software engineering studies"
-      ],
-      type: "highschool",
-      techFocus: ["Networking", "System Administration", "Database Design", "Technical Leadership"]
     }
   ];
 
