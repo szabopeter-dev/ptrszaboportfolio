@@ -49,12 +49,12 @@ const About = () => {
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-display font-semibold text-theme-text-primary mb-6">About</h2>
-              <p className="text-lg text-theme-text-secondary font-serif italic">
-                Computer Engineering student with professional experience and research achievements.
-              </p>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-semibold text-theme-text-primary mb-6">About Me</h2>
+            <p className="text-lg text-theme-text-secondary font-serif italic">
+              "Behind every great algorithm is a story of curiosity, persistence, and the desire to make a difference."
+            </p>
+          </div>
           
           <div 
             ref={aboutContentRef}
@@ -71,8 +71,9 @@ const About = () => {
               </div>
               
               <p className="text-lg md:text-xl font-serif text-theme-text-secondary leading-relaxed max-w-3xl mx-auto">
-                MSc Computer Engineering student with 1+ year professional experience at Recomp Informatikai Zrt. 
-                Developed React applications, AI chatbots, and achieved 34% ML accuracy improvement in thesis research.
+                "I'm not just a software engineer; I'm a digital storyteller. Every project I work on is a chapter in my journey 
+                to bridge the gap between complex technology and human experience. From crafting elegant React applications to 
+                developing AI solutions that actually make sense, I believe in code that serves people."
               </p>
             </div>
             
@@ -82,9 +83,10 @@ const About = () => {
                 <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-theme-primary to-theme-accent rounded-full flex items-center justify-center shadow-lg">
                   <Lightbulb className="text-white h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-semibold text-theme-text-primary mb-3 font-display">Research</h3>
+                <h3 className="text-lg font-semibold text-theme-text-primary mb-3 font-display">The Innovator</h3>
                 <p className="text-theme-text-secondary font-serif leading-relaxed">
-                  Thesis research achieved 34% ML accuracy improvement. Experience with TensorFlow, Python, and data analysis.
+                  Turning complex problems into elegant solutions. My thesis achieved a 34% improvement in machine learning accuracy—
+                  proving that innovation comes from understanding, not just implementing.
                 </p>
               </div>
               
@@ -92,9 +94,10 @@ const About = () => {
                 <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-theme-accent to-theme-secondary rounded-full flex items-center justify-center shadow-lg">
                   <Code2 className="text-white h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-semibold text-theme-text-primary mb-3 font-display">Development</h3>
+                <h3 className="text-lg font-semibold text-theme-text-primary mb-3 font-display">The Craftsman</h3>
                 <p className="text-theme-text-secondary font-serif leading-relaxed">
-                  1+ year at Recomp developing React applications, AI chatbots, and full-stack solutions with C#/.NET.
+                  Professional experience at Recomp taught me that great code isn't just functional—it's maintainable, scalable, 
+                  and tells a clear story to the next developer who reads it.
                 </p>
               </div>
               
@@ -102,9 +105,10 @@ const About = () => {
                 <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-theme-secondary to-theme-primary rounded-full flex items-center justify-center shadow-lg">
                   <Target className="text-white h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-semibold text-theme-text-primary mb-3 font-display">Education</h3>
+                <h3 className="text-lg font-semibold text-theme-text-primary mb-3 font-display">The Dreamer</h3>
                 <p className="text-theme-text-secondary font-serif leading-relaxed">
-                  MSc Computer Engineering, 8.2/10 GPA. Strong foundation in algorithms, data structures, and software architecture.
+                  Currently pursuing my master's with an 8.2/10 GPA, I'm not just studying—I'm preparing to push the boundaries 
+                  of what's possible in AI and software engineering.
                 </p>
               </div>
             </div>
@@ -112,8 +116,11 @@ const About = () => {
             {/* Technologies showcase */}
             <div className="animate-item mb-12">
               <h3 className="text-xl font-semibold text-theme-text-primary mb-6 text-center font-display">
-                Tech Stack
+                My Technical Toolkit
               </h3>
+              <p className="text-theme-text-secondary font-serif text-center mb-8 max-w-2xl mx-auto">
+                "The right tool for the right job—that's my philosophy. Here are the technologies I've mastered on my journey."
+              </p>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {[
@@ -132,7 +139,7 @@ const About = () => {
             {/* Call to action */}
             <div className="text-center animate-item">
               <p className="text-theme-text-secondary font-serif mb-6 italic">
-                Download CV for detailed experience and project information.
+                "Ready to bring your ideas to life? Let's create something amazing together."
               </p>
               <a href="/szabo_peter_cv_en.pdf" download="szabo_peter_cv_en.pdf">
                 <Button className="bg-gradient-to-r from-theme-primary to-theme-accent hover:from-theme-accent hover:to-theme-primary text-white px-8 py-4 text-lg rounded-xl shadow-lg transition-all duration-300 flex items-center gap-3 relative overflow-hidden group mx-auto">

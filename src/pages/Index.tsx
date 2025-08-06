@@ -2,7 +2,7 @@
 import React, { useEffect, useCallback, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-
+import PersonalJourney from "@/components/PersonalJourney";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -213,6 +213,7 @@ const Index = () => {
       <SEO />
       <Navbar />
       <Hero />
+      <PersonalJourney />
       <About />
       <Skills />
       <ProjectsSection />

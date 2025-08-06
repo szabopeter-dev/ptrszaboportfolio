@@ -27,7 +27,7 @@ const Hero = () => {
               Péter Szabó
             </h1>
             <h2 className="text-2xl md:text-4xl font-serif italic text-theme-text-secondary mb-4 animate-fade-in animate-delay-200">
-              Software Engineer
+              Crafting stories through code
             </h2>
             
             {/* Location info with animated icon */}
@@ -39,7 +39,7 @@ const Hero = () => {
             </div>
             
             <p className="text-base md:text-lg text-theme-text-secondary mb-6 md:mb-8 max-w-xl animate-fade-in animate-delay-300 font-serif leading-relaxed">
-              MSc Computer Engineering student (8.2/10 GPA) with experience in React, AI/ML, and full-stack development. Seeking Big Tech internship opportunities.
+              "A passionate software engineer who believes every line of code tells a story. I craft digital experiences that bridge the gap between human needs and technological possibilities."
             </p>
             
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-8 md:mb-10 animate-fade-in animate-delay-400">
