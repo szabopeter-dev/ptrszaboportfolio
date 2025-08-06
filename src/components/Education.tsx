@@ -60,17 +60,17 @@ const Education = () => {
       status: "Final Year",
       relevantCoursework: [
         "Data Structures & Algorithms",
-        "Software Testing & QA",
-        "Machine Learning & Deep Learning",
-        "Distributed Systems Programming",
-        "Modern Software Technologies",
+        "Probability & Statistics", 
+        "Linear Algebra",
+        "Software Architecture",
+        "Parallel Programming",
         "Database Systems & Design"
       ],
       achievements: [
-        "Developing 4-semester ML-based ATM cash forecasting system achieving 34% MAE reduction",
-        "Presenting thesis at Hungarian National Student Research Conference (TDK) in late 2025",
-        "Preparing paper for submission to IEEE SAMI 2026 (Slovakia) based on thesis results",
-        "Currently reading 'An Introduction to Statistical Learning' to strengthen ML theory foundation"
+        "Top 5 of my class - 2024",
+        "Thesis: ML-based ATM cash forecasting (conferences: TDK 2025, IEEE SAMI 2026 Slovakia)",
+        "Developing a 4-semester machine learning pipeline achieving 67% MAE reduction",
+        "GPA: 8.2/10 based on 6 completed semesters out of 7"
       ],
       type: "university",
       techFocus: ["Python", "Machine Learning", "Full-Stack Development", "System Design"]

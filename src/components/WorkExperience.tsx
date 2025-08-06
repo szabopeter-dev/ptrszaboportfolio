@@ -48,14 +48,15 @@ const WorkExperience = () => {
     {
       company: "Recomp Informatikai Zrt.",
       position: "Software Developer Intern",
-      period: "07/2024 – Present",
+      period: "July 2024 - Present",
       location: "Budapest, Hungary",
-      type: "Part-Time",
-        responsibilities: [
-        "🏗️ Legacy system modernization: React, Next.js, Tailwind CSS + Jest testing",
-        "🤖 AI chatbot development: OpenAI API + Eleven Labs for Unitree Go2 EDU robot",
-        "🛡️ NLP security pipeline: spaCy, HuSpaCy for document anonymization",
-        "⚡ Delphi code modernization for enhanced performance"
+      type: "Internship",
+      responsibilities: [
+        "Modernizing attorney management system serving 100+ legal professionals (Hogan Lovells, Oppenheim) - migrated Delphi desktop application to React/Next.js with GitLab CI/CD pipeline",
+        "Automated sensitive data redaction in legal documents by developing an NLP pipeline using spaCy and regex",
+        "Built an offline LLM-based billboard recommender with Ollama models for secure, AI-driven campaign planning",
+        "Built Gen AI agent using LLMs for Unitree Go2 robot integration with real-time conversation capabilities",
+        "Updated legacy Delphi code to align with modern programming standards enhancing code maintainability"
       ]
     }
   ];

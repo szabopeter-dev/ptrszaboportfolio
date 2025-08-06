@@ -83,11 +83,11 @@ const Skills = () => {
       iconColor: "text-blue-500",
       items: [
         "JavaScript / TypeScript",
-        "React.js / Next.js",
+        "React.js / Next.js", 
         "Angular",
         "HTML / CSS",
-        "Tailwind CSS / SASS",
-        "Jest"
+        "Tailwind CSS",
+        "Jest Testing"
       ],
       detailedDescriptionKeys: [
         "frontend_detail_1",
@@ -105,10 +105,10 @@ const Skills = () => {
       items: [
         "C# / .NET Core",
         "Entity Framework Core",
-        "RESTful Web APIs",
-        "NUnit",
-        "JWT Authentication",
-        "Microservices"
+        "REST APIs",
+        "NUnit Testing",
+        "JWT / OAuth2",
+        "GitHub Actions / GitLab CI"
       ],
       detailedDescriptionKeys: [
         "backend_detail_1",
@@ -126,11 +126,11 @@ const Skills = () => {
       iconColor: "text-pink-500",
       items: [
         "Python",
-        "Scikit-learn",
+        "scikit-learn",
         "TensorFlow / Keras",
-        "Pandas",
-        "Neural Networks",
-        "LSTM / GRU"
+        "Pandas / NumPy",
+        "Matplotlib",
+        "NLP / A/B Testing"
       ],
       detailedDescriptionKeys: [
         "ml_detail_1",
@@ -191,12 +191,12 @@ const Skills = () => {
       gradient: "from-indigo-500 to-purple-600",
       iconColor: "text-indigo-500",
       items: [
-        "Operating Systems",
-        "Assembly",
         "C++",
+        "Assembly",
         "Linear Algebra",
         "Statistics",
-        "Parallel Programming"
+        "Parallel Programming",
+        "Time Series Forecasting"
       ],
       detailedDescriptionKeys: [
         "systems_detail_1",

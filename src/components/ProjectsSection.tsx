@@ -71,42 +71,42 @@ const ProjectsSection = () => {
 
   const projects: Project[] = [
     {
-      title: "ATM Cash Forecasting System (BSc Thesis)",
-      description: "Production-ready ML pipeline for financial forecasting using advanced deep learning architectures and comprehensive feature engineering",
+      title: "ATM Cash Demands Forecasting",
+      description: "BSc Thesis & IEEE Conference Paper - Developing a 4-semester machine learning pipeline to predict ATM cash depletion risk using GRU/LSTM networks on 700K+ real transaction records",
       highlights: [
-        "Achieved 34% MAE reduction and 0.95 R² through systematic hyperparameter optimization",
-        "Implemented robust time series preprocessing with seasonality decomposition and lag structures"
+        "Achieved a 67% reduction in MAE (from 550K to 181K HUF) and up to 0.95 R² through advanced time series feature engineering",
+        "Demonstrated real-world applicability for optimizing ATM refill strategies comparing deep learning and traditional models"
       ],
-      metrics: ["34% MAE Reduction", "0.95 R² Score", "4-Semester Pipeline"],
-      technologies: ["Python", "TensorFlow", "GRU/LSTM", "Time Series", "Feature Engineering", "MLOps"],
+      metrics: ["67% MAE Reduction", "0.95 R² Score", "700K+ Records"],
+      technologies: ["Python", "TensorFlow", "GRU/LSTM", "Time Series", "PACF Analysis", "Feature Engineering"],
       icon: <Brain className="w-6 h-6 text-theme-accent" />,
-      type: "Deep Learning"
+      type: "BSc Thesis"
     },
     {
-      title: "Healthcare Risk Prediction System",
-      description: "High-performance binary classifier for early detection of alcohol consumption risk patterns in healthcare survey data",
+      title: "Hogwarts-Inspired Management System",
+      description: "Academic Full-Stack Project - Built full-stack web application using C# (.NET Core) backend and Angular frontend with SOLID principles and RESTful API design",
       highlights: [
-        "Achieved 91% recall on severely imbalanced dataset (1:9 ratio) using advanced preprocessing",
-        "Deployed gradient boosting with SHAP explainability for clinical decision support insights"
+        "Implemented real-time updates via SignalR WebSocket connections for live data synchronization",
+        "Achieved comprehensive backend testing using NUnit and Moq frameworks following software development best practices"
       ],
-      metrics: ["91% Recall", "Imbalanced Data", "Clinical Grade"],
-      technologies: ["Python", "LightGBM", "SHAP", "Pandas", "Scikit-learn", "Data Mining"],
-      icon: <TrendingUp className="w-6 h-6 text-theme-accent" />,
-      type: "Machine Learning",
-      githubUrl: "https://github.com/szabopeter-dev/brfss-alcohol-risk-analysis"
-    },
-    {
-      title: "Enterprise Management Platform",
-      description: "Full-stack enterprise application with microservices architecture, real-time communication, and comprehensive testing suite",
-      highlights: [
-        "Architected scalable backend with SOLID principles and dependency injection patterns",
-        "Implemented real-time bi-directional communication using SignalR WebSockets technology"
-      ],
-      metrics: ["90%+ Test Coverage", "Real-time Updates", "Enterprise Scale"],
+      metrics: ["Real-time Updates", "SOLID Principles", "Full Testing"],
       technologies: ["C#", ".NET Core", "Angular", "Entity Framework", "SignalR", "NUnit"],
       icon: <Wand2 className="w-6 h-6 text-theme-accent" />,
-      type: "Full-Stack",
+      type: "Academic Project",
       githubUrl: "https://github.com/szabopeter-dev/Harry-Potter-Project"
+    },
+    {
+      title: "Alcohol Risk Prediction with Machine Learning",
+      description: "Independent ML Project - Built a high-recall LightGBM model to identify individuals at risk of problematic alcohol use using healthcare survey data",
+      highlights: [
+        "Achieved 0.939 AUC and 91% recall by engineering a robust CDC-based target variable",
+        "Selected key behavioral and health-related features, revealing strong links between alcohol misuse, smoking, age, and mental health"
+      ],
+      metrics: ["0.939 AUC", "91% Recall", "CDC-based"],
+      technologies: ["Python", "LightGBM", "SHAP", "Pandas", "Scikit-learn", "Feature Engineering"],
+      icon: <TrendingUp className="w-6 h-6 text-theme-accent" />,
+      type: "Independent Project",
+      githubUrl: "https://github.com/szabopeter-dev/brfss-alcohol-risk-analysis"
     }
   ];
 
