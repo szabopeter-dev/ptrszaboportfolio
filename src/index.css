@@ -98,7 +98,7 @@
 
 @layer components {
   .section-heading {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-theme-dark relative
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-theme-text-primary relative
     mb-8 md:mb-12 after:content-[''] after:block after:w-16 md:after:w-24 after:h-1 after:bg-theme-accent after:mt-3 md:after:mt-4;
   }
   
@@ -107,13 +107,13 @@
   }
   
   .btn-primary {
-    @apply bg-theme text-white hover:bg-theme-dark 
+    @apply bg-theme-primary text-white hover:bg-theme-accent 
     transition-all duration-300 px-6 py-3 rounded-lg shadow-lg
     hover:shadow-xl flex items-center justify-center font-medium;
   }
   
   .btn-outline {
-    @apply bg-transparent text-theme border-2 border-theme hover:bg-theme hover:text-white
+    @apply bg-transparent text-theme-primary border-2 border-theme-primary hover:bg-theme-primary hover:text-white
     transition-all duration-300 px-6 py-3 rounded-lg shadow-md
     hover:shadow-xl flex items-center justify-center font-medium;
   }
@@ -130,7 +130,7 @@
   }
   
   .tag {
-    @apply bg-theme-light text-theme px-3 py-1 text-sm rounded-full font-medium;
+    @apply bg-theme-light text-theme-primary px-3 py-1 text-sm rounded-full font-medium;
   }
   
   .animate-fade-in {
