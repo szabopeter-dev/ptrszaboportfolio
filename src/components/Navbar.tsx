@@ -86,8 +86,8 @@ const Navbar = () => {
           rel="noopener noreferrer"
           className="inline-flex"
         >
-          <Button className="bg-theme hover:bg-theme-accent text-white px-4 py-2 rounded-md transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 whitespace-nowrap">
-            {t('linkedin')}
+          <Button className="font-mono text-xs bg-theme-dark hover:bg-theme-accent text-cream px-4 py-2 rounded-sm transition-colors whitespace-nowrap">
+            ./linkedin
           </Button>
         </a>
       </div>

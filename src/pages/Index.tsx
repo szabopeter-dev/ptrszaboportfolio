@@ -164,9 +164,8 @@ const Index = () => {
     }
     
     .section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-out;
+      opacity: 1;
+      transform: none;
     }
     
     .section.animate-fade-in {
