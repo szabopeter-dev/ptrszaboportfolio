@@ -1,116 +1,101 @@
-import React, { useEffect, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Building2, Calendar, MapPin, CheckCircle } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import React from "react";
+import { ExternalLink } from "lucide-react";
 
 type WorkItem = {
   company: string;
   position: string;
   period: string;
   location: string;
-  type: string;
-  responsibilities: string[];
+  highlights: string[];
+  tags?: string[];
 };
 
+const work: WorkItem[] = [
+  {
+    company: "Multiverse Computing",
+    position: "Machine Learning Engineer (Contract)",
+    period: "Apr 2026 — Present",
+    location: "Zaragoza, Spain",
+    tags: ["LLM", "Fine-tuning", "GraphRAG"],
+    highlights: [
+      "Fine-tuning HyperNova 60B (compressed GPT-OSS-120B) on Turkish via knowledge distillation and QA-pair generation for a major banking client; benchmarking retained capability on MMLU-Pro.",
+      "Built a GraphRAG pipeline (nano-graphrag) for an energy-sector client to validate compressed-model performance — 92% local retrieval accuracy across 5 domain documents.",
+      "Authored YOLOv8 model clarifications on training data, benchmarks and deployment fit for a Singapore-based defence & engineering client.",
+    ],
+  },
+  {
+    company: "Óbuda University — HPC & Applied ML Research Groups",
+    position: "Research Assistant",
+    period: "Feb 2026 — Apr 2026",
+    location: "Budapest, Hungary",
+    tags: ["Research", "Quantile LSTM"],
+    highlights: [
+      "Built a calibrated quantile LSTM achieving 32% MAE reduction vs. the prior publication, predicting demand with confidence intervals so banks can price the tradeoff between stockout risk and excess cash.",
+    ],
+  },
+  {
+    company: "Recomp Informatika Zrt.",
+    position: "AI Engineer Intern",
+    period: "Jul 2024 — Apr 2026",
+    location: "Budapest, Hungary",
+    tags: ["NLP", "LLM", "ROS2"],
+    highlights: [
+      "Modernized legacy Nettime attorney management system (Delphi → React 19 / Next.js 15) for 100+ legal professionals — time tracking, i18n, case management.",
+      "Designed and deployed a spaCy NER pipeline in Nettime to flag personal data in contracts — turning hours-long reviews into minute-scale checks.",
+      "Built an LLM-powered (Mistral) offline invoice extractor: 90% field accuracy on 80+ real Hungarian PDF invoices, cutting manual entry from ~25s to <3s per doc (~10× speedup).",
+      "Built an LLM-assisted billboard recommender for NetMaster Media (Ollama / Llama 3.2), used by 10+ advertising clients.",
+      "Deployed an LLM-to-ROS2 bridge (MCP protocol) on a Unitree Go2 quadruped for natural-language robot control and camera-based visual reasoning — demoed at BKIK.",
+    ],
+  },
+];
+
 const WorkExperience = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { t } = useLanguage();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.work-item');
-          items.forEach((item, index) => {
-            setTimeout(() => {
-              item.classList.add('animate-fade-in');
-            }, 150 * index);
-          });
-        }
-      });
-    }, { threshold: 0.1 });
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-      
-      const items = sectionRef.current.querySelectorAll('.work-item');
-      items.forEach(item => {
-        item.classList.add('opacity-0');
-      });
-    }
-
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-    };
-  }, []);
-
-  const workExperience: WorkItem[] = [
-    {
-      company: "Recomp Informatikai Zrt.",
-      position: "Software Developer Intern",
-      period: "July 2024 - Present",
-      location: "Budapest, Hungary",
-      type: "Internship",
-      responsibilities: [
-        "Modernizing attorney management system serving 100+ legal professionals (Hogan Lovells, Oppenheim) - migrated Delphi desktop application to React/Next.js with GitLab CI/CD pipeline",
-        "Automated sensitive data redaction in legal documents by developing an NLP pipeline using spaCy and regex",
-        "Built an offline LLM-based billboard recommender with Ollama models for secure, AI-driven campaign planning",
-        "Built Gen AI agent using LLMs for Unitree Go2 robot integration with real-time conversation capabilities",
-        "Updated legacy Delphi code to align with modern programming standards enhancing code maintainability"
-      ]
-    }
-  ];
-
   return (
-    <section id="experience" className="section bg-theme-lightest py-12 md:py-20">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="section-heading text-center text-2xl md:text-4xl font-bold text-theme-dark mb-4">
-          {t('workExperience')}
-        </h2>
-        <p className="text-center text-theme-dark/70 mb-12 md:mb-16 max-w-2xl mx-auto text-base md:text-lg">
-          🚀 Building the future with AI & modern tech
-        </p>
-        
-        <div ref={sectionRef} className="max-w-4xl mx-auto">
-          {workExperience.map((work, index) => (
-            <Card 
-              key={index}
-              className="work-item opacity-0 transition-all duration-500 mb-6 md:mb-8 rounded-xl border-theme-light/50 bg-white shadow-lg hover:shadow-xl"
-            >
-              <CardContent className="p-4 md:p-8">
-                <div className="flex flex-col md:flex-row md:items-start justify-between mb-4 md:mb-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 md:gap-3 mb-2">
-                      <Building2 className="w-5 h-5 md:w-6 md:h-6 text-theme-accent" />
-                      <h3 className="text-lg md:text-xl font-bold text-theme-dark">{work.company}</h3>
-                    </div>
-                    <h4 className="text-base md:text-lg font-semibold text-theme mb-1">{work.position}</h4>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm md:text-base text-theme-dark/70">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4 text-theme-accent" />
-                        <span>{work.period}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4 text-theme-accent" />
-                        <span>{work.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <span className="inline-block mt-2 md:mt-0 text-xs font-semibold px-3 py-1 rounded-full bg-theme-accent/10 text-theme-accent border border-theme-accent/20">
-                    {work.type}
-                  </span>
-                </div>
+    <section id="experience" className="py-20 md:py-28 bg-cream">
+      <div className="container mx-auto max-w-5xl px-4">
+        <div className="mb-12 border-b border-theme-dark/15 pb-4 flex items-baseline justify-between">
+          <h2 className="font-display text-4xl md:text-5xl text-theme-dark">
+            Experience<span className="text-theme-accent">.</span>
+          </h2>
+          <span className="font-mono text-xs text-theme-dark/50">// 03 roles</span>
+        </div>
 
-                <div className="space-y-2 md:space-y-3">
-                  {work.responsibilities.map((responsibility, idx) => (
-                    <div key={idx} className="flex items-start gap-2 md:gap-3">
-                      <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-theme-accent mt-0.5 flex-shrink-0" />
-                      <p className="text-sm md:text-base text-theme-dark/80 leading-relaxed">{responsibility}</p>
-                    </div>
+        <div className="space-y-12">
+          {work.map((w, i) => (
+            <article key={i} className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-8 group">
+              <div className="font-mono text-xs text-theme-dark/60 md:pt-1">
+                <div className="text-theme-accent">{w.period}</div>
+                <div className="mt-1">{w.location}</div>
+              </div>
+
+              <div className="border-l-2 border-theme-dark/10 group-hover:border-theme-accent transition-colors pl-5">
+                <h3 className="font-display text-2xl md:text-3xl text-theme-dark leading-tight">
+                  {w.position}
+                </h3>
+                <p className="font-mono text-sm text-theme-dark/70 mt-1 mb-4 flex items-center gap-1.5">
+                  <ExternalLink className="w-3.5 h-3.5 text-theme-accent" /> {w.company}
+                </p>
+
+                {w.tags && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {w.tags.map((t) => (
+                      <span key={t} className="font-mono text-[10px] px-2 py-0.5 bg-theme-accent/10 text-theme-accent rounded-sm">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <ul className="space-y-2 font-body text-sm md:text-[15px] text-theme-dark/85 leading-relaxed">
+                  {w.highlights.map((h, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="font-mono text-theme-accent shrink-0">▸</span>
+                      <span>{h}</span>
+                    </li>
                   ))}
-                </div>
-              </CardContent>
-            </Card>
+                </ul>
+              </div>
+            </article>
           ))}
         </div>
       </div>

@@ -164,9 +164,8 @@ const Index = () => {
     }
     
     .section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-out;
+      opacity: 1;
+      transform: none;
     }
     
     .section.animate-fade-in {
@@ -208,18 +207,18 @@ const Index = () => {
   `, []);
 
   return (
-    <div className="min-h-screen bg-theme-lightest text-theme-dark transition-colors duration-300">
+    <div className="min-h-screen bg-cream text-theme-dark transition-colors duration-300">
       <SEO />
       <Navbar />
       <Hero />
-      
-      <Education />
+
       <WorkExperience />
       <ProjectsSection />
+      <Education />
       <Skills />
       <Contact />
       <Footer />
-      
+
       <style>{animationStyles}</style>
     </div>
   );
