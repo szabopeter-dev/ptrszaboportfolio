@@ -58,7 +58,7 @@
   }
 
   body {
-    @apply bg-theme-lightest text-theme-dark font-sans;
+    @apply bg-cream text-theme-dark font-mono;
     scroll-behavior: smooth;
   }
 

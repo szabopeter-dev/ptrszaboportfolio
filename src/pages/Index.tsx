@@ -208,18 +208,18 @@ const Index = () => {
   `, []);
 
   return (
-    <div className="min-h-screen bg-theme-lightest text-theme-dark transition-colors duration-300">
+    <div className="min-h-screen bg-cream text-theme-dark transition-colors duration-300">
       <SEO />
       <Navbar />
       <Hero />
-      
-      <Education />
+
       <WorkExperience />
       <ProjectsSection />
+      <Education />
       <Skills />
       <Contact />
       <Footer />
-      
+
       <style>{animationStyles}</style>
     </div>
   );

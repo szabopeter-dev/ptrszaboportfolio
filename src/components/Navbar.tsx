@@ -97,18 +97,17 @@ const Navbar = () => {
   const navbarHeight = isMobile ? NAVBAR_HEIGHT.mobile : NAVBAR_HEIGHT.desktop;
 
   return (
-    <header 
+    <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300 py-4 will-change-transform",
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent",
+        scrolled ? "bg-cream/95 backdrop-blur-md border-b border-theme-dark/10" : "bg-transparent",
         !visible && "transform -translate-y-full"
       )}
       style={{ height: navbarHeight }}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-full">
-        <a href="#" className="text-2xl font-display font-bold group relative z-50 transition-all duration-300 hover:scale-110">
-          <span className="text-theme-accent group-hover:text-theme transition-colors duration-300">P</span>
-          <span className="text-theme group-hover:text-theme-accent transition-colors duration-300">S</span>
+        <a href="#" className="font-mono text-sm font-semibold group relative z-50">
+          <span className="text-theme-accent">~/</span><span className="text-theme-dark">peter-szabo</span>
         </a>
 
         {/* Desktop Navigation */}
