@@ -43,12 +43,12 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Optimized theme colors */
-    --theme-color: 213 47% 47%;
-    --theme-dark-color: 213 63% 18%;
-    --theme-light-color: 213 33% 87%;
-    --theme-lightest-color: 213 23% 97%;
-    --theme-accent-color: 184 100% 35%;
+    /* Claude Code inspired warm palette */
+    --theme-color: 16 65% 55%;            /* coral/anthropic orange */
+    --theme-dark-color: 25 15% 15%;       /* warm near-black */
+    --theme-light-color: 35 20% 85%;      /* warm border */
+    --theme-lightest-color: 40 30% 94%;   /* cream background #f0eee6 */
+    --theme-accent-color: 16 65% 55%;     /* same coral */
   }
 }
 
