@@ -8,23 +8,21 @@ import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const navLinks = [
-  { name: 'about', href: "#about" },
-  { name: 'skills', href: "#skills" },
-  { name: 'projects', href: "#projects" },
   { name: 'experience', href: "#experience" },
+  { name: 'projects', href: "#projects" },
   { name: 'education', href: "#education" },
+  { name: 'skills', href: "#skills" },
   { name: 'contact', href: "#contact" }
 ];
 
 // Extract NavLink component for better organization
 const NavLink = memo(({ name, href, t }: { name: string; href: string; t: (key: string) => string }) => (
-  <a 
+  <a
     key={name}
     href={href}
-    className="text-theme-dark hover:text-theme-accent transition-colors duration-300 font-medium relative group"
+    className="font-mono text-xs text-theme-dark/70 hover:text-theme-accent transition-colors relative group"
   >
-    <span className="relative z-10">{t(name)}</span>
-    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-theme-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+    <span className="text-theme-accent">/</span>{t(name)}
   </a>
 ));
 
